@@ -470,9 +470,36 @@ function finishLesson() {
 
 // --- CONTROLE DE SIMULAÇÕES (MODAL) ---
 function startSimulation(moduleId) {
-    // Impedir se o módulo estiver bloqueado
     const modCard = document.getElementById(`modulo-${moduleId}`);
-    if (modCard.classList.contains("locked")) return;
+    if (!modCard) return;
+
+    // Se o módulo estiver bloqueado
+    if (modCard.classList.contains("locked")) {
+        addEvaMessage(`⚠️ O **Módulo ${moduleId}** está bloqueado no momento. Conclua os módulos anteriores na trilha primeiro!`);
+        return;
+    }
+
+    // Verificar se as lições deste módulo foram lidas
+    const lessons = document.querySelectorAll(`#modulo-${moduleId} .lesson-item`);
+    let allRead = true;
+    lessons.forEach(l => {
+        const lid = l.getAttribute("data-lesson-id");
+        if (!appState.lessonsRead.includes(lid)) {
+            allRead = false;
+        }
+    });
+
+    if (!allRead && !appState.modulesCompleted.includes(moduleId)) {
+        addEvaMessage(`⚠️ João Paulo, você precisa ler todas as aulas do **Módulo ${moduleId}** antes de iniciar a Simulação Clínica!`);
+        modCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+
+    // Se o módulo já foi concluído
+    if (appState.modulesCompleted.includes(moduleId)) {
+        addEvaMessage(`✅ Você já concluiu com sucesso a Simulação Clínica do **Módulo ${moduleId}**!`);
+        return;
+    }
 
     appState.activeSimulationModule = moduleId;
     appState.selectedOptionIndex = null;
