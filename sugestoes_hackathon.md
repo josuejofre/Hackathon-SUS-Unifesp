@@ -67,14 +67,14 @@ O protótipo interativo simula a jornada do profissional dividida em 4 marcos de
 
 ```mermaid
 graph TD
-    M1[Módulo 1: Introdução à Tecnologia Assistiva e Fluxo SUS] -->|Aprovado| M2[Módulo 2: Avaliação Clínica e Prescrição de Cadeiras de Rodas]
-    M2 -->|Aprovado| M3[Módulo 3: Órteses de Membros Inferiores AFO/KAFO]
-    M3 -->|Aprovado| M4[Módulo 4: Adaptação, Reabilitação e Acompanhamento]
+    M1["Módulo 1: Introdução à Tecnologia Assistiva e Fluxo SUS"] -->|Aprovado| M2["Módulo 2: Avaliação Clínica e Prescrição de Cadeiras de Rodas"]
+    M2 -->|Aprovado| M3["Módulo 3: Órteses de Membros Inferiores AFO/KAFO"]
+    M3 -->|Aprovado| M4["Módulo 4: Adaptação, Reabilitação e Acompanhamento"]
     
-    style M1 fill:#0d9488,stroke:#0f766e,stroke-width:2px,color:#fff
-    style M2 fill:#4f46e5,stroke:#4338ca,stroke-width:2px,color:#fff
-    style M3 fill:#4f46e5,stroke:#4338ca,stroke-width:2px,color:#fff
-    style M4 fill:#4f46e5,stroke:#4338ca,stroke-width:2px,color:#fff
+    style M1 fill:#004f9f,stroke:#003a75,stroke-width:2px,color:#fff
+    style M2 fill:#00a599,stroke:#00847a,stroke-width:2px,color:#fff
+    style M3 fill:#00a599,stroke:#00847a,stroke-width:2px,color:#fff
+    style M4 fill:#00a599,stroke:#00847a,stroke-width:2px,color:#fff
 ```
 
 1. **Módulo 1 - Fundamentos e Fluxo SUS:** Focado na diferença entre Órtese e Prótese, legislação (Diretrizes da Pessoa com Deficiência) e fluxo de referência (UBS -> CER).
