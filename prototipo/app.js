@@ -201,8 +201,9 @@ const simulationsData = {
 
 // --- DIALOGOS MOCKADOS DA IA EVA ---
 const evaResponses = {
-    "ola": "Olá, João Paulo! Como vai seu dia na UBS? Estou pronta para ajudar você a decifrar a prescrição e os fluxos de órteses e próteses no SUS. Qual a sua dúvida?",
-    "oi": "Olá! Que bom ter você por aqui. Lembre-se: capacitar-se em tecnologia assistiva melhora diretamente a vida dos nossos pacientes na comunidade. Como posso ajudar?",
+    "ola": "Olá, João Paulo! Como vai seu dia na UBS? Sou a E.V.A. (Educação em Vida Assistiva). Estou pronta para ajudar você a decifrar a prescrição e os fluxos de órteses e próteses no SUS. Qual a sua dúvida?",
+    "oi": "Olá! Sou a E.V.A., sua tutora virtual de aprendizagem em órteses e próteses. Lembre-se: capacitar-se em tecnologia assistiva melhora diretamente a vida dos nossos pacientes na comunidade. Como posso ajudar?",
+    "preceptora": "Um preceptor ou preceptora na saúde é um profissional experiente que atua como orientador e tutor de estudantes ou recém-formados na prática clínica do dia a dia (como em hospitais e UBSs). No SUSAssist, eu, E.V.A., funciono como a sua preceptora digital, te guiando no aprendizado prático e tirando suas dúvidas sobre órteses e próteses!",
     "cadeira de rodas": "O SUS concede cadeiras de rodas através da tabela do SIA/SUS (procedimento OPM). Os modelos disponíveis incluem: Cadeira Dobrável em X, Cadeira Monobloco (ativa, leve), Cadeira para Obesos, Cadeira Postural (Tetraplegia) e Cadeira Motorizada. <strong>Importante:</strong> Para cadeira motorizada, o paciente deve passar por avaliação cognitiva e ter controle motor do membro superior funcional para operar o joystick com segurança.",
     "afo": "A órtese tornozelo-pé (AFO) é uma das tecnologias assistivas mais prescritas no SUS. Ela serve para manter o tornozelo em 90 graus (neutro) e é indicada para <strong>pé caído</strong> decorrente de AVC, paralisia cerebral, sequelas de trauma ou poliomielite. Ela evita tropeços e previne o encurtamento do tendão de Aquiles.",
     "fluxo": "O fluxo regulatório no SUS começa na <strong>Atenção Primária (UBS)</strong>: o profissional preenche o laudo de solicitação de OPM. O pedido é inserido no <strong>SISREG</strong>. O sistema direciona o paciente para a avaliação e confecção no <strong>CER (Centro Especializado em Reabilitação)</strong> de referência da sua região.",
@@ -329,6 +330,20 @@ function setupEventListeners() {
             chatInputEl.value = question;
             handleUserChatMessage();
         });
+    });
+
+    // Clicar no item do menu Simulador Clínico
+    document.getElementById("nav-sim").addEventListener("click", (e) => {
+        e.preventDefault();
+        // Achar o primeiro módulo ativo e não completo para abrir
+        let activeM = 1;
+        for (let m = 1; m <= 4; m++) {
+            if (!appState.modulesCompleted.includes(m)) {
+                activeM = m;
+                break;
+            }
+        }
+        startSimulation(activeM);
     });
 }
 
