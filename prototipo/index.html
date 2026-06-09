@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUSAssist - Capacitação em Órteses e Próteses</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Principal -->
+        <aside class="app-sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>SUS<span>Assist</span></h1>
+                    <p>Tecnologia Assistiva</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Painel Principal
+                </a>
+                <a href="#trilha" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    Minha Trilha
+                </a>
+                <a href="#simulacoes" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Simulador Clínico
+                </a>
+                <a href="#conquistas" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                    Conquistas
+                </a>
+            </nav>
+
+            <div class="user-profile-summary">
+                <div class="profile-avatar">JP</div>
+                <div class="profile-info">
+                    <h4 id="user-name">Dr. João Paulo</h4>
+                    <p id="user-role">Fisioterapeuta - UBS Ipiranga</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="app-main">
+            <!-- Top Header -->
+            <header class="main-header">
+                <div class="welcome-text">
+                    <h2>Olá, João Paulo 👋</h2>
+                    <p>Continue sua jornada de educação permanente em Órteses e Próteses no SUS.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="progress-container-header">
+                        <div class="progress-text">Progresso Geral: <span id="overall-percentage">0%</span></div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="overall-progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" id="theme-toggle" title="Alternar Tema">
+                        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Seção Esquerda: Trilha de Aprendizado -->
+                <section class="learning-section">
+                    <div class="section-title-wrapper">
+                        <h3>Trilha de Aprendizado: Tecnologia Assistiva</h3>
+                        <span class="badge-accent">4 Módulos</span>
+                    </div>
+
+                    <div class="trilha-timeline" id="trilha-timeline">
+                        <!-- Módulo 1 (Sempre ativo no início) -->
+                        <div class="modulo-card active" id="modulo-1">
+                            <div class="modulo-header">
+                                <div class="modulo-number">1</div>
+                                <div class="modulo-meta">
+                                    <div class="status-badge status-em-progresso">Em Progresso</div>
+                                    <h4>Módulo 1: Introdução à Tecnologia Assistiva e Fluxo SUS</h4>
+                                    <p class="modulo-duration">⏱ 5 min • 3 Aulas • 1 Caso Clínico</p>
+                                </div>
+                            </div>
+                            <div class="modulo-body">
+                                <p class="modulo-desc">Compreenda a diferença entre órteses e próteses, o marco legal da pessoa com deficiência e o fluxo regulatório da Atenção Básica (UBS) para os Centros de Reabilitação (CER).</p>
+                                <ul class="lesson-list">
+                                    <li class="lesson-item read" data-lesson-id="1-1">
+                                        <div class="lesson-status-icon">✓</div>
+                                        <span>Aula 1.1: O que são Órteses e Próteses (O&P)?</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="1-2">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 1.2: A legislação e o papel do SUS na Tecnologia Assistiva</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="1-3">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 1.3: Fluxo de Regulação e o CER (Centro Especializado)</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                </ul>
+                                <div class="action-footer">
+                                    <button class="btn-simulation locked" id="btn-sim-1">Iniciar Simulação Clínica 1</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 2 -->
+                        <div class="modulo-card locked" id="modulo-2">
+                            <div class="modulo-header">
+                                <div class="modulo-number">2</div>
+                                <div class="modulo-meta">
+                                    <div class="status-badge status-bloqueado">Bloqueado</div>
+                                    <h4>Módulo 2: Avaliação Clínica e Prescrição de Cadeiras de Rodas</h4>
+                                    <p class="modulo-duration">⏱ 8 min • 3 Aulas • 1 Caso Clínico</p>
+                                </div>
+                            </div>
+                            <div class="modulo-body">
+                                <p class="modulo-desc">Aprenda a realizar a avaliação postural detalhada, a tirar as medidas do paciente e a prescrever o modelo correto de cadeira de rodas para evitar lesões.</p>
+                                <ul class="lesson-list">
+                                    <li class="lesson-item" data-lesson-id="2-1">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 2.1: Tipos de Cadeira de Rodas no SUS e Adequação Postural</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="2-2">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 2.2: Tomada de Medidas Antropométricas</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="2-3">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 2.3: Prevenção de Úlceras por Pressão (Escaras)</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                </ul>
+                                <div class="action-footer">
+                                    <button class="btn-simulation locked" id="btn-sim-2">Iniciar Simulação Clínica 2</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 3 -->
+                        <div class="modulo-card locked" id="modulo-3">
+                            <div class="modulo-header">
+                                <div class="modulo-number">3</div>
+                                <div class="modulo-meta">
+                                    <div class="status-badge status-bloqueado">Bloqueado</div>
+                                    <h4>Módulo 3: Órteses de Membros Inferiores (AFO/KAFO)</h4>
+                                    <p class="modulo-duration">⏱ 7 min • 3 Aulas • 1 Caso Clínico</p>
+                                </div>
+                            </div>
+                            <div class="modulo-body">
+                                <p class="modulo-desc">Identifique quando indicar órteses de tornozelo-pé (AFO) e de joelho-tornozelo-pé (KAFO) para reabilitação de sequelas motoras.</p>
+                                <ul class="lesson-list">
+                                    <li class="lesson-item" data-lesson-id="3-1">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 3.1: Indicações de Órtese de Tornozelo-Pé (AFO)</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="3-2">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 3.2: Quando indicar a Órtese Joelho-Tornozelo-Pé (KAFO)</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="3-3">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 3.3: Avaliação de Marcha para Adaptação de Órtese</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                </ul>
+                                <div class="action-footer">
+                                    <button class="btn-simulation locked" id="btn-sim-3">Iniciar Simulação Clínica 3</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 4 -->
+                        <div class="modulo-card locked" id="modulo-4">
+                            <div class="modulo-header">
+                                <div class="modulo-number">4</div>
+                                <div class="modulo-meta">
+                                    <div class="status-badge status-bloqueado">Bloqueado</div>
+                                    <h4>Módulo 4: Adaptação, Reabilitação e Acompanhamento pós-entrega</h4>
+                                    <p class="modulo-duration">⏱ 6 min • 3 Aulas • 1 Caso Clínico</p>
+                                </div>
+                            </div>
+                            <div class="modulo-body">
+                                <p class="modulo-desc">Compreenda a importância da reabilitação multiprofissional contínua após a entrega do equipamento e o monitoramento de sua eficácia e desgaste.</p>
+                                <ul class="lesson-list">
+                                    <li class="lesson-item" data-lesson-id="4-1">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 4.1: O Treino de Marcha e Uso de Próteses</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="4-2">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 4.2: Visita Domiciliar e Acompanhamento Multiprofissional</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                    <li class="lesson-item" data-lesson-id="4-3">
+                                        <div class="lesson-status-icon"></div>
+                                        <span>Aula 4.3: Manutenção, Reparos e Substituição no SUS</span>
+                                        <button class="btn-read-lesson">Ler</button>
+                                    </li>
+                                </ul>
+                                <div class="action-footer">
+                                    <button class="btn-simulation locked" id="btn-sim-4">Iniciar Simulação Clínica 4</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Direita: Chat com a IA Eva e Conquistas -->
+                <section class="sidebar-section">
+                    <!-- Painel da Assistente Eva -->
+                    <div class="eva-assistant-panel">
+                        <div class="eva-header">
+                            <div class="eva-avatar-wrapper">
+                                <img src="assets/eva_avatar.png" alt="Eva" class="eva-img">
+                                <span class="online-indicator"></span>
+                            </div>
+                            <div class="eva-meta">
+                                <h3>Eva</h3>
+                                <p>Preceptora Virtual em Órteses e Próteses</p>
+                            </div>
+                        </div>
+                        <div class="eva-chat-container" id="chat-container">
+                            <div class="chat-message eva-msg">
+                                Olá, João Paulo! Sou a Eva, sua assistente virtual de aprendizagem em órteses e próteses.
+                                <br><br>
+                                Estou aqui para tirar suas dúvidas e lhe apoiar em casos reais de atendimento no SUS. Em que posso te ajudar hoje?
+                            </div>
+                        </div>
+                        
+                        <!-- Botões Rápidos de Pergunta -->
+                        <div class="quick-questions-wrapper">
+                            <button class="quick-question-btn" data-question="Como prescrever cadeira de rodas no SUS?">Prescrição Cadeira de Rodas</button>
+                            <button class="quick-question-btn" data-question="O que é uma órtese AFO e quando indicar?">Indicações da Órtese AFO</button>
+                            <button class="quick-question-btn" data-question="Qual o fluxo de regulação para o CER?">Fluxo UBS para CER</button>
+                        </div>
+
+                        <form class="eva-chat-input-area" id="chat-form">
+                            <input type="text" id="chat-input" placeholder="Pergunte sobre portarias, diretrizes ou O&P..." autocomplete="off">
+                            <button type="submit" class="btn-send-message">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Painel de Conquistas (Badges) -->
+                    <div class="achievements-panel">
+                        <div class="panel-header">
+                            <h3>Minhas Conquistas</h3>
+                            <span class="badge-count" id="badge-count-text">0 / 4</span>
+                        </div>
+                        <div class="badges-grid">
+                            <div class="badge-item locked" id="badge-1">
+                                <div class="badge-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                                    </svg>
+                                </div>
+                                <h5>Expert do Fluxo</h5>
+                                <p>Completou o Módulo 1 e entende a regulação do SUS.</p>
+                            </div>
+                            <div class="badge-item locked" id="badge-2">
+                                <div class="badge-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                    </svg>
+                                </div>
+                                <h5>Adequação Postural</h5>
+                                <p>Domina as medidas e prescrição de cadeiras de rodas.</p>
+                            </div>
+                            <div class="badge-item locked" id="badge-3">
+                                <div class="badge-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                                    </svg>
+                                </div>
+                                <h5>Foco Funcional</h5>
+                                <p>Sabe avaliar marcha e indicar órteses MMII.</p>
+                            </div>
+                            <div class="badge-item locked" id="badge-4">
+                                <div class="badge-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    </svg>
+                                </div>
+                                <h5>Guardião da Autonomia</h5>
+                                <p>Domina o acompanhamento pós-entrega e reabilitação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modais de Leitura de Aula -->
+    <div class="modal-overlay" id="lesson-modal">
+        <div class="modal-card">
+            <header class="modal-header-nav">
+                <h3 id="lesson-modal-title">Título da Aula</h3>
+                <button class="btn-close-modal" id="btn-close-lesson">×</button>
+            </header>
+            <div class="modal-body-content" id="lesson-modal-content">
+                <!-- Conteúdo dinâmico da aula -->
+            </div>
+            <footer class="modal-footer">
+                <button class="btn-primary" id="btn-finish-lesson">Marcar como Concluída</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modais de Simulação Clínica (Quiz de Caso Clínico) -->
+    <div class="modal-overlay" id="simulation-modal">
+        <div class="modal-card sim-card">
+            <header class="modal-header-nav sim-header">
+                <h3>Simulação Clínica Interativa</h3>
+                <button class="btn-close-modal" id="btn-close-sim">×</button>
+            </header>
+            <div class="modal-body-content">
+                <div class="sim-case-description" id="sim-case-text">
+                    <!-- Descrição dinâmica do caso do paciente -->
+                </div>
+                <div class="sim-options-list" id="sim-options">
+                    <!-- Opções dinâmicas de múltipla escolha -->
+                </div>
+                <div class="sim-feedback-panel" id="sim-feedback" style="display: none;">
+                    <!-- Feedback de erro ou sucesso -->
+                </div>
+            </div>
+            <footer class="modal-footer">
+                <button class="btn-primary" id="btn-submit-sim">Confirmar Decisão Clínica</button>
+                <button class="btn-success" id="btn-next-module" style="display: none;">Prosseguir na Trilha</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Script Principal -->
+    <script src="app.js"></script>
+</body>
+</html>

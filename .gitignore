@@ -1,0 +1,9 @@
+# Ignorar arquivos de vídeo extremamente pesados do Meet e do Lançamento
+*.mp4
+
+# Outros arquivos do sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*.log
