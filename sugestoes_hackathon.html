@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SUSAssist - Proposta de Solução</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #004f9f;
+            --accent: #00a599;
+            --text-color: #1e293b;
+            --bg-color: #ffffff;
+            --border-color: #e2e8f0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            color: #0f172a;
+            margin-top: 1.8em;
+            margin-bottom: 0.6em;
+            font-weight: 700;
+        }
+        h1 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 12px;
+            color: var(--primary);
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 1.6rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            color: #0f172a;
+        }
+        h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+        blockquote {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 12px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        code {
+            font-family: monospace;
+            background-color: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f1f5f9;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        ul, ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 40px 0;
+        }
+        
+        /* Estilos do Bloco Mermaid */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 32px 0;
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Otimizações de Impressão (PDF) */
+        @media print {
+            body {
+                margin: 20px;
+                max-width: 100%;
+                font-size: 11pt;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            pre, blockquote, .mermaid {
+                page-break-inside: avoid;
+            }
+            hr {
+                margin: 20px 0;
+            }
+        }
+    </style>
+    
+
+    <!-- Carrega o Mermaid JS para renderizar o diagrama no navegador -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'default',
+                securityLevel: 'loose',
+                flowchart: { useMaxWidth: true, htmlLabels: true }
+            });
+        });
+    </script>
+    
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">SUSAssist - Proposta de Solução</h1>
+</header>
+<h1
+id="susassist-solução-para-o-desafio-de-educação-digital-no-sus">SUSAssist:
+Solução para o Desafio de Educação Digital no SUS</h1>
+<h2
+id="tema-capacitação-permanente-em-tecnologia-assistiva-órteses-e-próteses">Tema:
+Capacitação Permanente em Tecnologia Assistiva (Órteses e Próteses)</h2>
+<p>Este documento apresenta a análise e a proposta de solução
+desenvolvida para o <strong>Desafio 2: Educação Digital para
+Profissionais do SUS</strong>, com foco na temática de
+<strong>Tecnologia Assistiva (Órteses e Próteses - O&amp;P)</strong>,
+conforme as diretrizes do Edital do Hackathon Saúde Digital Unifesp
+2026.</p>
+<hr />
+<h2 id="o-diagnóstico-do-problema-no-sus">1. O Diagnóstico do Problema
+no SUS</h2>
+<p>A prescrição, dispensação, adaptação e acompanhamento de órteses e
+próteses no Sistema Único de Saúde enfrentam gargalos críticos: 1.
+<strong>Centralização e Falta de Capacitação na Atenção
+Primária:</strong> Profissionais das Unidades Básicas de Saúde (UBS)
+frequentemente não possuem formação específica para avaliar necessidades
+de tecnologia assistiva simples (como cadeiras de rodas de diferentes
+tipos, andadores, órteses de tornozelo-pé, etc.). 2.
+<strong>Encaminhamentos Inadequados:</strong> A falta de conhecimento
+técnico gera encaminhamentos incorretos ou incompletos aos Centros
+Especializados em Reabilitação (CER), sobrecarregando o sistema de
+média/alta complexidade e aumentando o tempo de espera nas filas. 3.
+<strong>Abandono do Equipamento (Rejeição):</strong> Dispositivos
+prescritos sem a correta adequação postural ou funcional acabam sendo
+abandonados pelo paciente, o que representa prejuízo clínico (piora da
+mobilidade, escaras, deformidades) e desperdício de recursos públicos.
+4. <strong>Tempo e Escala dos Profissionais:</strong> Profissionais de
+saúde têm jornadas intensas e dificuldade em se afastar do trabalho para
+cursos tradicionais e longos.</p>
+<hr />
+<h2 id="a-solução-proposta-susassist">2. A Solução Proposta:
+<strong>SUSAssist</strong></h2>
+<p>O <strong>SUSAssist</strong> é uma plataforma digital de
+<strong>microlearning adaptativo</strong> e <strong>apoio à decisão
+clínica</strong>, disponível via Web e App Mobile (PWA), desenhada para
+capacitar profissionais de saúde diretamente em seu local de
+trabalho.</p>
+<p>A plataforma baseia-se em quatro pilares fundamentais:</p>
+<h3 id="a.-trilhas-de-aprendizamento-adaptativas-microlearning">A.
+Trilhas de Aprendizamento Adaptativas (Microlearning)</h3>
+<p>Em vez de cursos longos, o profissional realiza pílulas de
+conhecimento (módulos de 3 a 5 minutos) focadas em competências
+específicas. A trilha é adaptada de acordo com o papel do profissional
+(médico, fisioterapeuta, enfermeiro ou agente comunitário de saúde -
+ACS) e seu nível de conhecimento prévio, detectado por breves quizzes
+diagnósticos.</p>
+<h3 id="b.-eva-assistente-virtual-de-ia-para-tecnologia-assistiva">B.
+Eva: Assistente Virtual de IA para Tecnologia Assistiva</h3>
+<p>A <strong>Eva</strong> (Especialista em Vida Assistiva) é uma
+inteligência artificial que atua de duas formas: 1. <strong>Tutor de
+Aprendizado:</strong> Acompanha o profissional na trilha, responde a
+dúvidas sobre conteúdos, sugere revisões e detalha materiais complexos.
+2. <strong>Suporte Clínico:</strong> Serve como ferramenta de apoio no
+dia a dia da UBS. O médico ou fisioterapeuta pode perguntar à Eva sobre
+critérios de elegibilidade para próteses de membros inferiores,
+portarias do SUS (como a Portaria de Consolidação nº 2/2017) ou como
+medir adequadamente um paciente para prescrição de cadeira de rodas.</p>
+<h3 id="c.-simulador-de-casos-clínicos-interativos">C. Simulador de
+Casos Clínicos Interativos</h3>
+<p>O profissional aprende na prática por meio de cenários interativos
+simulados. Ele avalia pacientes fictícios com diferentes perfis sociais,
+funcionais e clínicos, devendo prescrever a tecnologia assistiva
+correta, configurar acessórios (como almofadas anti-escaras) e desenhar
+o fluxo de encaminhamento adequado no SUS.</p>
+<h3 id="d.-gamificação-e-micro-credenciamento-badges">D. Gamificação e
+Micro-credenciamento (Badges)</h3>
+<p>Para estimular o engajamento, a plataforma conta com uma dinâmica de
+gamificação. À medida que o profissional avança nas trilhas de O&amp;P e
+resolve casos clínicos com sucesso, ele desbloqueia medalhas de
+competência (<em>badges</em>), como: * <em>Guardião da Postura</em>
+(prescrição correta de cadeira de rodas). * <em>Mestre do
+Encaminhamento</em> (fluxo correto UBS -&gt; CER). * <em>Protetor da
+Pele</em> (prevenção de lesões por pressão).</p>
+<hr />
+<h2 id="avaliação-frente-aos-critérios-do-edital-pesos-e-alinhamento">3.
+Avaliação Frente aos Critérios do Edital (Pesos e Alinhamento)</h2>
+<h3 id="impacto-clínicosocial-peso-30">3.1. Impacto Clínico/Social (Peso
+30%)</h3>
+<ul>
+<li><strong>Na vida do usuário do SUS:</strong> A capacitação adequada
+da atenção primária acelera o diagnóstico e a prescrição correta da
+O&amp;P. O paciente recebe um dispositivo adequado mais rapidamente,
+reduzindo complicações físicas (úlceras por pressão, contraturas e
+dores) e psicológicas. Promove diretamente a equidade e a autonomia de
+pessoas com deficiência.</li>
+<li><strong>Na qualidade do cuidado:</strong> Aumenta a resolutividade
+na UBS, reduzindo a taxa de abandono do equipamento (que hoje chega a
+níveis alarmantes em algumas regiões por falta de adaptação
+correta).</li>
+</ul>
+<h3 id="viabilidade-técnica-peso-30">3.2. Viabilidade Técnica (Peso
+30%)</h3>
+<ul>
+<li><strong>Integração com Sistemas Existentes:</strong>
+<ul>
+<li><strong>AVASUS/UNA-SUS:</strong> O SUSAssist funciona como um
+microsserviço educacional integrado via LTI (Learning Tools
+Interoperability) ou APIs Rest às plataformas de capacitação oficiais do
+Ministério da Saúde.</li>
+<li><strong>CNES e Gov.br:</strong> Autenticação unificada via Gov.br
+para verificar a atuação do profissional no SUS pelo Cadastro Nacional
+de Estabelecimentos de Saúde (CNES).</li>
+<li><strong>e-SUS APS:</strong> Integração do simulador para que possa
+ser acessado como ferramenta de apoio à decisão clínica (DSS - Decision
+Support System) direto do prontuário eletrônico.</li>
+</ul></li>
+<li><strong>Exequibilidade:</strong> O protótipo utiliza tecnologias web
+modernas (HTML, CSS e JavaScript) e pode ser implementado como um
+aplicativo híbrido leve, com baixos requisitos de servidor.</li>
+</ul>
+<h3 id="segurança-e-lgpd-peso-20">3.3. Segurança e LGPD (Peso 20%)</h3>
+<ul>
+<li><strong>Tratamento de Dados de Saúde:</strong> O simulador clínico
+utiliza apenas dados sintéticos (pacientes fictícios), eliminando riscos
+de vazamento de informações reais de pacientes.</li>
+<li><strong>Dados do Profissional:</strong> O cadastro do profissional
+na trilha coleta dados restritos de identificação funcional (conforme as
+bases do Gov.br) com criptografia ponta a ponta (HTTPS/TLS) e controle
+de acessos estrito.</li>
+<li><strong>Consentimento:</strong> Termo de Consentimento Livre e
+Esclarecido (TCLE) digital integrado para a coleta de dados de navegação
+e desempenho escolar, usados exclusivamente para a melhoria pedagógica
+das trilhas.</li>
+</ul>
+<h3 id="escalabilidade-peso-20">3.4. Escalabilidade (Peso 20%)</h3>
+<ul>
+<li><strong>Diversidade de Contextos (UBS Rurais a CERs):</strong> A
+aplicação é otimizada para funcionar em conexões lentas (3G/4G rural). O
+conteúdo teórico e os simuladores de texto ficam disponíveis em modo
+offline no PWA. Os dados de progresso são sincronizados automaticamente
+quando houver conexão disponível.</li>
+<li><strong>Adaptação Regional:</strong> A trilha pode ser customizada
+para refletir os fluxos locais de cada município ou estado (já que os
+fluxos de referência e contrarreferência podem variar regionalmente no
+Brasil).</li>
+</ul>
+<hr />
+<h2 id="estrutura-da-trilha-de-aprendizado-no-protótipo">4. Estrutura da
+Trilha de Aprendizado no Protótipo</h2>
+<p>O protótipo interativo simula a jornada do profissional dividida em 4
+marcos de competência:</p>
+<div class="mermaid">graph TD
+    M1["Módulo 1: Introdução à Tecnologia Assistiva e Fluxo SUS"] -->|Aprovado| M2["Módulo 2: Avaliação Clínica e Prescrição de Cadeiras de Rodas"]
+    M2 -->|Aprovado| M3["Módulo 3: Órteses de Membros Inferiores AFO/KAFO"]
+    M3 -->|Aprovado| M4["Módulo 4: Adaptação, Reabilitação e Acompanhamento"]
+    
+    style M1 fill:#004f9f,stroke:#003a75,stroke-width:2px,color:#fff
+    style M2 fill:#00a599,stroke:#00847a,stroke-width:2px,color:#fff
+    style M3 fill:#00a599,stroke:#00847a,stroke-width:2px,color:#fff
+    style M4 fill:#00a599,stroke:#00847a,stroke-width:2px,color:#fff</div>
+<ol type="1">
+<li><strong>Módulo 1 - Fundamentos e Fluxo SUS:</strong> Focado na
+diferença entre Órtese e Prótese, legislação (Diretrizes da Pessoa com
+Deficiência) e fluxo de referência (UBS -&gt; CER).</li>
+<li><strong>Módulo 2 - Prescrição de Cadeira de Rodas:</strong> Medidas
+do paciente, escolha do modelo (padrão, monobloco, motorizada, postural)
+e prevenção de úlceras por pressão.</li>
+<li><strong>Módulo 3 - Órteses MMII (AFO e KAFO):</strong> Indicações
+para órteses de tornozelo-pé (AFO) e joelho-tornozelo-pé (KAFO) pós-AVC,
+paralisia cerebral e traumas.</li>
+<li><strong>Módulo 4 - Reabilitação e Acompanhamento:</strong> Processo
+de treino de marcha, acompanhamento pós-entrega, manutenção e descarte
+correto.</li>
+</ol>
+<hr />
+<h2 id="diferencial-para-a-banca-avaliadora">5. Diferencial para a Banca
+Avaliadora</h2>
+<ul>
+<li><strong>Foco Centrado no Profissional e no Usuário Final:</strong> A
+solução não é apenas teórica; ela treina o profissional com foco no
+bem-estar do usuário final (equidade e protagonismo do paciente).</li>
+<li><strong>Solução Prática vs Teórica:</strong> O simulador garante que
+o profissional saiba aplicar a teoria imediatamente na sua rotina de
+atendimento na UBS.</li>
+<li><strong>Uso Inteligente de IA:</strong> A IA não substitui o
+treinamento do profissional, mas sim o potencializa, servindo como uma
+“preceptora digital de bolso” 24 horas por dia.</li>
+</ul>
+</body>
+</html>
