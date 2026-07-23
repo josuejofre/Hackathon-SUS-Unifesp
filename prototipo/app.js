@@ -1,681 +1,573 @@
-// SUSAssist - Lógica do Protótipo Interativo
+// Trilha Digital em Tecnologia Assistiva — Lógica do Aplicativo
+// 5 Eixos | 14 Unidades | Gamificação | Quebra-Cabeça Interativo | Widget Flutuante E.V.A.
 
-// --- BANCO DE DADOS DOS CONTEÚDOS DAS AULAS ---
+const state = {
+    completedLessons: new Set(),
+    completedSimulations: new Set(),
+    completedPuzzles: new Set(),
+    userXP: 0,
+    userLevel: 1,
+    unlockedBadges: new Set(),
+    puzzleCurrentPhase: 1,
+    currentSimModuleId: null
+};
+
 const lessonsContent = {
-    "1-1": {
-        title: "Aula 1.1: O que são Órteses e Próteses (O&P)?",
-        html: `
-            <p>Para atuar na Atenção Primária, é fundamental diferenciar as tecnologias assistivas concedidas pelo SUS:</p>
-            <h4>Órtese</h4>
-            <p>É um dispositivo aplicado externamente ao corpo para modificar as características estruturais ou funcionais dos sistemas neuromuscular e esquelético. Ela <strong>alinha, previne ou corrige deformidades</strong>, apoia membros fracos ou melhora a função de partes móveis. Exemplos: palmilhas, talas, órteses de tornozelo-pé (AFO), coletes ortopédicos.</p>
-            <h4>Prótese</h4>
-            <p>É um dispositivo aplicado externamente para <strong>substituir total ou parcialmente</strong> um membro, órgão ou tecido ausente ou deficiente. Exemplos: próteses transtibiais, transfemorais (para amputações de perna), próteses de braço ou mão.</p>
-            <blockquote>
-                <strong>Dica de Prática:</strong> A órtese <em>apoia</em> o segmento corporal existente. A prótese <em>substitui</em> o segmento ausente.
-            </blockquote>
-        `
+    "E1U1T1": {
+        title: "1.1 O que é Tecnologia Assistiva",
+        html: `<p>Tecnologia Assistiva (TA) é uma área interdisciplinar que reúne produtos, recursos, metodologias, estratégias, serviços e práticas para promover autonomia, independência e qualidade de vida para pessoas com deficiência ou mobilidade reduzida.</p><h4>Definição da LBI (Lei 13.146/2015)</h4><p>Dispositivos e serviços visando à inclusão social e autonomia.</p>`
     },
-    "1-2": {
-        title: "Aula 1.2: A legislação e o papel do SUS na Tecnologia Assistiva",
-        html: `
-            <p>A concessão de órteses, próteses e materiais especiais (OPME) não-cirúrgicos é assegurada por portarias do Ministério da Saúde no âmbito da Rede de Cuidados à Pessoa com Deficiência.</p>
-            <h4>Principais Diretrizes:</h4>
-            <ul>
-                <li><strong>Portaria de Consolidação nº 2/2017:</strong> Regulamenta as diretrizes nacionais para a atenção à saúde das pessoas com deficiência.</li>
-                <li><strong>Integralidade do Cuidado:</strong> O SUS é responsável por todo o ciclo: avaliação médica, prescrição, confecção/aquisição, adaptação, reabilitação física e manutenção periódica do dispositivo.</li>
-                <li><strong>Gratuidade Total:</strong> Nenhum profissional do SUS pode orientar a compra privada ou cobrar taxas adicionais para aceleração de pedidos. A prescrição deve seguir a Tabela de Procedimentos, Medicamentos e OPM do SUS.</li>
-            </ul>
-        `
+    "E1U1T2": {
+        title: "1.2 O que são OPM",
+        html: `<p><strong>OPM</strong>: Órteses, Próteses e Meios Auxiliares de Locomoção no SUS (Tabela SIGTAP).</p>`
     },
-    "1-3": {
-        title: "Aula 1.3: Fluxo de Regulação e o CER (Centro Especializado)",
-        html: `
-            <p>Como o paciente recebe uma cadeira de rodas ou uma prótese no SUS? O fluxo regulatório segue passos estritos de referência:</p>
-            <ol>
-                <li><strong>Acolhimento na UBS:</strong> O paciente é avaliado pelo médico de família ou fisioterapeuta da equipe multiprofissional (eSF/eMulti).</li>
-                <li><strong>Prescrição e Laudo:</strong> O profissional preenche o laudo de solicitação de OPM com a descrição detalhada e o código da Tabela SUS.</li>
-                <li><strong>Sistema de Regulação (SISREG):</strong> A solicitação é inserida no sistema de regulação municipal/estadual.</li>
-                <li><strong>Atendimento no CER:</strong> O paciente é chamado para o CER (Centro Especializado em Reabilitação), onde uma equipe especializada (médico fisiatra, terapeuta ocupacional, fisioterapeuta, protesista) faz a avaliação final, tirada de moldes, entrega e adaptação do dispositivo.</li>
-            </ol>
-        `
+    "E1U1T3": {
+        title: "1.3 Diferença entre Órtese, Prótese e Recurso Auxiliar",
+        html: `<p><strong>Órtese:</strong> Apoia segmento existente (ex: AFO, colete).<br><strong>Prótese:</strong> Substitui membro ausente (ex: prótese transtibial).<br><strong>Recurso Auxiliar:</strong> Equipamento de deslocamento (ex: cadeira de rodas, andador).</p>`
     },
-    "2-1": {
-        title: "Aula 2.1: Tipos de Cadeira de Rodas no SUS e Adequação Postural",
-        html: `
-            <p>A prescrição de cadeiras de rodas deve considerar o grau de autonomia, força e estabilidade do usuário. A tabela do SUS inclui:</p>
-            <ul>
-                <li><strong>Cadeira de Rodas Monobloco / Dobrável em X:</strong> Para usuários ativos ou passivos. A de alumínio (mais leve) facilita a autopropulsão e o transporte.</li>
-                <li><strong>Cadeira de Rodas para Obeso:</strong> Reforçada para suportar cargas acima de 100-120kg.</li>
-                <li><strong>Cadeira de Rodas Motorizada:</strong> Indicada para pessoas com grave comprometimento motor nos quatro membros (ex: tetraplegia) que possuem função cognitiva preservada para controlar o joystick de forma segura.</li>
-                <li><strong>Cadeira de Rodas Postural (Tetra):</strong> Possui apoios de cabeça, tronco e abdômen, indicada para pacientes com controle de tronco nulo ou espasticidade severa.</li>
-            </ul>
-        `
+    "E1U1T4": {
+        title: "1.4 Quem participa do processo de cuidado",
+        html: `<p>Equipe multiprofissional (UBS, eMulti, CER) e o protagonismo da pessoa com deficiência e sua família.</p>`
     },
-    "2-2": {
-        title: "Aula 2.2: Tomada de Medidas Antropométricas",
-        html: `
-            <p>Prescrever uma cadeira de rodas sem medir o paciente é como comprar um sapato sem saber o tamanho. As medidas principais a serem tomadas com o paciente sentado em superfície firme são:</p>
-            <ol>
-                <li><strong>Largura do Assento:</strong> Medir a distância entre os pontos mais largos do quadril/trocanteres e somar +2cm a +4cm de folga.</li>
-                <li><strong>Profundidade do Assento:</strong> Distância da região posterior do glúteo até a dobra posterior do joelho (fossa poplítea), subtraindo 3cm a 5cm para não garrotear a circulação.</li>
-                <li><strong>Altura do Encosto:</strong> Depende do controle de tronco. Para usuários ativos, mede-se da base do assento até abaixo da escápula. Para passivos, vai até os ombros ou cabeça.</li>
-            </ol>
-        `
-    },
-    "2-3": {
-        title: "Aula 2.3: Prevenção de Úlceras por Pressão (Escaras)",
-        html: `
-            <p>Pacientes com perda de sensibilidade ou mobilidade (como paraplégicos) correm altíssimo risco de desenvolver feridas graves. A prevenção na cadeira envolve:</p>
-            <ul>
-                <li><strong>Almofadas Especiais:</strong> O SUS fornece almofadas de espuma de alta densidade revestida ou células de ar (tipo Roho) para redistribuição de pressão nos ossos do quadril (ísquios).</li>
-                <li><strong>Mapeamento de Pressão:</strong> Encontrar pontos vermelhos na pele após o uso.</li>
-                <li><strong>Alívio de Pressão:</strong> Orientar o paciente a realizar alívios de pressão (erguer o corpo com os braços ou inclinar o tronco) a cada 20-30 minutos.</li>
-            </ul>
-        `
-    },
-    "3-1": {
-        title: "Aula 3.1: Indicações de Órtese de Tornozelo-Pé (AFO)",
-        html: `
-            <p>A órtese tornozelo-pé (ou <strong>AFO - Ankle Foot Orthosis</strong>) é um dos dispositivos mais prescritos na reabilitação neurológica.</p>
-            <h4>Indicações principais:</h4>
-            <ul>
-                <li><strong>Pé Caído (Flácido ou Espástico):</strong> Comum após Acidente Vascular Cerebral (AVC), lesão medular incompleta ou lesões de nervos periféricos (ex: nervo fibular). A AFO segura o pé em 90 graus para que o paciente não tropece ao caminhar.</li>
-                <li><strong>Instabilidade de Tornozelo:</strong> Previne torções e desvios em varo ou valgo.</li>
-            </ul>
-            <h4>Tipos de AFO:</h4>
-            <p>Podem ser rígidas (bloqueiam o movimento para dar estabilidade máxima) ou dinâmicas/articuladas (permitem a dorsiflexão natural do tornozelo na marcha).</p>
-        `
-    },
-    "3-2": {
-        title: "Aula 3.2: Quando indicar a Órtese Joelho-Tornozelo-Pé (KAFO)",
-        html: `
-            <p>A órtese joelho-tornozelo-pé (ou <strong>KAFO - Knee Ankle Foot Orthosis</strong>), popularmente chamada de tutor longo, abrange toda a perna.</p>
-            <h4>Indicações:</h4>
-            <p>Utilizada quando o paciente apresenta fraqueza ou paralisia não apenas no tornozelo, mas também no músculo quadríceps (joelho), impedindo-o de manter o joelho estendido durante a marcha. Ex: sequelas de poliomielite, lesões medulares baixas, paralisia cerebral grave.</p>
-            <blockquote>
-                <strong>Critério de Uso:</strong> O paciente precisa ter força preservada nos membros superiores (para usar muletas ou andador como apoio) e força nos músculos flexores do quadril para conseguir dar o passo.
-            </blockquote>
-        `
-    },
-    "3-3": {
-        title: "Aula 3.3: Avaliação de Marcha para Adaptação de Órtese",
-        html: `
-            <p>Antes de confeccionar a órtese no CER, o profissional deve analisar a marcha do paciente em três fases chaves:</p>
-            <ol>
-                <li><strong>Fase de Toque de Calcanhar:</strong> Avaliar se o calcanhar toca primeiro o solo ou se o paciente toca com a ponta do pé (marcha equina).</li>
-                <li><strong>Fase de Apoio Médio:</strong> Observar se há hiperextensão do joelho (recurvato) como compensação da fraqueza.</li>
-                <li><strong>Fase de Oscilação:</strong> Verificar se o paciente precisa fazer um movimento de circundução (marcha ceifante) para que o pé não arraste no chão. A órtese corrigirá essa necessidade.</li>
-            </ol>
-        `
-    },
-    "4-1": {
-        title: "Aula 4.1: O Treino de Marcha e Uso de Próteses",
-        html: `
-            <p>A prótese não funciona sozinha. O processo de protetização exige um rigoroso treinamento de reabilitação:</p>
-            <ul>
-                <li><strong>Dessensibilização do Coto:</strong> Massagens, batidinhas e enfaixamento compressivo do coto de amputação para prepará-lo para a pressão do encaixe da prótese.</li>
-                <li><strong>Treinamento de Equilíbrio:</strong> Exercícios em barras paralelas para o paciente transferir o peso corporal para a prótese sem medo.</li>
-                <li><strong>Treinamento de Marcha:</strong> Corrigir desvios posturais e ensinar o padrão correto de caminhada em rampas, escadas e terrenos irregulares.</li>
-            </ul>
-        `
-    },
-    "4-2": {
-        title: "Aula 4.2: Visita Domiciliar e Acompanhamento Multiprofissional",
-        html: `
-            <p>O sucesso da reabilitação depende do ambiente doméstico. Na visita domiciliar da equipe de saúde da família:</p>
-            <ul>
-                <li><strong>Eliminação de Barreiras:</strong> Orientar a remoção de tapetes soltos, instalação de barras de apoio no banheiro e rampas de acesso simples.</li>
-                <li><strong>Inspeção Diária do Coto:</strong> O paciente e a família devem ser instruídos a olhar o coto todos os dias. Vermelhidão que não some após 15 minutos sem a prótese indica risco de ferida.</li>
-                <li><strong>Higiene:</strong> Lavagem diária do coto com sabão neutro e secagem completa para evitar infecções fúngicas ou bacterianas.</li>
-            </ul>
-        `
-    },
-    "4-3": {
-        title: "Aula 4.3: Manutenção, Reparos e Substituição no SUS",
-        html: `
-            <p>Órteses e próteses sofrem desgaste natural com o uso regular. O fluxo do SUS também cobre essa demanda:</p>
-            <ul>
-                <li><strong>Manutenção Periódica:</strong> Troca de tiras de velcro, solados, liners de silicone ou lubrificação de articulações metálicas devem ser feitas no CER de referência.</li>
-                <li><strong>Substituição por Desgaste ou Crescimento:</strong> Em crianças, a substituição de órteses é frequente devido ao crescimento rápido. Em adultos, a vida útil de uma prótese bem cuidada varia de 2 a 5 anos.</li>
-                <li><strong>Nova Solicitação:</strong> Se o dispositivo quebrar ou não servir mais, o profissional da UBS reinicia o processo no SISREG com o laudo de "Substituição/Manutenção de OPM".</li>
-            </ul>
-        `
+    "E1U1T5": {
+        title: "1.5 OPM no contexto do SUS",
+        html: `<p>Acesso gratuito garantido por lei via Rede de Cuidados à Pessoa com Deficiência (RCPD).</p>`
     }
 };
 
-// --- DADOS DAS SIMULAÇÕES CLÍNICAS (CASOS CLÍNICOS) ---
 const simulationsData = {
     1: {
         moduleId: 1,
-        title: "Caso Clínico 1: O Encaminhamento do Lucas",
-        description: `<strong>Paciente:</strong> Lucas, 8 anos, diagnosticado com Paralisia Cerebral. Ele consegue caminhar utilizando um andador comum na escola, mas seus professores notam que ele está tropeçando frequentemente. 
-        <br><br>
-        <strong>Avaliação na UBS:</strong> Você observa que Lucas apresenta um padrão de marcha equina (caminha na ponta dos pés de forma dinâmica), com encurtamento do tendão de Aquiles que se desfaz passivamente. O médico da família deseja saber como proceder pelo SUS para ajudar o Lucas.`,
+        title: "Quiz Módulo 1 — Tecnologia Assistiva & OPM no SUS",
+        description: "Qual das afirmativas sobre Tecnologia Assistiva (TA) no SUS é VERDADEIRA?",
         options: [
-            { text: "Prescrever uma cadeira de rodas postural motorizada no SISREG para evitar que Lucas caminhe e se canse.", correct: false, feedback: "Incorreto. Lucas tem potencial de marcha e o uso de cadeira de rodas motorizada diminuiria sua autonomia funcional desnecessariamente." },
-            { text: "Encaminhar Lucas para o CER via SISREG para avaliação de órtese do tipo AFO (tornozelo-pé) para alinhar o tornozelo durante a marcha e solicitar a manutenção/adequação do andador.", correct: true, feedback: "Excelente! A órtese AFO rígida ou articulada ajudará a manter o tornozelo em posição funcional (90 graus) na fase de oscilação, reduzindo os tropeços, enquanto o andador garante o apoio. O encaminhamento via UBS ao CER segue o fluxo regulatório correto do SUS." },
-            { text: "Solicitar exames de ressonância magnética de urgência e recomendar repouso absoluto no leito por 6 meses.", correct: false, feedback: "Incorreto. O repouso causará perda de força muscular e piora do encurtamento do Lucas. A conduta correta é reabilitação e prescrição de órtese." },
-            { text: "Orientar a família de que o SUS não fornece órteses para crianças em idade escolar e sugerir que comprem em uma loja particular.", correct: false, feedback: "Incorreto! A concessão de OPMs para pessoas com deficiência física de todas as idades é garantida por lei e coberta integralmente pelo SUS." }
+            { text: "A TA refere-se apenas a dispositivos físicos e exclui serviços.", correct: false, feedback: "Incorreto. Pela LBI, TA inclui produtos, metodologias, práticas e serviços." },
+            { text: "Toda OPM faz parte do campo da Tecnologia Assistiva, que engloba também outros recursos.", correct: true, feedback: "Excelente! OPM é um subgrupo essencial de Tecnologia Assistiva." }
         ]
     },
     2: {
         moduleId: 2,
-        title: "Caso Clínico 2: A Cadeira de Rodas do Seu Francisco",
-        description: `<strong>Paciente:</strong> Seu Francisco, 72 anos, amputado transtibial esquerdo por diabetes. Ele está em cadeira de rodas há 6 meses.
-        <br><br>
-        <strong>Avaliação na UBS:</strong> Durante a visita domiciliar, você identifica que Seu Francisco está usando uma cadeira de rodas emprestada de ferro, muito estreita e sem almofada. Ele queixa-se de dores fortes no quadril e você nota uma área avermelhada na região sacral que não desaparece. Qual a conduta correta de prescrição?`,
+        title: "Simulação Módulo 2 — Funcionalidade & CIF",
+        description: "Ao prescrever uma OPM para um paciente pós-AVC que mora sozinho, qual deve ser o foco prioritário?",
         options: [
-            { text: "Prescrever uma cadeira de rodas de ferro comum tamanho padrão e recomendar pomadas cicatrizantes.", correct: false, feedback: "Incorreto. Usar uma cadeira estreita e sem redistribuição de pressão perpetuará a lesão sacral, que pode evoluir para uma úlcera grave." },
-            { text: "Recomendar que ele pare de usar a cadeira de rodas e passe a se arrastar pelo chão da casa para evitar a pressão no quadril.", correct: false, feedback: "Incorreto. Essa conduta expõe o idoso a infecções, perda da dignidade e riscos graves de acidentes." },
-            { text: "Prescrever uma cadeira de alumínio leve adaptada às medidas do Seu Francisco, acompanhada de almofada de células de ar ou espuma de alta densidade para alívio de pressão, além de encaminhar para o CER para treino de prótese.", correct: true, feedback: "Perfeito! A adequação das medidas previne escaras (úlceras por pressão) nas proeminências ósseas, e o alumínio facilita a mobilidade. A almofada especial é essencial para o alívio de pressão. O encaminhamento ao CER prepara o idoso para futura protetização." },
-            { text: "Solicitar uma cadeira motorizada pesada diretamente, ignorando que o paciente tem diabetes descompensada e falta de força em membros superiores.", correct: false, feedback: "Incorreto. Cadeira motorizada exige avaliação específica cognitiva e motora e, neste caso, o mais urgente é o alívio de pressão no quadril e adequação postural simples." }
+            { text: "Independência funcional na marcha e prevenção de quedas no ambiente domiciliar.", correct: true, feedback: "Perfeito! A prioridade é garantir segurança e autonomia em AVDs." },
+            { text: "Apenas a estética da peça.", correct: false, feedback: "A funcionalidade vem em primeiro lugar." }
         ]
     },
     3: {
         moduleId: 3,
-        title: "Caso Clínico 3: O Pé Caído de Dona Maria",
-        description: `<strong>Paciente:</strong> Dona Maria, 62 anos, hemiparesia espástica à direita pós-AVC há 1 ano. 
-        <br><br>
-        <strong>Avaliação na UBS:</strong> Dona Maria consegue andar sem andador dentro de casa, mas arrasta a ponta do pé direito, precisando erguer muito o quadril (marcha ceifante/escarvante) para evitar tropeçar. Ela já caiu duas vezes no último mês. Que órtese deve ser prescrita pelo SUS para resolver este problema?`,
+        title: "Simulação Módulo 3 — Avaliação Inicial",
+        description: "Qual elemento NÃO pode faltar no laudo de solicitação de OPM via SISREG?",
         options: [
-            { text: "Uma órtese longa articulada de metal (KAFO) que trava o joelho em extensão completa.", correct: false, feedback: "Incorreto. Dona Maria tem controle do joelho; uma KAFO seria pesada, limitante e inadequada para sua marcha atual." },
-            { text: "Uma órtese tornozelo-pé (AFO) em polipropileno sob medida para manter o pé neutro em 90 graus na fase de oscilação da marcha.", correct: true, feedback: "Excelente escolha! A órtese AFO de polipropileno (tipo rígida ou mola de Codivilla) estabiliza o tornozelo em 90 graus, evitando que a ponta do pé arraste e eliminando o risco de quedas. É o dispositivo ideal para pé caído pós-AVC." },
-            { text: "Nenhuma órtese, recomendando apenas o uso de sapatos de sola de borracha antiderrapante pesados.", correct: false, feedback: "Incorreto. O sapato antiderrapante não resolve a queda do pé e pode até aumentar os tropeços devido ao atrito do calçado arrastando no chão." },
-            { text: "Uma prótese de pé estético de silicone para calçar por dentro da meia.", correct: false, feedback: "Incorreto. Dona Maria tem o membro íntegro (apenas paralisado/espástico). Próteses substituem partes ausentes; ela necessita de uma órtese." }
+            { text: "Descrição clara da limitação funcional e do objetivo terapêutico pretendido.", correct: true, feedback: "Exato! Sem justificativa funcional a regulação não aprova o pedido." },
+            { text: "Apenas a marca comercial do fabricante.", correct: false, feedback: "No SUS prescreve-se por código SIGTAP." }
         ]
     },
     4: {
         moduleId: 4,
-        title: "Caso Clínico 4: A Adaptação da Dona Cleide",
-        description: `<strong>Paciente:</strong> Dona Cleide, 45 anos, amputada transtibial direita. Ela recebeu sua prótese confeccionada no CER há duas semanas.
-        <br><br>
-        <strong>Avaliação na UBS:</strong> Ela procura a UBS relatando que tentou caminhar em casa, mas sente dores extremas na ponta do osso do coto (tíbia) e a pele local está muito vermelha, quente e quase abrindo uma ferida. Qual a conduta imediata da equipe da UBS?`,
+        title: "Quiz Oficial Módulo 4 — Critérios para Prescrever",
+        description: "Qual é o significado de 'Objetivo de curto prazo' na prescrição de OPM?",
         options: [
-            { text: "Orientar Dona Cleide a continuar usando a prótese e caminhando para calejamento natural da pele.", correct: false, feedback: "Perigoso! Caminhar com ponto de hiperpressão em coto de amputação pode causar necrose tecidual e feridas graves que inviabilizam o uso da prótese por meses." },
-            { text: "Suspender o uso da prótese temporariamente, tratar a inflamação na UBS e encaminhar Dona Cleide ao CER com laudo solicitando ajuste urgente no encaixe (liner/soquete) da prótese.", correct: true, feedback: "Espetacular! A conduta correta é proteger a integridade do coto suspendendo o uso até o ajuste, e acionar o CER (oficina ortopédica) para desgastar ou readequar o soquete no local de hiperpressão óssea." },
-            { text: "Orientar a paciente a preencher o encaixe da prótese com várias meias grossas ou jornal até a dor passar por completo.", correct: false, feedback: "Incorreto. Encher o encaixe de material sem critério pode apertar ainda mais o coto ou desalinhar a marcha, agravando a lesão." },
-            { text: "Encaminhá-la de volta ao cirurgião que fez a amputação para realizar uma nova cirurgia de encurtamento do osso.", correct: false, feedback: "Incorreto. A cirurgia é o último recurso. Na grande maioria dos casos, pequenos ajustes mecânicos no soquete de resina resolvem os pontos de pressão." }
+            { text: "Resultado esperado nas primeiras etapas do tratamento (ex: estabilização e alívio de dor).", correct: true, feedback: "Gabarito Oficial! O objetivo de curto prazo busca ganhos nas etapas iniciais." },
+            { text: "Duração estimada de utilização da OPM ao longo de anos.", correct: false, feedback: "Isso se refere ao Tempo Previsto de Uso." }
+        ]
+    },
+    5: {
+        moduleId: 5,
+        title: "Quiz Oficial Módulo 5 — Erros Comuns na Prescrição",
+        description: "Qual é considerado um dos ERROS mais prejudiciais na provisão de OPM?",
+        options: [
+            { text: "Prescrever o recurso sem definir um objetivo funcional claro e sem avaliar o ambiente de vida.", correct: true, feedback: "Gabarito Oficial! Gera alto índice de abandono do recurso." },
+            { text: "Realizar o acompanhamento longitudinal do paciente.", correct: false, feedback: "Acompanhar é essencial." }
+        ]
+    },
+    6: {
+        moduleId: 6,
+        title: "🧩 Desafio Quebra-Cabeça de OPMs (8 Fases)",
+        description: "Você ativou o módulo didático de montagem de OPMs! Clique abaixo para iniciar o Quebra-Cabeça Interativo de 8 Fases.",
+        isPuzzleLauncher: true,
+        options: [
+            { text: "🚀 Iniciar Quebra-Cabeça de OPMs", correct: true, feedback: "Abrindo módulo interativo..." }
+        ]
+    },
+    7: {
+        moduleId: 7,
+        title: "Simulação Módulo 7 — Escolha de Órteses",
+        description: "Para uma adolescente com escoliose idiopática (curva de 32° Cobb, Risser 2), qual a indicação correta?",
+        options: [
+            { text: "Colete de Boston (TLSO) para tratamento conservador tridimensional.", correct: true, feedback: "Correto! Colete de Boston é o padrão para escoliose em fase de crescimento." },
+            { text: "Colar cervical rígido.", correct: false, feedback: "Incorreto." }
+        ]
+    },
+    8: {
+        moduleId: 8,
+        title: "Simulação Módulo 8 — Componentes de Próteses",
+        description: "Qual componente da prótese distribui a pressão no coto residual?",
+        options: [
+            { text: "Encaixe (Socket).", correct: true, feedback: "Exato! O soquete é a interface de carga." },
+            { text: "Pé protético SACH.", correct: false, feedback: "Incorreto." }
+        ]
+    },
+    9: {
+        moduleId: 9,
+        title: "Simulação Módulo 9 — Fabricação Tradicional",
+        description: "No método tradicional, como é obtido o modelo positivo?",
+        options: [
+            { text: "Por vazamento de gesso dentro da atadura gessada moldada no paciente.", correct: true, feedback: "Correto!" },
+            { text: "Por fatiamento CAM em impressora 3D.", correct: false, feedback: "Isso é do fluxo 3D." }
+        ]
+    },
+    10: {
+        moduleId: 10,
+        title: "Simulação Módulo 10 — Parametrização de Fatiamento 3D",
+        description: "Qual filamento deve ser selecionado para obter elasticidade e conforto em órteses dinâmicas?",
+        options: [
+            { text: "TPU (Poliuretano Termoplástico flexível).", correct: true, feedback: "Perfeito!" },
+            { text: "PLA rígido.", correct: false, feedback: "PLA é rígido." }
+        ]
+    },
+    11: {
+        moduleId: 11,
+        title: "Simulação Módulo 11 — Comparação de Métodos",
+        description: "Qual a vantagem do Fluxo 3D em termos de reposição?",
+        options: [
+            { text: "Salvamento do arquivo CAD 3D em nuvem para reimpressão sem nova moldagem.", correct: true, feedback: "Excelente!" },
+            { text: "O arquivo digital se apaga.", correct: false, feedback: "Incorreto." }
+        ]
+    },
+    12: {
+        moduleId: 12,
+        title: "Simulação Módulo 12 — Prova e Adaptação",
+        description: "Após 15 min de uso, o usuário apresenta vermelhidão no maléolo. Qual a conduta?",
+        options: [
+            { text: "Realizar o alívio de pressão local antes de liberar o uso.", correct: true, feedback: "Correto! Evita úlceras por pressão." },
+            { text: "Orientar o uso contínuo mesmo com dor.", correct: false, feedback: "Perigoso." }
+        ]
+    },
+    13: {
+        moduleId: 13,
+        title: "Simulação Módulo 13 — Seguimento Clínico",
+        description: "Criança usando AFO há 10 meses refere dor nos dedos por crescimento. Qual a conduta?",
+        options: [
+            { text: "Reavaliar o comprimento e confeccionar nova órtese dimensionada.", correct: true, feedback: "Exato!" },
+            { text: "Cortar a ponta sem reavaliar.", correct: false, feedback: "Incorreto." }
+        ]
+    },
+    14: {
+        moduleId: 14,
+        title: "🎯 Árvore de Decisão — Caso Integrativo Final",
+        description: "Paciente José Carlos, 73 anos (pós-AVC, pé caído). Indicaria AFO articulada neste momento?",
+        options: [
+            { text: "Sim. A AFO articulada compensa o déficit de dorsiflexão e reduz o risco de quedas.", correct: true, feedback: "Decisão Clínica Correta! Parabéns pela conclusão da Trilha Digital!" },
+            { text: "Não. Aguardar sem intervenção.", correct: false, feedback: "Incorreto." }
         ]
     }
 };
 
-// --- DIALOGOS MOCKADOS DA IA EVA ---
-const evaResponses = {
-    "ola": "Olá, João Paulo! Como vai seu dia na UBS? Sou a E.V.A. (Educação em Vida Assistiva). Estou pronta para ajudar você a decifrar a prescrição e os fluxos de órteses e próteses no SUS. Qual a sua dúvida?",
-    "oi": "Olá! Sou a E.V.A., sua tutora virtual de aprendizagem em órteses e próteses. Lembre-se: capacitar-se em tecnologia assistiva melhora diretamente a vida dos nossos pacientes na comunidade. Como posso ajudar?",
-    "preceptora": "Um preceptor ou preceptora na saúde é um profissional experiente que atua como orientador e tutor de estudantes ou recém-formados na prática clínica do dia a dia (como em hospitais e UBSs). No SUSAssist, eu, E.V.A., funciono como a sua preceptora digital, te guiando no aprendizado prático e tirando suas dúvidas sobre órteses e próteses!",
-    "cadeira de rodas": "O SUS concede cadeiras de rodas através da tabela do SIA/SUS (procedimento OPM). Os modelos disponíveis incluem: Cadeira Dobrável em X, Cadeira Monobloco (ativa, leve), Cadeira para Obesos, Cadeira Postural (Tetraplegia) e Cadeira Motorizada. <strong>Importante:</strong> Para cadeira motorizada, o paciente deve passar por avaliação cognitiva e ter controle motor do membro superior funcional para operar o joystick com segurança.",
-    "afo": "A órtese tornozelo-pé (AFO) é uma das tecnologias assistivas mais prescritas no SUS. Ela serve para manter o tornozelo em 90 graus (neutro) e é indicada para <strong>pé caído</strong> decorrente de AVC, paralisia cerebral, sequelas de trauma ou poliomielite. Ela evita tropeços e previne o encurtamento do tendão de Aquiles.",
-    "fluxo": "O fluxo regulatório no SUS começa na <strong>Atenção Primária (UBS)</strong>: o profissional preenche o laudo de solicitação de OPM. O pedido é inserido no <strong>SISREG</strong>. O sistema direciona o paciente para a avaliação e confecção no <strong>CER (Centro Especializado em Reabilitação)</strong> de referência da sua região.",
-    "regulacao": "O fluxo regulatório no SUS começa na <strong>Atenção Primária (UBS)</strong>: o profissional preenche o laudo de solicitação de OPM. O pedido é inserido no <strong>SISREG</strong>. O sistema direciona o paciente para a avaliação e confecção no <strong>CER (Centro Especializado em Reabilitação)</strong> de referência da sua região.",
-    "escaras": "Para pacientes usuários de cadeira de rodas, a prevenção de úlceras por pressão (escaras) é vital. Na prescrição, certifique-se de solicitar também uma <strong>almofada de redistribuição de pressão</strong> (espuma selada ou células de ar), que é fornecida pelo SUS sob o código OPM adequado.",
-    "ajuda": "Você pode me perguntar sobre: 'Cadeira de rodas', 'Órtese AFO', 'Fluxo de regulação no SUS', 'Prevenção de escaras' ou detalhes sobre indicação de próteses.",
-    "protese": "As próteses no SUS (como transtibial ou transfemoral) são prescritas e confeccionadas nos CERs. O sucesso da protetização depende da preparação do coto (enfaixamento compressivo e dessensibilização) e do treino de marcha continuado na UBS e no CER."
-};
+const puzzleData = [
+    { phase: 1, title: "Fase 1 — Mão", question: "Qual material é mais indicado para confeccionar órtese de posicionamento para mão espástica?", options: [{ text: "Termoplástico de baixa temperatura", correct: true, desc: "Muito bem! O termoplástico é moldado diretamente no paciente." }], icon: "🖐️", pieceName: "Órtese de Repouso para Mão" },
+    { phase: 2, title: "Fase 2 — Dinâmica", question: "Qual componente fornece a força de tração dinâmica?", options: [{ text: "Elástico / Mola de Tração", correct: true, desc: "Perfeito!" }], icon: "🦾", pieceName: "Tração Dinâmica Flexora/Extensora" },
+    { phase: 3, title: "Fase 3 — Punho", question: "Objetivo de uma órtese estática de punho:", options: [{ text: "Imobilizar ou estabilizar a articulação na posição funcional", correct: true, desc: "Correto!" }], icon: "🤚", pieceName: "Órtese Cock-up de Punho" },
+    { phase: 4, title: "Fase 4 — AFO", question: "Órtese indicada para pé caído pós-AVC:", options: [{ text: "AFO (Órtese Tornozelo-Pé)", correct: true, desc: "Excelente!" }], icon: "🦶", pieceName: "Órtese Tornozelo-Pé (AFO)" },
+    { phase: 5, title: "Fase 5 — Material", question: "Propriedade do termoplástico:", options: [{ text: "Amolece em água quente (60–70°C) e endurece ao esfriar", correct: true, desc: "Correto!" }], icon: "♨️", pieceName: "Placa Termoplástica Moldável" },
+    { phase: 6, title: "Fase 6 — Prótese", question: "Função principal da exoprótese:", options: [{ text: "Substituir um segmento corporal ausente", correct: true, desc: "Exato!" }], icon: "🦵", pieceName: "Prótese Transtibial" },
+    { phase: 7, title: "Fase 7 — Bengala", question: "Meio auxiliar com MENOR base de apoio:", options: [{ text: "Bengala simples", correct: true, desc: "Correto!" }], icon: "🦯", pieceName: "Bengala Canadense" },
+    { phase: 8, title: "Fase 8 — Andador", question: "Paciente que necessita da maior base de apoio:", options: [{ text: "Idoso com grande déficit de equilíbrio", correct: true, desc: "Parabéns!" }], icon: "♿", pieceName: "Andador com Assento e Rodas" }
+];
 
-// --- ESTADO GERAL DO APLICATIVO ---
-let appState = {
-    theme: "light",
-    lessonsRead: [], // Lista de lessonIds lidos
-    modulesCompleted: [], // Lista de números dos módulos concluídos (1 a 4)
-    activeSimulationModule: null, // Módulo da simulação aberta no momento
-    selectedOptionIndex: null // Opção selecionada no quiz
-};
-
-// --- ELEMENTOS DO DOM ---
-const bodyEl = document.body;
-const themeToggleBtn = document.getElementById("theme-toggle");
-const overallPercentageEl = document.getElementById("overall-percentage");
-const overallProgressBarEl = document.getElementById("overall-progress-bar");
-const badgeCountTextEl = document.getElementById("badge-count-text");
-
-// Modal de Aula
-const lessonModalEl = document.getElementById("lesson-modal");
-const lessonTitleEl = document.getElementById("lesson-modal-title");
-const lessonContentEl = document.getElementById("lesson-modal-content");
-const finishLessonBtn = document.getElementById("btn-finish-lesson");
-const closeLessonBtn = document.getElementById("btn-close-lesson");
-
-// Modal de Simulação
-const simModalEl = document.getElementById("simulation-modal");
-const simCaseTextEl = document.getElementById("sim-case-text");
-const simOptionsEl = document.getElementById("sim-options");
-const simFeedbackEl = document.getElementById("sim-feedback");
-const submitSimBtn = document.getElementById("btn-submit-sim");
-const nextModuleBtn = document.getElementById("btn-next-module");
-const closeSimBtn = document.getElementById("btn-close-sim");
-
-// Chat da Eva
-const chatContainerEl = document.getElementById("chat-container");
-const chatFormEl = document.getElementById("chat-form");
-const chatInputEl = document.getElementById("chat-input");
-
-// --- CARREGAMENTO INICIAL ---
-document.addEventListener("DOMContentLoaded", () => {
-    loadSavedState();
-    setupEventListeners();
-    updateUI();
+document.addEventListener('DOMContentLoaded', () => {
+    initApp();
 });
 
-// Salvar/Carregar Estado no LocalStorage
-function saveState() {
-    localStorage.setItem("susassist_state", JSON.stringify({
-        lessonsRead: appState.lessonsRead,
-        modulesCompleted: appState.modulesCompleted,
-        theme: appState.theme
-    }));
+function initApp() {
+    setupViewNavigation();
+    setupLessonButtons();
+    setupSimulationButtons();
+    setupEvaFloatingWidget();
+    setupPuzzleModal();
+    setupThemeToggle();
+    updateUIProgress();
 }
 
-function loadSavedState() {
-    const saved = localStorage.getItem("susassist_state");
-    if (saved) {
-        try {
-            const parsed = JSON.parse(saved);
-            appState.lessonsRead = parsed.lessonsRead || [];
-            appState.modulesCompleted = parsed.modulesCompleted || [];
-            appState.theme = parsed.theme || "light";
-            
-            if (appState.theme === "dark") {
-                bodyEl.classList.add("dark-mode");
-            }
-        } catch (e) {
-            console.error("Erro ao carregar estado salvo", e);
-        }
+function setupViewNavigation() {
+    const navTrilha = document.getElementById('nav-btn-trilha');
+    const navConquistas = document.getElementById('nav-btn-conquistas');
+
+    if (navTrilha) navTrilha.addEventListener('click', () => showView('trilha'));
+    if (navConquistas) navConquistas.addEventListener('click', () => showView('conquistas'));
+}
+
+function showView(viewName) {
+    const trilhaView = document.getElementById('trilha-view');
+    const conquistasView = document.getElementById('conquistas-view');
+    const navTrilha = document.getElementById('nav-btn-trilha');
+    const navConquistas = document.getElementById('nav-btn-conquistas');
+
+    if (viewName === 'trilha') {
+        if (trilhaView) trilhaView.classList.add('active-view');
+        if (conquistasView) conquistasView.classList.remove('active-view');
+        if (navTrilha) navTrilha.classList.add('active');
+        if (navConquistas) navConquistas.classList.remove('active');
+    } else if (viewName === 'conquistas') {
+        if (trilhaView) trilhaView.classList.remove('active-view');
+        if (conquistasView) conquistasView.classList.add('active-view');
+        if (navTrilha) navTrilha.classList.remove('active');
+        if (navConquistas) navConquistas.classList.add('active');
     }
 }
 
-// Configurar ouvintes de eventos
-function setupEventListeners() {
-    // Alternar Tema
-    themeToggleBtn.addEventListener("click", () => {
-        bodyEl.classList.toggle("dark-mode");
-        appState.theme = bodyEl.classList.contains("dark-mode") ? "dark" : "light";
-        saveState();
-    });
-
-    // Ler botões de Aula
-    document.querySelectorAll(".btn-read-lesson").forEach(button => {
-        button.addEventListener("click", (e) => {
-            const lessonItem = e.target.closest(".lesson-item");
-            const lessonId = lessonItem.getAttribute("data-lesson-id");
+function setupLessonButtons() {
+    document.querySelectorAll('.btn-read-lesson').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lessonItem = btn.closest('.lesson-item');
+            const lessonId = lessonItem.getAttribute('data-lesson-id');
             openLessonModal(lessonId);
         });
     });
 
-    // Fechar modal de aula
-    closeLessonBtn.addEventListener("click", closeLessonModal);
-    finishLessonBtn.addEventListener("click", finishLesson);
-
-    // Botões de Simulação da Trilha
-    document.getElementById("btn-sim-1").addEventListener("click", () => startSimulation(1));
-    document.getElementById("btn-sim-2").addEventListener("click", () => startSimulation(2));
-    document.getElementById("btn-sim-3").addEventListener("click", () => startSimulation(3));
-    document.getElementById("btn-sim-4").addEventListener("click", () => startSimulation(4));
-
-    // Ações de Simulação
-    closeSimBtn.addEventListener("click", closeSimModal);
-    submitSimBtn.addEventListener("click", evaluateSimulationAnswer);
-    nextModuleBtn.addEventListener("click", advanceToNextModule);
-
-    // Enviar mensagem no Chat
-    chatFormEl.addEventListener("submit", (e) => {
-        e.preventDefault();
-        handleUserChatMessage();
-    });
-
-    // Botões rápidos de pergunta
-    document.querySelectorAll(".quick-question-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const question = e.target.getAttribute("data-question");
-            chatInputEl.value = question;
-            handleUserChatMessage();
-        });
-    });
-
-    // Clicar no item do menu Simulador Clínico
-    document.getElementById("nav-sim").addEventListener("click", (e) => {
-        e.preventDefault();
-        // Achar o primeiro módulo ativo e não completo para abrir
-        let activeM = 1;
-        for (let m = 1; m <= 4; m++) {
-            if (!appState.modulesCompleted.includes(m)) {
-                activeM = m;
-                break;
-            }
-        }
-        startSimulation(activeM);
-    });
+    document.getElementById('btn-close-lesson')?.addEventListener('click', closeLessonModal);
+    document.getElementById('btn-finish-lesson')?.addEventListener('click', finishCurrentLesson);
 }
 
-// --- ATUALIZAÇÕES DA INTERFACE ---
-function updateUI() {
-    // 1. Atualizar lições lidas na tela
-    appState.lessonsRead.forEach(lessonId => {
-        const item = document.querySelector(`[data-lesson-id="${lessonId}"]`);
-        if (item) {
-            item.classList.add("read");
-            const icon = item.querySelector(".lesson-status-icon");
-            if (icon) icon.textContent = "✓";
-        }
-    });
-
-    // 2. Verificar se destrava botões de simulação
-    for (let m = 1; m <= 4; m++) {
-        const modCard = document.getElementById(`modulo-${m}`);
-        const simBtn = document.getElementById(`btn-sim-${m}`);
-        const statusBadge = modCard.querySelector(".status-badge");
-        
-        // Se o módulo está completo
-        if (appState.modulesCompleted.includes(m)) {
-            modCard.classList.remove("locked", "active");
-            modCard.classList.add("completed");
-            simBtn.classList.remove("locked");
-            simBtn.textContent = "Simulação Concluída ✓";
-            simBtn.disabled = true;
-            simBtn.style.background = "var(--success)";
-            if (statusBadge) {
-                statusBadge.textContent = "Concluído";
-                statusBadge.className = "status-badge status-concluido";
-            }
-            
-            // Destravar o próximo módulo
-            const nextMod = document.getElementById(`modulo-${m + 1}`);
-            if (nextMod && !appState.modulesCompleted.includes(m + 1)) {
-                nextMod.classList.remove("locked");
-                nextMod.classList.add("active");
-                const nextBadge = nextMod.querySelector(".status-badge");
-                if (nextBadge) {
-                    nextBadge.textContent = "Em Progresso";
-                    nextBadge.className = "status-badge status-em-progresso";
-                }
-            }
-        } else {
-            // Se não está completo, checar se as lições dele foram lidas
-            const lessons = document.querySelectorAll(`#modulo-${m} .lesson-item`);
-            let allRead = true;
-            lessons.forEach(l => {
-                const lid = l.getAttribute("data-lesson-id");
-                if (!appState.lessonsRead.includes(lid)) {
-                    allRead = false;
-                }
-            });
-
-            if (allRead && !modCard.classList.contains("locked")) {
-                simBtn.classList.remove("locked");
-                simBtn.disabled = false;
-            } else {
-                simBtn.classList.add("locked");
-                simBtn.disabled = true;
-            }
-        }
-    }
-
-    // 3. Atualizar Badges (Gamificação)
-    appState.modulesCompleted.forEach(m => {
-        const badge = document.getElementById(`badge-${m}`);
-        if (badge) {
-            badge.classList.remove("locked");
-            badge.classList.add("unlocked");
-        }
-    });
-
-    // 4. Progresso Geral
-    const progressPercent = appState.modulesCompleted.length * 25;
-    overallPercentageEl.textContent = `${progressPercent}%`;
-    overallProgressBarEl.style.width = `${progressPercent}%`;
-    badgeCountTextEl.textContent = `${appState.modulesCompleted.length} / 4`;
-}
-
-// --- CONTROLE DE AULAS (MODAL) ---
-let currentOpenLessonId = null;
+let currentActiveLessonId = null;
 
 function openLessonModal(lessonId) {
-    currentOpenLessonId = lessonId;
-    const content = lessonsContent[lessonId];
-    if (content) {
-        lessonTitleEl.textContent = content.title;
-        lessonContentEl.innerHTML = content.html;
-        
-        // Se a lição já foi lida, muda o botão
-        if (appState.lessonsRead.includes(lessonId)) {
-            finishLessonBtn.textContent = "Lição Concluída (Fechar)";
-            finishLessonBtn.classList.replace("btn-primary", "btn-success");
-        } else {
-            finishLessonBtn.textContent = "Marcar como Concluída";
-            finishLessonBtn.classList.replace("btn-success", "btn-primary");
-        }
-        
-        lessonModalEl.classList.add("open");
+    currentActiveLessonId = lessonId;
+    const lessonData = lessonsContent[lessonId];
+    const modal = document.getElementById('lesson-modal');
+    
+    if (lessonData) {
+        document.getElementById('lesson-modal-title').innerText = lessonData.title;
+        document.getElementById('lesson-modal-content').innerHTML = lessonData.html;
+    } else {
+        document.getElementById('lesson-modal-title').innerText = "Aula da Trilha Digital";
+        document.getElementById('lesson-modal-content').innerHTML = "<p>Conteúdo pedagógico em expansão.</p>";
     }
+    
+    modal?.classList.add('open');
 }
 
 function closeLessonModal() {
-    lessonModalEl.classList.remove("open");
-    currentOpenLessonId = null;
+    document.getElementById('lesson-modal')?.classList.remove('open');
 }
 
-function finishLesson() {
-    if (currentOpenLessonId) {
-        if (!appState.lessonsRead.includes(currentOpenLessonId)) {
-            appState.lessonsRead.push(currentOpenLessonId);
-            saveState();
-            
-            // Adicionar uma notificação legal no chat da Eva informando que a lição foi concluída
-            addEvaMessage(`Muito bem! Você concluiu a aula: <em>${lessonsContent[currentOpenLessonId].title}</em>. Continue assim!`);
+function finishCurrentLesson() {
+    if (currentActiveLessonId) {
+        state.completedLessons.add(currentActiveLessonId);
+        const item = document.querySelector(`[data-lesson-id="${currentActiveLessonId}"]`);
+        if (item) {
+            item.classList.add('completed');
+            item.querySelector('.lesson-status-icon').innerText = '✓';
         }
-        closeLessonModal();
-        updateUI();
+        addXP(15);
     }
+    closeLessonModal();
+    updateUIProgress();
 }
 
-// --- CONTROLE DE SIMULAÇÕES (MODAL) ---
-function startSimulation(moduleId) {
-    const modCard = document.getElementById(`modulo-${moduleId}`);
-    if (!modCard) return;
-
-    // Se o módulo estiver bloqueado
-    if (modCard.classList.contains("locked")) {
-        addEvaMessage(`⚠️ O **Módulo ${moduleId}** está bloqueado no momento. Conclua os módulos anteriores na trilha primeiro!`);
-        return;
-    }
-
-    // Verificar se as lições deste módulo foram lidas
-    const lessons = document.querySelectorAll(`#modulo-${moduleId} .lesson-item`);
-    let allRead = true;
-    lessons.forEach(l => {
-        const lid = l.getAttribute("data-lesson-id");
-        if (!appState.lessonsRead.includes(lid)) {
-            allRead = false;
+function setupSimulationButtons() {
+    for (let i = 1; i <= 14; i++) {
+        const btn = document.getElementById(`btn-sim-${i}`);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('locked')) {
+                    alert(`Conclua as etapas anteriores para desbloquear a Unidade ${i}!`);
+                    return;
+                }
+                if (simulationsData[i] && simulationsData[i].isPuzzleLauncher) {
+                    openPuzzleModal();
+                } else {
+                    openSimulationModal(i);
+                }
+            });
         }
-    });
-
-    if (!allRead && !appState.modulesCompleted.includes(moduleId)) {
-        addEvaMessage(`⚠️ João Paulo, você precisa ler todas as aulas do **Módulo ${moduleId}** antes de iniciar a Simulação Clínica!`);
-        modCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
     }
 
-    // Se o módulo já foi concluído
-    if (appState.modulesCompleted.includes(moduleId)) {
-        addEvaMessage(`✅ Você já concluiu com sucesso a Simulação Clínica do **Módulo ${moduleId}**!`);
-        return;
-    }
+    document.getElementById('btn-close-sim')?.addEventListener('click', closeSimModal);
+    document.getElementById('btn-submit-sim')?.addEventListener('click', submitSimulation);
+    document.getElementById('btn-next-module')?.addEventListener('click', unlockNextModuleCard);
+}
 
-    appState.activeSimulationModule = moduleId;
-    appState.selectedOptionIndex = null;
+function openSimulationModal(modId) {
+    state.currentSimModuleId = modId;
+    const simData = simulationsData[modId];
+    if (!simData) return;
+
+    document.getElementById('sim-title').innerText = simData.title;
+    document.getElementById('sim-case-text').innerHTML = simData.description;
     
-    const sim = simulationsData[moduleId];
-    if (sim) {
-        simCaseTextEl.innerHTML = `<h3>${sim.title}</h3><br>${sim.description}`;
-        
-        // Renderizar opções
-        simOptionsEl.innerHTML = "";
-        sim.options.forEach((opt, idx) => {
-            const btn = document.createElement("button");
-            btn.className = "sim-option-card";
-            btn.innerHTML = opt.text;
-            btn.addEventListener("click", () => selectSimOption(idx));
-            simOptionsEl.appendChild(btn);
+    const optionsContainer = document.getElementById('sim-options');
+    optionsContainer.innerHTML = '';
+    
+    simData.options.forEach((opt, idx) => {
+        const optCard = document.createElement('div');
+        optCard.className = 'sim-option-card';
+        optCard.setAttribute('data-opt-index', idx);
+        optCard.innerText = opt.text;
+        optCard.addEventListener('click', () => {
+            document.querySelectorAll('.sim-option-card').forEach(c => c.classList.remove('selected'));
+            optCard.classList.add('selected');
         });
-
-        // Resetar botões do rodapé
-        simFeedbackEl.style.display = "none";
-        submitSimBtn.style.display = "inline-block";
-        nextModuleBtn.style.display = "none";
-        
-        simModalEl.classList.add("open");
-    }
-}
-
-function selectSimOption(index) {
-    appState.selectedOptionIndex = index;
-    
-    // Atualizar visual
-    const optionsBtns = simOptionsEl.querySelectorAll(".sim-option-card");
-    optionsBtns.forEach((btn, idx) => {
-        if (idx === index) {
-            btn.classList.add("selected");
-        } else {
-            btn.classList.remove("selected");
-        }
+        optionsContainer.appendChild(optCard);
     });
-}
 
-function evaluateSimulationAnswer() {
-    if (appState.selectedOptionIndex === null) {
-        alert("Por favor, selecione uma conduta clínica antes de confirmar.");
-        return;
-    }
+    document.getElementById('sim-feedback').style.display = 'none';
+    document.getElementById('btn-submit-sim').style.display = 'inline-block';
+    document.getElementById('btn-next-module').style.display = 'none';
 
-    const sim = simulationsData[appState.activeSimulationModule];
-    const selectedOpt = sim.options[appState.selectedOptionIndex];
-
-    simFeedbackEl.style.display = "block";
-    
-    if (selectedOpt.correct) {
-        simFeedbackEl.className = "sim-feedback-panel sim-feedback-success";
-        simFeedbackEl.innerHTML = `<strong>Resposta Correta!</strong><br>${selectedOpt.feedback}`;
-        
-        // Salvar módulo completo
-        if (!appState.modulesCompleted.includes(appState.activeSimulationModule)) {
-            appState.modulesCompleted.push(appState.activeSimulationModule);
-            saveState();
-        }
-
-        // Mostrar botão para avançar
-        submitSimBtn.style.display = "none";
-        nextModuleBtn.style.display = "inline-block";
-        
-        // Parabenizar via Chat da Eva
-        setTimeout(() => {
-            addEvaMessage(`🎉 <strong>Parabéns!</strong> Você resolveu o Caso Clínico do Módulo ${appState.activeSimulationModule} com sucesso e desbloqueou uma nova medalha: <em>${document.getElementById(`badge-${appState.activeSimulationModule}`).querySelector('h5').innerText}</em>!`);
-        }, 500);
-
-    } else {
-        simFeedbackEl.className = "sim-feedback-panel sim-feedback-error";
-        simFeedbackEl.innerHTML = `<strong>Decisão Clínica Inadequada:</strong><br>${selectedOpt.feedback}<br><br><em>Dica: Revise as aulas do módulo ou tire suas dúvidas no chat com a Eva ao lado! Tente selecionar outra opção.</em>`;
-    }
-}
-
-function advanceToNextModule() {
-    closeSimModal();
-    updateUI();
-    
-    // Rolar a tela suavemente para o próximo módulo
-    const nextModNum = appState.activeSimulationModule + 1;
-    const nextModEl = document.getElementById(`modulo-${nextModNum}`);
-    if (nextModEl) {
-        setTimeout(() => {
-            nextModEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 300);
-    }
+    document.getElementById('simulation-modal')?.classList.add('open');
 }
 
 function closeSimModal() {
-    simModalEl.classList.remove("open");
-    appState.activeSimulationModule = null;
+    document.getElementById('simulation-modal')?.classList.remove('open');
 }
 
-// --- LOGICA DE CHAT DA IA EVA ---
-function handleUserChatMessage() {
-    const text = chatInputEl.value.trim();
-    if (!text) return;
+function submitSimulation() {
+    const selected = document.querySelector('.sim-option-card.selected');
+    if (!selected) {
+        alert('Por favor, selecione uma opção de decisão!');
+        return;
+    }
 
-    // Adicionar mensagem do usuário no chat
-    addUserMessage(text);
-    chatInputEl.value = "";
-
-    // Simular digitação da Eva
-    showEvaTypingIndicator();
-
-    setTimeout(() => {
-        removeEvaTypingIndicator();
+    const idx = parseInt(selected.getAttribute('data-opt-index'));
+    const simData = simulationsData[state.currentSimModuleId];
+    const opt = simData.options[idx];
+    
+    const feedbackPanel = document.getElementById('sim-feedback');
+    feedbackPanel.style.display = 'block';
+    
+    if (opt.correct) {
+        feedbackPanel.className = 'sim-feedback-panel sim-feedback-success';
+        feedbackPanel.innerHTML = `<strong>Decisão Correta!</strong><br>${opt.feedback}`;
+        state.completedSimulations.add(state.currentSimModuleId);
+        addXP(50);
+        checkBadgeUnlocks(state.currentSimModuleId);
         
-        // Análise de palavra-chave simples
-        const cleanText = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        let responseText = "";
+        document.getElementById('btn-submit-sim').style.display = 'none';
+        document.getElementById('btn-next-module').style.display = 'inline-block';
+    } else {
+        feedbackPanel.className = 'sim-feedback-panel sim-feedback-error';
+        feedbackPanel.innerHTML = `<strong>Atenção:</strong><br>${opt.feedback}`;
+    }
+    updateUIProgress();
+}
 
-        // Busca correspondência no banco de diálogos
-        let matched = false;
-        for (const key in evaResponses) {
-            if (cleanText.includes(key)) {
-                responseText = evaResponses[key];
-                matched = true;
-                break;
+function unlockNextModuleCard() {
+    closeSimModal();
+    const currId = state.currentSimModuleId;
+    const currCard = document.getElementById(`modulo-${currId}`);
+    if (currCard) {
+        const badge = currCard.querySelector('.status-badge');
+        if (badge) {
+            badge.className = 'status-badge status-concluido';
+            badge.innerText = 'Concluído';
+        }
+    }
+
+    const nextId = currId + 1;
+    if (nextId <= 14) {
+        const nextCard = document.getElementById(`modulo-${nextId}`);
+        if (nextCard) {
+            nextCard.classList.remove('locked');
+            nextCard.classList.add('active');
+            const badge = nextCard.querySelector('.status-badge');
+            if (badge) {
+                badge.className = 'status-badge status-em-progresso';
+                badge.innerText = 'Em Progresso';
             }
+            const btnSim = document.getElementById(`btn-sim-${nextId}`);
+            if (btnSim) btnSim.classList.remove('locked');
         }
-
-        if (!matched) {
-            // Resposta fallback genérica e didática baseada na prática clínica do SUS
-            responseText = `Compreendo sua dúvida sobre "${text}". Na prática de Tecnologia Assistiva do SUS, toda conduta deve priorizar a funcionalidade e a prevenção de deformidades. 
-            <br><br>
-            Você pode tentar me perguntar sobre palavras-chave específicas como:
-            <br>
-            • <strong>cadeira de rodas</strong> (tipos e prescrição)
-            <br>
-            • <strong>órtese AFO</strong> (indicações para pé caído)
-            <br>
-            • <strong>fluxo</strong> (o caminho da UBS ao CER)
-            <br>
-            • <strong>escaras</strong> (cuidados posturais e almofadas)`;
-        }
-
-        addEvaMessage(responseText);
-    }, 1000);
+    }
+    updateUIProgress();
 }
 
-function addUserMessage(text) {
-    const msg = document.createElement("div");
-    msg.className = "chat-message user-msg";
-    msg.textContent = text;
-    chatContainerEl.appendChild(msg);
-    scrollChatToBottom();
+function setupPuzzleModal() {
+    document.getElementById('btn-close-puzzle')?.addEventListener('click', closePuzzleModal);
+    document.getElementById('btn-next-puzzle-phase')?.addEventListener('click', nextPuzzlePhase);
 }
 
-function addEvaMessage(htmlContent) {
-    const msg = document.createElement("div");
-    msg.className = "chat-message eva-msg";
-    msg.innerHTML = htmlContent;
-    chatContainerEl.appendChild(msg);
-    scrollChatToBottom();
+function openPuzzleModal() {
+    state.puzzleCurrentPhase = 1;
+    renderPuzzlePhase(state.puzzleCurrentPhase);
+    document.getElementById('puzzle-modal')?.classList.add('open');
 }
 
-function showEvaTypingIndicator() {
-    const indicator = document.createElement("div");
-    indicator.className = "chat-message eva-msg typing-indicator-msg";
-    indicator.id = "eva-typing-indicator";
-    indicator.innerHTML = "<span></span><span></span><span></span>";
-    chatContainerEl.appendChild(indicator);
-    scrollChatToBottom();
+function closePuzzleModal() {
+    document.getElementById('puzzle-modal')?.classList.remove('open');
 }
 
-function removeEvaTypingIndicator() {
-    const indicator = document.getElementById("eva-typing-indicator");
-    if (indicator) {
-        indicator.remove();
+function renderPuzzlePhase(phaseNum) {
+    const data = puzzleData[phaseNum - 1];
+    if (!data) return;
+
+    document.getElementById('puzzle-phase-num').innerText = `${phaseNum}`;
+    document.getElementById('puzzle-question-text').innerHTML = `<strong>${data.title}</strong><br><br>${data.question}`;
+    
+    const optionsList = document.getElementById('puzzle-options-list');
+    optionsList.style.display = 'flex';
+    optionsList.innerHTML = '';
+    document.getElementById('puzzle-assembly-area').style.display = 'none';
+
+    data.options.forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.className = 'sim-option-card';
+        btn.innerText = opt.text;
+        btn.addEventListener('click', () => {
+            if (opt.correct) {
+                showPuzzleSuccess(data, opt.desc);
+            } else {
+                alert('Resposta incorreta. Tente novamente!');
+            }
+        });
+        optionsList.appendChild(btn);
+    });
+}
+
+function showPuzzleSuccess(data, desc) {
+    document.getElementById('puzzle-options-list').style.display = 'none';
+    const assemblyArea = document.getElementById('puzzle-assembly-area');
+    assemblyArea.style.display = 'block';
+    
+    document.getElementById('puzzle-assembly-icon').innerText = data.icon;
+    document.getElementById('puzzle-assembly-title').innerText = `🧩 Peça Encaixada: ${data.pieceName}`;
+    document.getElementById('puzzle-assembly-desc').innerText = desc || "Muito bem!";
+    
+    state.completedPuzzles.add(data.phase);
+    addXP(30);
+}
+
+function nextPuzzlePhase() {
+    if (state.puzzleCurrentPhase < 8) {
+        state.puzzleCurrentPhase++;
+        renderPuzzlePhase(state.puzzleCurrentPhase);
+    } else {
+        alert("🎉 Parabéns! Você concluiu as 8 Fases do Quebra-Cabeça de Órteses & Próteses!");
+        closePuzzleModal();
+        state.completedSimulations.add(6);
+        checkBadgeUnlocks(6);
+        unlockNextModuleCard();
     }
 }
 
-function scrollChatToBottom() {
-    chatContainerEl.scrollTop = chatContainerEl.scrollHeight;
+// ============================================================
+// FLOATING E.V.A. AI WIDGET
+// ============================================================
+function setupEvaFloatingWidget() {
+    const fabBtn = document.getElementById('btn-eva-fab');
+    const pill = document.getElementById('eva-widget-pill');
+    const popup = document.getElementById('eva-chat-popup');
+    const closeBtn = document.getElementById('btn-close-eva-popup');
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
+
+    const togglePopup = () => {
+        if (popup) popup.classList.toggle('open');
+    };
+
+    if (fabBtn) fabBtn.addEventListener('click', togglePopup);
+    if (pill) pill.addEventListener('click', togglePopup);
+    if (closeBtn) closeBtn.addEventListener('click', () => popup?.classList.remove('open'));
+
+    if (form && input) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            appendMsg('user', msg);
+            input.value = '';
+
+            setTimeout(() => {
+                const reply = getEvaReply(msg);
+                appendMsg('eva', reply);
+            }, 450);
+        });
+    }
+
+    document.querySelectorAll('.quick-question-btn').forEach(b => {
+        b.addEventListener('click', () => {
+            const q = b.getAttribute('data-question');
+            if (input) {
+                input.value = q;
+                form.dispatchEvent(new Event('submit'));
+            }
+        });
+    });
+}
+
+function appendMsg(sender, text) {
+    const container = document.getElementById('chat-container');
+    if (!container) return;
+    const div = document.createElement('div');
+    div.className = `chat-message ${sender}-msg`;
+    div.innerHTML = text;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+}
+
+function getEvaReply(userMsg) {
+    const lower = userMsg.toLowerCase();
+    if (lower.includes('afo') || lower.includes('pé')) {
+        return "A AFO (Órtese Tornozelo-Pé) é indicada para controle do pé caído, prevenindo tropeços na marcha.";
+    } else if (lower.includes('3d') || lower.includes('impressão')) {
+        return "No fluxo digital 3D, utilizamos scanner 3D sem gesso, modelagem CAD e fatiamento CAM em TPU/PLA!";
+    } else if (lower.includes('sus') || lower.includes('cer')) {
+        return "O atendimento em OPM no SUS é regulado pelo SISREG: da UBS/eMulti para o Centro Especializado em Reabilitação (CER).";
+    } else {
+        return "Estou à disposição para tirar dúvidas sobre Tecnologia Assistiva, OPM e impressão 3D!";
+    }
+}
+
+function addXP(amount) {
+    state.userXP += amount;
+    state.userLevel = Math.floor(state.userXP / 100) + 1;
+    
+    const xpDisp = document.getElementById('user-xp-display');
+    const lvlDisp = document.getElementById('user-level-display');
+    if (xpDisp) xpDisp.innerText = state.userXP;
+    if (lvlDisp) lvlDisp.innerText = state.userLevel;
+}
+
+function checkBadgeUnlocks(modId) {
+    const badgeMap = { 1: "badge-1", 2: "badge-2", 3: "badge-3", 4: "badge-4", 5: "badge-5", 6: "badge-6", 7: "badge-7" };
+    if (badgeMap[modId]) {
+        state.unlockedBadges.add(badgeMap[modId]);
+        const el = document.getElementById(badgeMap[modId]);
+        if (el) el.classList.remove('locked');
+    }
+
+    if (state.completedSimulations.size >= 5) {
+        state.unlockedBadges.add("badge-decisao");
+        document.getElementById("badge-decisao")?.classList.remove('locked');
+    }
+
+    if (state.completedSimulations.size >= 14) {
+        state.unlockedBadges.add("badge-supremo");
+        document.getElementById("badge-supremo")?.classList.remove('locked');
+    }
+
+    updateUIProgress();
+}
+
+function updateUIProgress() {
+    const totalUnits = 14;
+    const progress = Math.round((state.completedSimulations.size / totalUnits) * 100);
+    
+    const percentageEl = document.getElementById('overall-percentage');
+    const progressBar = document.getElementById('overall-progress-bar');
+    const badgeText = document.getElementById('badge-count-text');
+
+    if (percentageEl) percentageEl.innerText = `${progress}%`;
+    if (progressBar) progressBar.style.width = `${progress}%`;
+    if (badgeText) badgeText.innerText = `${state.unlockedBadges.size} / 10 Badges`;
+}
+
+function setupThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (btn) {
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    }
 }

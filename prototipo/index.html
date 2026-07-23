@@ -3,65 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUSAssist - Capacitação em Órteses e Próteses</title>
+    <title>Trilha Digital em Tecnologia Assistiva — Capacitação SUS</title>
+    <meta name="description" content="Trilha Digital de capacitação em prescrição de órteses, próteses e impressão 3D para profissionais da rede SUS. 5 Eixos, 14 Unidades.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260723_v3">
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar Principal -->
+        <!-- ============================================================ -->
+        <!-- SIDEBAR PRINCIPAL (ESQUERDA - 260px STICKY)                   -->
+        <!-- ============================================================ -->
         <aside class="app-sidebar">
-            <div class="logo-area">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
+            <div>
+                <div class="sidebar-logo-box">
+                    <img src="assets/v2/logo_trilha_digital.png" alt="Trilha Digital em Tecnologia Assistiva" class="sidebar-logo-img">
                 </div>
-                <div class="logo-text">
-                    <h1>SUS<span>Assist</span></h1>
-                    <p>Tecnologia Assistiva</p>
-                </div>
-            </div>
 
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    Painel Principal
-                </a>
-                <a href="#trilha" class="nav-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                    Minha Trilha
-                </a>
-                <a href="#simulacoes" class="nav-item" id="nav-sim">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                    Simulador Clínico
-                </a>
-                <a href="#conquistas" class="nav-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                    Conquistas
-                </a>
-            </nav>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" id="nav-btn-trilha">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        Minha Trilha
+                    </button>
+                    <button class="nav-item" id="nav-btn-conquistas">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                        Galeria de Badges
+                    </button>
+                    <a href="rpg.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        Modo RPG
+                    </a>
+                    <a href="vr.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Modo VR 3D
+                    </a>
+                </nav>
+            </div>
 
             <div class="user-profile-summary">
                 <div class="profile-avatar">JP</div>
                 <div class="profile-info">
-                    <h4 id="user-name">Dr. João Paulo</h4>
-                    <p id="user-role">Fisioterapeuta - UBS Ipiranga</p>
+                    <h4>Dr. João Paulo</h4>
+                    <p>Fisioterapeuta - UBS Ipiranga</p>
                 </div>
             </div>
         </aside>
 
-        <!-- Conteúdo Principal -->
+        <!-- ============================================================ -->
+        <!-- CONTEÚDO PRINCIPAL (DIREITA)                                 -->
+        <!-- ============================================================ -->
         <main class="app-main">
             <!-- Top Header -->
             <header class="main-header">
                 <div class="welcome-text">
-                    <h2>Olá, João Paulo 👋</h2>
-                    <p>Continue sua jornada de educação permanente em Órteses e Próteses no SUS.</p>
+                    <h2>Olá, Dr. João Paulo 👋</h2>
+                    <p>Trilha Digital em Tecnologia Assistiva · ~30 horas · 14 Unidades</p>
                 </div>
                 <div class="header-actions">
                     <div class="progress-container-header">
@@ -71,303 +69,403 @@
                         </div>
                     </div>
                     <button class="theme-toggle" id="theme-toggle" title="Alternar Tema">
-                        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        ☀️
                     </button>
                 </div>
             </header>
 
-            <div class="dashboard-grid">
-                <!-- Seção Esquerda: Trilha de Aprendizado -->
-                <section class="learning-section" id="trilha">
-                    <div class="section-title-wrapper">
-                        <h3>Trilha de Aprendizado: Tecnologia Assistiva</h3>
-                        <span class="badge-accent">4 Módulos</span>
-                    </div>
+            <!-- ============================================================ -->
+            <!-- VIEW 1: MINHA TRILHA (14 UNIDADES EM 5 EIXOS)                -->
+            <!-- ============================================================ -->
+            <div id="trilha-view" class="view-section active-view">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.3rem; color: var(--color-slate);">Matriz Curricular da Trilha</h3>
+                    <span style="background: var(--accent-light); color: var(--accent-dark); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">5 Eixos · 14 Unidades</span>
+                </div>
 
-                    <div class="trilha-timeline" id="trilha-timeline">
-                        <!-- Módulo 1 (Sempre ativo no início) -->
-                        <div class="modulo-card active" id="modulo-1">
-                            <div class="modulo-header">
-                                <div class="modulo-number">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="modulo-icon-svg">
-                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                                    </svg>
-                                </div>
-                                <div class="modulo-meta">
-                                    <div class="status-badge status-em-progresso">Em Progresso</div>
-                                    <h4>Módulo 1: Introdução à Tecnologia Assistiva e Fluxo SUS</h4>
-                                    <p class="modulo-duration">⏱ 5 min • 3 Aulas • 1 Caso Clínico</p>
-                                </div>
-                            </div>
-                            <div class="modulo-body">
-                                <p class="modulo-desc">Compreenda a diferença entre órteses e próteses, o marco legal da pessoa com deficiência e o fluxo regulatório da Atenção Básica (UBS) para os Centros de Reabilitação (CER).</p>
-                                <ul class="lesson-list">
-                                    <li class="lesson-item read" data-lesson-id="1-1">
-                                        <div class="lesson-status-icon">✓</div>
-                                        <span>Aula 1.1: O que são Órteses e Próteses (O&P)?</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="1-2">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 1.2: A legislação e o papel do SUS na Tecnologia Assistiva</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="1-3">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 1.3: Fluxo de Regulação e o CER (Centro Especializado)</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                </ul>
-                                <div class="action-footer">
-                                    <button class="btn-simulation locked" id="btn-sim-1">Iniciar Simulação Clínica 1</button>
-                                </div>
-                            </div>
-                        </div>
+                <!-- EIXO 1: FUNDAMENTOS -->
+                <div class="eixo-header eixo-1">
+                    <span>🧩 Eixo 1 — Fundamentos</span>
+                    <span class="eixo-badge">4 horas · 2 Unidades</span>
+                </div>
 
-                        <!-- Módulo 2 -->
-                        <div class="modulo-card locked" id="modulo-2">
-                            <div class="modulo-header">
-                                <div class="modulo-number">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="modulo-icon-svg">
-                                        <circle cx="12" cy="18" r="4"/>
-                                        <path d="M8.5 7.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0z"/>
-                                        <path d="M12 10v4h4"/>
-                                    </svg>
-                                </div>
-                                <div class="modulo-meta">
-                                    <div class="status-badge status-bloqueado">Bloqueado</div>
-                                    <h4>Módulo 2: Avaliação Clínica e Prescrição de Cadeiras de Rodas</h4>
-                                    <p class="modulo-duration">⏱ 8 min • 3 Aulas • 1 Caso Clínico</p>
-                                </div>
-                            </div>
-                            <div class="modulo-body">
-                                <p class="modulo-desc">Aprenda a realizar a avaliação postural detalhada, a tirar as medidas do paciente e a prescrever o modelo correto de cadeira de rodas para evitar lesões.</p>
-                                <ul class="lesson-list">
-                                    <li class="lesson-item" data-lesson-id="2-1">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 2.1: Tipos de Cadeira de Rodas no SUS e Adequação Postural</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="2-2">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 2.2: Tomada de Medidas Antropométricas</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="2-3">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 2.3: Prevenção de Úlceras por Pressão (Escaras)</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                </ul>
-                                <div class="action-footer">
-                                    <button class="btn-simulation locked" id="btn-sim-2">Iniciar Simulação Clínica 2</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Módulo 3 -->
-                        <div class="modulo-card locked" id="modulo-3">
-                            <div class="modulo-header">
-                                <div class="modulo-number">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="modulo-icon-svg">
-                                        <path d="M3 22h18"/>
-                                        <path d="M18 22V9a4 4 0 0 0-8 0v13"/>
-                                        <circle cx="14" cy="5" r="1"/>
-                                    </svg>
-                                </div>
-                                <div class="modulo-meta">
-                                    <div class="status-badge status-bloqueado">Bloqueado</div>
-                                    <h4>Módulo 3: Órteses de Membros Inferiores (AFO/KAFO)</h4>
-                                    <p class="modulo-duration">⏱ 7 min • 3 Aulas • 1 Caso Clínico</p>
-                                </div>
-                            </div>
-                            <div class="modulo-body">
-                                <p class="modulo-desc">Identifique quando indicar órteses de tornozelo-pé (AFO) e de joelho-tornozelo-pé (KAFO) para reabilitação de sequelas motoras.</p>
-                                <ul class="lesson-list">
-                                    <li class="lesson-item" data-lesson-id="3-1">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 3.1: Indicações de Órtese de Tornozelo-Pé (AFO)</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="3-2">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 3.2: Quando indicar a Órtese Joelho-Tornozelo-Pé (KAFO)</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="3-3">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 3.3: Avaliação de Marcha para Adaptação de Órtese</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                </ul>
-                                <div class="action-footer">
-                                    <button class="btn-simulation locked" id="btn-sim-3">Iniciar Simulação Clínica 3</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Módulo 4 -->
-                        <div class="modulo-card locked" id="modulo-4">
-                            <div class="modulo-header">
-                                <div class="modulo-number">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="modulo-icon-svg">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                    </svg>
-                                </div>
-                                <div class="modulo-meta">
-                                    <div class="status-badge status-bloqueado">Bloqueado</div>
-                                    <h4>Módulo 4: Adaptação, Reabilitação e Acompanhamento pós-entrega</h4>
-                                    <p class="modulo-duration">⏱ 6 min • 3 Aulas • 1 Caso Clínico</p>
-                                </div>
-                            </div>
-                            <div class="modulo-body">
-                                <p class="modulo-desc">Compreenda a importância da reabilitação multiprofissional contínua após a entrega do equipamento e o monitoramento de sua eficácia e desgaste.</p>
-                                <ul class="lesson-list">
-                                    <li class="lesson-item" data-lesson-id="4-1">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 4.1: O Treino de Marcha e Uso de Próteses</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="4-2">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 4.2: Visita Domiciliar e Acompanhamento Multiprofissional</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                    <li class="lesson-item" data-lesson-id="4-3">
-                                        <div class="lesson-status-icon"></div>
-                                        <span>Aula 4.3: Manutenção, Reparos e Substituição no SUS</span>
-                                        <button class="btn-read-lesson">Ler</button>
-                                    </li>
-                                </ul>
-                                <div class="action-footer">
-                                    <button class="btn-simulation locked" id="btn-sim-4">Iniciar Simulação Clínica 4</button>
-                                </div>
-                            </div>
+                <div class="modulo-card active" id="modulo-1">
+                    <div class="modulo-header">
+                        <div class="modulo-number">1</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-em-progresso">Em Progresso</span>
+                            <h4>Unidade 1 — Tecnologia Assistiva & OPM no SUS</h4>
+                            <p class="modulo-duration">⏱ ~40 min · 5 Tópicos · 1 Quiz</p>
                         </div>
                     </div>
-                </section>
+                    <p class="modulo-desc">Compreenda o conceito legal de Tecnologia Assistiva (LBI), o que são OPMs no SUS, a diferença entre órtese, prótese e recurso auxiliar, e o papel da equipe multiprofissional.</p>
+                    <ul class="lesson-list">
+                        <li class="lesson-item" data-lesson-id="E1U1T1"><div class="lesson-status-icon"></div><span>1.1 O que é Tecnologia Assistiva</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U1T2"><div class="lesson-status-icon"></div><span>1.2 O que são OPM</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U1T3"><div class="lesson-status-icon"></div><span>1.3 Diferença entre Órtese, Prótese e Recurso Auxiliar</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U1T4"><div class="lesson-status-icon"></div><span>1.4 Quem participa do processo de cuidado</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U1T5"><div class="lesson-status-icon"></div><span>1.5 OPM no contexto do SUS</span><button class="btn-read-lesson">Ler</button></li>
+                    </ul>
+                    <button class="btn-simulation" id="btn-sim-1">Iniciar Quiz do Módulo 1 ➔</button>
+                </div>
 
-                <!-- Seção Direita: Chat com a IA Eva e Conquistas -->
-                <section class="sidebar-section">
-                    <!-- Painel da Assistente Eva -->
-                    <div class="eva-assistant-panel">
-                        <div class="eva-header">
-                            <div class="eva-avatar-wrapper">
-                                <img src="assets/eva_avatar.png" alt="Eva" class="eva-img">
-                                <span class="online-indicator"></span>
-                            </div>
-                            <div class="eva-meta">
-                                <h3>E.V.A.</h3>
-                                <p>Educação em Vida Assistiva</p>
-                            </div>
-                        </div>
-                        <div class="eva-chat-container" id="chat-container">
-                            <div class="chat-message eva-msg">
-                                Olá, João Paulo! Sou a E.V.A. (Educação em Vida Assistiva), sua assistente e tutora virtual de aprendizagem em órteses e próteses.
-                                <br><br>
-                                Estou aqui para tirar suas dúvidas e apoiar suas decisões clínicas na UBS. O que gostaria de discutir hoje?
-                            </div>
-                        </div>
-                        
-                        <!-- Botões Rápidos de Pergunta -->
-                        <div class="quick-questions-wrapper">
-                            <button class="quick-question-btn" data-question="Como prescrever cadeira de rodas no SUS?">Prescrição Cadeira de Rodas</button>
-                            <button class="quick-question-btn" data-question="O que é uma órtese AFO e quando indicar?">Indicações da Órtese AFO</button>
-                            <button class="quick-question-btn" data-question="Qual o fluxo de regulação para o CER?">Fluxo UBS para CER</button>
-                        </div>
-
-                        <form class="eva-chat-input-area" id="chat-form">
-                            <input type="text" id="chat-input" placeholder="Pergunte sobre portarias, diretrizes ou O&P..." autocomplete="off">
-                            <button type="submit" class="btn-send-message">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Painel de Conquistas (Badges) -->
-                    <div class="achievements-panel" id="conquistas">
-                        <div class="panel-header">
-                            <h3>Minhas Conquistas</h3>
-                            <span class="badge-count" id="badge-count-text">0 / 4</span>
-                        </div>
-                        <div class="badges-grid">
-                            <div class="badge-item locked" id="badge-1">
-                                <div class="badge-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-                                    </svg>
-                                </div>
-                                <h5>Expert do Fluxo</h5>
-                                <p>Completou o Módulo 1 e entende a regulação do SUS.</p>
-                            </div>
-                            <div class="badge-item locked" id="badge-2">
-                                <div class="badge-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                                    </svg>
-                                </div>
-                                <h5>Adequação Postural</h5>
-                                <p>Domina as medidas e prescrição de cadeiras de rodas.</p>
-                            </div>
-                            <div class="badge-item locked" id="badge-3">
-                                <div class="badge-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                                    </svg>
-                                </div>
-                                <h5>Foco Funcional</h5>
-                                <p>Sabe avaliar marcha e indicar órteses MMII.</p>
-                            </div>
-                            <div class="badge-item locked" id="badge-4">
-                                <div class="badge-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                    </svg>
-                                </div>
-                                <h5>Guardião da Autonomia</h5>
-                                <p>Domina o acompanhamento pós-entrega e reabilitação.</p>
-                            </div>
+                <div class="modulo-card locked" id="modulo-2">
+                    <div class="modulo-header">
+                        <div class="modulo-number">2</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 2 — Funcionalidade e Reabilitação (CIF)</h4>
+                            <p class="modulo-duration">⏱ ~40 min · 5 Tópicos · 1 Simulação</p>
                         </div>
                     </div>
-                </section>
+                    <p class="modulo-desc">Compreenda os conceitos da CIF da OMS: estrutura vs. função corporal, metas SMART, participação social, barreiras ambientais e prevenção do abandono.</p>
+                    <ul class="lesson-list">
+                        <li class="lesson-item" data-lesson-id="E1U2T1"><div class="lesson-status-icon"></div><span>2.1 Função × estrutura corporal</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U2T2"><div class="lesson-status-icon"></div><span>2.2 Objetivo terapêutico</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U2T3"><div class="lesson-status-icon"></div><span>2.3 Participação e independência</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U2T4"><div class="lesson-status-icon"></div><span>2.4 Barreiras ambientais</span><button class="btn-read-lesson">Ler</button></li>
+                        <li class="lesson-item" data-lesson-id="E1U2T5"><div class="lesson-status-icon"></div><span>2.5 Adesão ao tratamento</span><button class="btn-read-lesson">Ler</button></li>
+                    </ul>
+                    <button class="btn-simulation locked" id="btn-sim-2">Iniciar Simulação — Prioridades ➔</button>
+                </div>
+
+                <!-- EIXO 2: RACIOCÍNIO CLÍNICO -->
+                <div class="eixo-header eixo-2">
+                    <span>🔍 Eixo 2 — Raciocínio para Prescrição</span>
+                    <span class="eixo-badge">8 horas · 3 Unidades</span>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-3">
+                    <div class="modulo-header">
+                        <div class="modulo-number">3</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 3 — Avaliação Inicial</h4>
+                            <p class="modulo-duration">⏱ ~50 min · 3 Tópicos · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Investigação da demanda, avaliação biomecânica de força e amplitude, análise da rotina e critérios de encaminhamento regulado ao CER.</p>
+                    <button class="btn-simulation locked" id="btn-sim-3">Iniciar Simulação — Avaliação ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-4">
+                    <div class="modulo-header">
+                        <div class="modulo-number">4</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 4 — Critérios para Prescrever (Quiz Oficial)</h4>
+                            <p class="modulo-duration">⏱ ~40 min · 3 Tópicos · Quiz Oficial Módulo 4</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Indicações clínicas, contraindicações formais, metas de curto e longo prazo, e alinhamento de expectativas do usuário.</p>
+                    <button class="btn-simulation locked" id="btn-sim-4">🎯 Iniciar Quiz Oficial Módulo 4 ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-5">
+                    <div class="modulo-header">
+                        <div class="modulo-number">5</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 5 — Erros Comuns na Prescrição (Quiz Oficial)</h4>
+                            <p class="modulo-duration">⏱ ~40 min · 2 Tópicos · Quiz Oficial Módulo 5</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Identificação dos 5 erros mais frequentes na provisão de OPM no SUS e estratégias práticas de mitigação.</p>
+                    <button class="btn-simulation locked" id="btn-sim-5">🎯 Iniciar Quiz Oficial Módulo 5 ➔</button>
+                </div>
+
+                <!-- EIXO 3: OPM -->
+                <div class="eixo-header eixo-3">
+                    <span>🦾 Eixo 3 — Conhecendo as OPM</span>
+                    <span class="eixo-badge">6 horas · 3 Unidades</span>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-6">
+                    <div class="modulo-header">
+                        <div class="modulo-number">6</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 6 — Introdução às Órteses & Quebra-Cabeça (8 Fases)</h4>
+                            <p class="modulo-duration">⏱ ~50 min · 🧩 Desafio Interativo de 8 Fases</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Conceitos biomecânicos de sustentação e o **Desafio Prático de Montagem de OPMs em 8 Fases** (Mão, Dinâmica, Punho, AFO, Termoplástico, Prótese, Bengala e Andador).</p>
+                    <button class="btn-simulation locked" id="btn-sim-6">🧩 Abrir Quebra-Cabeça de OPMs (8 Fases) ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-7">
+                    <div class="modulo-header">
+                        <div class="modulo-number">7</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 7 — Tipos de Órteses (Membro Sup, Inf e Coluna)</h4>
+                            <p class="modulo-duration">⏱ ~45 min · 3 Tópicos · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Órteses de Membro Superior (estáticas e dinâmicas), Membro Inferior (AFO, KAFO) e Coluna (Colete de Boston).</p>
+                    <button class="btn-simulation locked" id="btn-sim-7">Iniciar Simulação — Tipos de Órteses ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-8">
+                    <div class="modulo-header">
+                        <div class="modulo-number">8</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 8 — Introdução às Próteses</h4>
+                            <p class="modulo-duration">⏱ ~45 min · 2 Tópicos · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Exopróteses vs. Endopróteses, componentes (Encaixe/Socket, Suspensão, Peças Articuladas) e alinhamento familiar.</p>
+                    <button class="btn-simulation locked" id="btn-sim-8">Iniciar Simulação — Próteses ➔</button>
+                </div>
+
+                <!-- EIXO 4: PRODUÇÃO & 3D -->
+                <div class="eixo-header eixo-4">
+                    <span>⚙️ Eixo 4 — Produção & Tecnologia 3D</span>
+                    <span class="eixo-badge">7 horas · 3 Unidades</span>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-9">
+                    <div class="modulo-header">
+                        <div class="modulo-number">9</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 9 — Fabricação Tradicional (Gesso)</h4>
+                            <p class="modulo-duration">⏱ ~35 min · 1 Tópico · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Etapas clássicas do gesso: moldagem negativa, modelo positivo de gesso, modificação manual e termoformagem.</p>
+                    <button class="btn-simulation locked" id="btn-sim-9">Iniciar Simulação — Método Tradicional ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-10">
+                    <div class="modulo-header">
+                        <div class="modulo-number">10</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 10 — Fluxo Digital e Impressão 3D</h4>
+                            <p class="modulo-duration">⏱ ~45 min · 1 Tópico · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">As 4 etapas do fluxo 3D: Escaneamento 3D sem gesso, Modelagem CAD, Fatiamento CAM (PLA, PETG, TPU) e Impressão FDM.</p>
+                    <button class="btn-simulation locked" id="btn-sim-10">Iniciar Simulação — Impressão 3D ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-11">
+                    <div class="modulo-header">
+                        <div class="modulo-number">11</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 11 — Comparação entre Métodos (Tradicional vs 3D)</h4>
+                            <p class="modulo-duration">⏱ ~40 min · 1 Tópico · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Matriz comparativa de tempo, custo, personalização, replicabilidade de arquivos e curva de aprendizado.</p>
+                    <button class="btn-simulation locked" id="btn-sim-11">Iniciar Simulação — Comparativo ➔</button>
+                </div>
+
+                <!-- EIXO 5: DA ENTREGA AO RESULTADO -->
+                <div class="eixo-header eixo-5">
+                    <span>🏆 Eixo 5 — Da Entrega ao Resultado</span>
+                    <span class="eixo-badge">5 horas · 3 Unidades</span>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-12">
+                    <div class="modulo-header">
+                        <div class="modulo-number">12</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 12 — Prova e Adaptação do Dispositivo</h4>
+                            <p class="modulo-duration">⏱ ~35 min · 1 Tópico · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Condução da prova física, alívio de pontos de hiperpressão na pele, alinhamento funcional e educação do usuário.</p>
+                    <button class="btn-simulation locked" id="btn-sim-12">Iniciar Simulação — Prova Física ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-13">
+                    <div class="modulo-header">
+                        <div class="modulo-number">13</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 13 — Seguimento Clínico Longitudinal</h4>
+                            <p class="modulo-duration">⏱ ~35 min · 1 Tópico · 1 Simulação</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Acompanhamento periódico, monitoramento de desgaste do material, reavaliação de metas e manutenção preventiva.</p>
+                    <button class="btn-simulation locked" id="btn-sim-13">Iniciar Simulação — Seguimento ➔</button>
+                </div>
+
+                <div class="modulo-card locked" id="modulo-14">
+                    <div class="modulo-header">
+                        <div class="modulo-number">14</div>
+                        <div class="modulo-meta">
+                            <span class="status-badge status-bloqueado">Bloqueado</span>
+                            <h4>Unidade 14 — Casos Integradores (Árvore de Decisão)</h4>
+                            <p class="modulo-duration">⏱ ~50 min · 3 Estudos de Caso · Avaliação Final</p>
+                        </div>
+                    </div>
+                    <p class="modulo-desc">Tomada de decisão clínica por Árvore de Decisão: Caso 1 (José Carlos - AVC/AFO), Caso 2 (Criança PC) e Caso 3 (Ana Paula - Amputação Transradial 3D).</p>
+                    <button class="btn-simulation locked" id="btn-sim-14">🎯 Avaliação Final — Árvore de Decisão ➔</button>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- VIEW 2: GALERIA DE BADGES & RECOMPENSAS (PÁGINA DEDICADA)    -->
+            <!-- ============================================================ -->
+            <div id="conquistas-view" class="view-section">
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 20px; border: 1.5px solid var(--border-color); margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; box-shadow: var(--shadow-sm);">
+                    <div>
+                        <h2 style="font-size: 1.6rem; color: var(--color-slate); font-weight: 800;">Galeria de Badges & Recompensas</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 4px;">Acompanhe sua evolução pedagógica, acúmulo de XP e conquistas no SUS.</p>
+                    </div>
+                    <div style="background: var(--accent-light); border: 2px solid var(--accent-dark); padding: 10px 22px; border-radius: 50px; font-weight: 800; color: var(--color-slate); font-size: 1.05rem;">
+                        ⚡ <span id="user-xp-display">0</span> XP · Nível <span id="user-level-display">1</span>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 20px; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h3 style="font-size: 1.2rem; color: var(--color-slate);">Insígnias de Maestria</h3>
+                        <span id="badge-count-text" style="background: var(--primary); color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">0 / 10 Badges</span>
+                    </div>
+
+                    <div class="badges-grid">
+                        <div class="badge-item locked" id="badge-1">
+                            <div class="badge-icon">🚀</div>
+                            <h5>Pioneiro 3D</h5>
+                            <p>Módulo 1: Conceito de TA, OPM e Impressão 3D no SUS.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-2">
+                            <div class="badge-icon">🧠</div>
+                            <h5>Estrategista Clínico</h5>
+                            <p>Módulo 2: Raciocínio clínico para indicação ideal.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-3">
+                            <div class="badge-icon">📷</div>
+                            <h5>Capturador de Formas</h5>
+                            <p>Módulo 3: Escaneamento 3D e anatomia digital.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-4">
+                            <div class="badge-icon">✏️</div>
+                            <h5>Escultor Digital</h5>
+                            <p>Módulo 4: Modelagem CAD e ajustes de malha 3D.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-5">
+                            <div class="badge-icon">⚙️</div>
+                            <h5>Engenheiro de Parâmetros</h5>
+                            <p>Módulo 5: Fatiamento CAM (PLA, PETG, TPU) e fabricação.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-6">
+                            <div class="badge-icon">🤝</div>
+                            <h5>Embaixador da Adesão</h5>
+                            <p>Módulo 6: Prova física, ergonomia e adesão humanizada.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-7">
+                            <div class="badge-icon">🔮</div>
+                            <h5>Visionário da Saúde</h5>
+                            <p>Módulo 7: Seguimento clínico e IA na saúde pública.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-microlearning">
+                            <div class="badge-icon">⚡</div>
+                            <h5>Velocista Microlearning</h5>
+                            <p>Conclusão ágil e focada das aulas práticas.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-decisao">
+                            <div class="badge-icon">🎯</div>
+                            <h5>Mestre da Decisão</h5>
+                            <p>Precisão total de 1ª tentativa nos casos clínicos.</p>
+                        </div>
+                        <div class="badge-item locked" id="badge-supremo" style="border: 2px solid var(--primary);">
+                            <div class="badge-icon">🏆</div>
+                            <h5>Agente Transformador SUS</h5>
+                            <p>Badge Supremo: Conclusão integral 100% com maestria.</p>
+                        </div>
+                    </div>
+
+                    <!-- Banner Ampliado do Quadro de Recompensas -->
+                    <div style="margin-top: 36px; text-align: center;">
+                        <h4 style="font-size: 1rem; color: var(--color-slate); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Quadro Oficial de Recompensas & Certificação</h4>
+                        <img src="assets/v2/recompensas.png" alt="Recompensas Trilha Digital" style="width: 100%; max-width: 950px; border-radius: 16px; border: 2px solid var(--border-color); box-shadow: var(--shadow-md);">
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- Modais de Leitura de Aula -->
+    <!-- ============================================================ -->
+    <!-- WIDGET FLUTUANTE DA E.V.A. (MATCHING IMAGE 2 EXACTLY)        -->
+    <!-- ============================================================ -->
+    <div class="eva-floating-widget" id="eva-floating-widget">
+        <div class="eva-widget-pill" id="eva-widget-pill" title="Clique para abrir a assistente E.V.A.">
+            <span class="pill-title">Dúvidas sobre OPM ou 3D?</span>
+            <span class="pill-sub">Fale com a E.V.A. (Assistente Virtual) 🤖</span>
+        </div>
+        <button class="eva-fab-circle-btn" id="btn-eva-fab" title="Abrir Chat da E.V.A.">
+            <img src="assets/eva_avatar.png" alt="E.V.A. AI">
+            <span class="eva-online-dot"></span>
+        </button>
+    </div>
+
+    <!-- POPUP DE CHAT FLUTUANTE DA E.V.A. -->
+    <div class="eva-chat-popup" id="eva-chat-popup">
+        <div class="eva-popup-header">
+            <div class="eva-info">
+                <img src="assets/eva_avatar.png" alt="E.V.A." style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                <div>
+                    <h4>E.V.A. Assistente</h4>
+                    <p>Educação em Vida Assistiva</p>
+                </div>
+            </div>
+            <button class="btn-close-eva-popup" id="btn-close-eva-popup">×</button>
+        </div>
+        
+        <div id="chat-container" style="flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem;">
+            <div class="chat-message eva-msg">
+                Olá, Dr. João Paulo! Sou a E.V.A. Como posso ajudar em sua capacitação na Trilha Digital hoje? 🚀
+            </div>
+        </div>
+
+        <div style="padding: 8px 12px; display: flex; gap: 6px; overflow-x: auto; background: var(--bg-secondary);">
+            <button class="quick-question-btn" data-question="O que é uma órtese AFO?" style="font-size: 0.72rem; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); background: white; cursor: pointer; white-space: nowrap;">Indicações da AFO</button>
+            <button class="quick-question-btn" data-question="Como funciona a impressão 3D?" style="font-size: 0.72rem; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); background: white; cursor: pointer; white-space: nowrap;">Impressão 3D</button>
+            <button class="quick-question-btn" data-question="Qual o fluxo no SUS?" style="font-size: 0.72rem; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); background: white; cursor: pointer; white-space: nowrap;">Fluxo UBS → CER</button>
+        </div>
+
+        <form id="chat-form" style="padding: 10px; display: flex; gap: 8px; border-top: 1px solid var(--border-color);">
+            <input type="text" id="chat-input" placeholder="Pergunte sobre OPM, 3D, SUS..." autocomplete="off" style="flex: 1; padding: 8px 12px; border-radius: 20px; border: 1px solid var(--border-color); font-size: 0.85rem;">
+            <button type="submit" style="background: var(--primary); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                ➔
+            </button>
+        </form>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODAIS DE AULA, SIMULAÇÃO E QUEBRA-CABEÇA                   -->
+    <!-- ============================================================ -->
     <div class="modal-overlay" id="lesson-modal">
         <div class="modal-card">
             <header class="modal-header-nav">
                 <h3 id="lesson-modal-title">Título da Aula</h3>
                 <button class="btn-close-modal" id="btn-close-lesson">×</button>
             </header>
-            <div class="modal-body-content" id="lesson-modal-content">
-                <!-- Conteúdo dinâmico da aula -->
-            </div>
+            <div class="modal-body-content" id="lesson-modal-content"></div>
             <footer class="modal-footer">
                 <button class="btn-primary" id="btn-finish-lesson">Marcar como Concluída</button>
             </footer>
         </div>
     </div>
 
-    <!-- Modais de Simulação Clínica (Quiz de Caso Clínico) -->
     <div class="modal-overlay" id="simulation-modal">
         <div class="modal-card sim-card">
             <header class="modal-header-nav sim-header">
-                <h3>Simulação Clínica Interativa</h3>
+                <h3 id="sim-title">Simulação Clínica Interativa</h3>
                 <button class="btn-close-modal" id="btn-close-sim">×</button>
             </header>
             <div class="modal-body-content">
-                <div class="sim-case-description" id="sim-case-text">
-                    <!-- Descrição dinâmica do caso do paciente -->
-                </div>
-                <div class="sim-options-list" id="sim-options">
-                    <!-- Opções dinâmicas de múltipla escolha -->
-                </div>
-                <div class="sim-feedback-panel" id="sim-feedback" style="display: none;">
-                    <!-- Feedback de erro ou sucesso -->
-                </div>
+                <div class="sim-case-description" id="sim-case-text"></div>
+                <div class="sim-options-list" id="sim-options"></div>
+                <div class="sim-feedback-panel" id="sim-feedback" style="display: none;"></div>
             </div>
             <footer class="modal-footer">
                 <button class="btn-primary" id="btn-submit-sim">Confirmar Decisão Clínica</button>
@@ -376,7 +474,25 @@
         </div>
     </div>
 
-    <!-- Script Principal -->
-    <script src="app.js"></script>
+    <div class="modal-overlay" id="puzzle-modal">
+        <div class="modal-card puzzle-card" style="max-width: 750px;">
+            <header class="modal-header-nav" style="background: linear-gradient(135deg, var(--color-slate), var(--color-cyan)); color: white;">
+                <h3>🧩 Quebra-Cabeça de Órteses & Próteses — Fase <span id="puzzle-phase-num">1</span>/8</h3>
+                <button class="btn-close-modal" id="btn-close-puzzle">×</button>
+            </header>
+            <div class="modal-body-content" style="padding: 24px;">
+                <div id="puzzle-question-text" class="sim-case-description" style="font-size: 1rem; background: var(--bg-secondary); border-left-color: var(--primary);"></div>
+                <div id="puzzle-options-list" class="sim-options-list"></div>
+                <div id="puzzle-assembly-area" style="display: none; margin-top: 20px; text-align: center; background: var(--accent-light); padding: 20px; border-radius: 14px; border: 2px dashed var(--accent-dark);">
+                    <div style="font-size: 2.8rem;" id="puzzle-assembly-icon">🧩</div>
+                    <h4 style="color: var(--color-slate); margin-top: 10px;" id="puzzle-assembly-title">Peça Montada com Sucesso!</h4>
+                    <p id="puzzle-assembly-desc" style="color: var(--text-secondary); font-size: 0.92rem; margin-top: 6px;"></p>
+                    <button class="btn-primary" id="btn-next-puzzle-phase" style="margin-top: 15px; background-color: var(--color-forest);">Próxima Fase do Quebra-Cabeça ➔</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=20260723_v3"></script>
 </body>
 </html>
