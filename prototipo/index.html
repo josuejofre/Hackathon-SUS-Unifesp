@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trilha Digital em Tecnologia Assistiva — Capacitação SUS</title>
-    <meta name="description" content="Trilha Digital de capacitação em prescrição de órteses, próteses e impressão 3D para profissionais da rede SUS. 5 Eixos, 14 Unidades.">
+    <title>Digitrilha em Tecnologia Assistiva — Capacitação SUS</title>
+    <meta name="description" content="Digitrilha de capacitação em prescrição de órteses, próteses e impressão 3D para profissionais da rede SUS. 5 Eixos, 14 Unidades.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,17 +19,25 @@
         <aside class="app-sidebar">
             <div>
                 <div class="sidebar-logo-box">
-                    <img src="assets/v2/logo_trilha_digital.png" alt="Trilha Digital em Tecnologia Assistiva" class="sidebar-logo-img">
+                    <img src="assets/v2/logo_digitrilha.png" alt="Digitrilha em Tecnologia Assistiva" class="sidebar-logo-img">
                 </div>
 
                 <nav class="sidebar-nav">
                     <button class="nav-item active" id="nav-btn-trilha">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
                         Minha Trilha
                     </button>
                     <button class="nav-item" id="nav-btn-conquistas">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
                         Galeria de Badges
+                    </button>
+                    <button class="nav-item" id="nav-btn-waze">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Waze-SUS (Fluxos)
+                    </button>
+                    <button class="nav-item" id="nav-btn-cert">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        Certificado Digital
                     </button>
                     <a href="rpg.html" class="nav-item">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -59,7 +67,7 @@
             <header class="main-header">
                 <div class="welcome-text">
                     <h2>Olá, Dr. João Paulo 👋</h2>
-                    <p>Trilha Digital em Tecnologia Assistiva · ~30 horas · 14 Unidades</p>
+                    <p>Digitrilha em Tecnologia Assistiva · ~30 horas · 14 Unidades</p>
                 </div>
                 <div class="header-actions">
                     <div class="progress-container-header">
@@ -68,6 +76,9 @@
                             <div class="progress-bar-fill" id="overall-progress-bar" style="width: 0%"></div>
                         </div>
                     </div>
+                    <button class="theme-toggle" id="sound-toggle" title="Efeitos Sonoros Imersivos" style="margin-right: 6px;">
+                        🔊
+                    </button>
                     <button class="theme-toggle" id="theme-toggle" title="Alternar Tema">
                         ☀️
                     </button>
@@ -390,6 +401,94 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ============================================================ -->
+            <!-- VIEW 3: WAZE-SUS — MAPEAMENTO COLABORATIVO DE FLUXOS REGIONAIS-->
+            <!-- ============================================================ -->
+            <div id="waze-view" class="view-section">
+                <div style="background: linear-gradient(135deg, #004f9f, #00a599); color: white; padding: 28px; border-radius: 16px; margin-bottom: 24px; box-shadow: var(--shadow-md);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">📢 Colaboração Waze-SUS</span>
+                            <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-top: 8px;">Mapeamento Colaborativo de Fluxos Regionais</h2>
+                            <p style="font-size: 0.95rem; opacity: 0.9; margin-top: 4px; max-width: 700px;">
+                                Baseado no modelo inovador de <strong>São José dos Campos (SP)</strong>. Assim como no Waze, os profissionais de saúde relatam a realidade do seu município para que a comunidade mantenha a Digitrilha sempre atualizada!
+                            </p>
+                        </div>
+                        <button class="btn-primary" id="btn-open-relatar" style="background: white; color: var(--primary); font-weight: 700; font-size: 0.95rem; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; box-shadow: var(--shadow-sm);">
+                            📢 Relatar Fluxo do Seu Município
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Métricas Waze-SUS -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--primary);">5.570</span>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Municípios Cobertos</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--accent-dark);">342</span>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Relatos Regionais validados</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--color-forest);">100%</span>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Alinhamento às Portarias SUS</p>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; color: var(--color-slate); margin-bottom: 16px;">Mural de Experiências e Fluxos Municipais</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;" id="waze-reports-grid">
+                    <!-- Card 1: São José dos Campos (SP) -->
+                    <div style="background: white; border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="background: #e0f2fe; color: var(--primary); font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 12px;">📍 São José dos Campos — SP</span>
+                            <span style="color: #059669; font-size: 0.8rem; font-weight: 700;">✅ Modelo Referência</span>
+                        </div>
+                        <h4 style="font-size: 1rem; color: var(--color-slate); margin-bottom: 6px;">Fluxo de Prescrição e Regulação de OPM na UBS</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+                            "A triagem inicial é realizada pela equipe eMulti na UBS com agendamento via SISREG para o CER II. Documentação necessária: Laudo funcional detalhado + Formulário LME padronizado pela SMS."
+                        </p>
+                        <div style="margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+                            <span>Por: Dra. Camile Santos (Fisioterapeuta)</span>
+                            <span>👍 148 Útil</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: São Paulo (SP) -->
+                    <div style="background: white; border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="background: #e0f2fe; color: var(--primary); font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 12px;">📍 São Paulo — SP</span>
+                            <span style="color: #059669; font-size: 0.8rem; font-weight: 700;">✅ Homologado</span>
+                        </div>
+                        <h4 style="font-size: 1rem; color: var(--color-slate); margin-bottom: 6px;">Dispensação de Cadeiras de Rodas Posturais</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+                            "Na capital, o laudo exige medição antropométrica completa e a Escala de Braden anexada para aprovação do módulo de almofada anti-escaras."
+                        </p>
+                        <div style="margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+                            <span>Por: Dr. Ricardo Lima (Médico ESF)</span>
+                            <span>👍 92 Útil</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Recife (PE) -->
+                    <div style="background: white; border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="background: #e0f2fe; color: var(--primary); font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 12px;">📍 Recife — PE</span>
+                            <span style="color: #059669; font-size: 0.8rem; font-weight: 700;">✅ Homologado</span>
+                        </div>
+                        <h4 style="font-size: 1rem; color: var(--color-slate); margin-bottom: 6px;">Prototipagem 3D em Órteses de Punho</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+                            "O centro municipal de reabilitação aceita arquivos de escaneamento 3D enviados via aplicativo para impressão direta em filamento TPU."
+                        </p>
+                        <div style="margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+                            <span>Por: Dra. Beatriz Costa (TO)</span>
+                            <span>👍 76 Útil</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -432,16 +531,14 @@
             <button class="quick-question-btn" data-question="Qual o fluxo no SUS?" style="font-size: 0.72rem; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); background: white; cursor: pointer; white-space: nowrap;">Fluxo UBS → CER</button>
         </div>
 
-        <form id="chat-form" style="padding: 10px; display: flex; gap: 8px; border-top: 1px solid var(--border-color);">
-            <input type="text" id="chat-input" placeholder="Pergunte sobre OPM, 3D, SUS..." autocomplete="off" style="flex: 1; padding: 8px 12px; border-radius: 20px; border: 1px solid var(--border-color); font-size: 0.85rem;">
-            <button type="submit" style="background: var(--primary); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700;">
-                ➔
-            </button>
+        <form class="eva-chat-input-area" id="eva-chat-form" onsubmit="return false;">
+            <input type="text" id="eva-input" placeholder="Pergunte sobre portarias, AFO, próteses ou 3D..." autocomplete="off">
+            <button type="submit" id="btn-send-eva">Enviar</button>
         </form>
     </div>
 
     <!-- ============================================================ -->
-    <!-- MODAIS DE AULA, SIMULAÇÃO E QUEBRA-CABEÇA                   -->
+    <!-- MODAIS DE AULA, SIMULAÇÃO, QUEBRA-CABEÇA, RELATO WAZE E CERTIFICADO -->
     <!-- ============================================================ -->
     <div class="modal-overlay" id="lesson-modal">
         <div class="modal-card">
@@ -493,6 +590,122 @@
         </div>
     </div>
 
-    <script src="app.js?v=20260723_v3"></script>
+    <!-- MODAL RELATAR FLUXO MUNICIPAL (WAZE-SUS) -->
+    <div class="modal-overlay" id="relatar-modal">
+        <div class="modal-card" style="max-width: 600px;">
+            <header class="modal-header-nav" style="background: linear-gradient(135deg, #004f9f, #00a599); color: white;">
+                <h3>📢 Relatar Fluxo do Seu Município (Waze-SUS)</h3>
+                <button class="btn-close-modal" id="btn-close-relatar">×</button>
+            </header>
+            <div class="modal-body-content" style="padding: 24px;">
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+                    Como funciona a regulação, prescrição e dispensação de OPM na sua cidade? Relate as especificidades locais para ajudar na atualização contínua da comunidade!
+                </p>
+                <form id="waze-relato-form" onsubmit="return false;">
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-bottom: 14px;">
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--color-slate);">Estado (UF)</label>
+                            <select id="waze-uf" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 4px;">
+                                <option value="SP">São Paulo (SP)</option>
+                                <option value="RJ">Rio de Janeiro (RJ)</option>
+                                <option value="MG">Minas Gerais (MG)</option>
+                                <option value="PE">Pernambuco (PE)</option>
+                                <option value="AM">Amazonas (AM)</option>
+                                <option value="RS">Rio Grande do Sul (RS)</option>
+                                <option value="BA">Bahia (BA)</option>
+                                <option value="CE">Ceará (CE)</option>
+                                <option value="DF">Distrito Federal (DF)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--color-slate);">Município</label>
+                            <input type="text" id="waze-municipio" placeholder="Ex: São José dos Campos" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 4px;">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 14px;">
+                        <label style="font-size: 0.82rem; font-weight: 700; color: var(--color-slate);">Categoria do Relato</label>
+                        <select id="waze-categoria" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 4px;">
+                            <option value="SISREG">Fluxo de Regulação SISREG local</option>
+                            <option value="CER">Tempo médio de espera / Atendimento no CER</option>
+                            <option value="LME">Documentos e Exigências da Secretaria Municipal</option>
+                            <option value="3D">Uso de Prototipagem / Impressão 3D na região</option>
+                            <option value="DICA">Dica prática para profissionais da UBS</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-size: 0.82rem; font-weight: 700; color: var(--color-slate);">Descrição do Como Funciona na Sua Região</label>
+                        <textarea id="waze-descricao" rows="4" placeholder="Descreva sucintamente como é a rotina prática no seu município..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 4px; font-family: inherit; font-size: 0.9rem;"></textarea>
+                    </div>
+                    <button type="button" class="btn-primary" id="btn-submit-relato" style="width: 100%; font-weight: 700; padding: 12px;">
+                        🚀 Enviar Relato para Curadoria
+                    </button>
+                </form>
+                <div id="waze-feedback-sent" style="display: none; margin-top: 16px; background: #ecfdf5; border: 1px solid #10b981; color: #065f46; padding: 16px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 1.8rem;">🎉</div>
+                    <h4 style="margin-top: 6px;">Relato Enviado com Sucesso!</h4>
+                    <p style="font-size: 0.88rem; margin-top: 4px;">Obrigado, Dr. João Paulo! Sua contribuição foi recebida e será analisada pela equipe curadora para enriquecer o mapa colaborativo da Digitrilha.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CERTIFICADO DIGITAL E MICRO-CREDENCIAMENTO -->
+    <div class="modal-overlay" id="cert-modal">
+        <div class="modal-card" style="max-width: 800px; padding: 0; overflow: hidden;">
+            <div style="background: white; border: 8px solid #004f9f; padding: 36px; position: relative;" id="printable-certificate">
+                <button class="btn-close-modal" id="btn-close-cert" style="position: absolute; top: 12px; right: 16px;">×</button>
+                
+                <div style="text-align: center; border-bottom: 2px solid #004f9f; padding-bottom: 16px; margin-bottom: 24px;">
+                    <span style="font-size: 0.8rem; font-weight: 700; color: #004f9f; letter-spacing: 2px; text-transform: uppercase;">MINISTÉRIO DA SAÚDE · UNIFESP · HACKATHON SAÚDE DIGITAL 2026</span>
+                    <h1 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: #0f172a; margin-top: 8px;">CERTIFICADO DE CAPACITAÇÃO E MICRO-CREDENCIAMENTO</h1>
+                    <p style="color: #00a599; font-size: 1rem; font-weight: 700;">Tecnologia Assistiva (Órteses, Próteses e Meios Auxiliares)</p>
+                </div>
+
+                <div style="text-align: center; line-height: 1.8; color: #334155; font-size: 1.05rem; margin-bottom: 28px;">
+                    Certificamos que <strong>Dr. João Paulo</strong> (Fisioterapeuta - CREFITO/CNES 129485), concluiu com êxito a <strong>Digitrilha em Tecnologia Assistiva</strong> no formato de Educação Permanente em Saúde, com carga horária total de <strong>30 horas</strong>.
+                </div>
+
+                <!-- Competências e Badges -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; margin-bottom: 28px;">
+                    <h4 style="font-size: 0.85rem; color: #004f9f; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; text-align: center;">Competências e Selos Adquiridos</h4>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 12px; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.8rem;">🛡️</div>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: #1e293b;">Guardião da Postura</span>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem;">📋</div>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: #1e293b;">Mestre do Encaminhamento</span>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem;">🧩</div>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: #1e293b;">Mestre da Montagem</span>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem;">🦿</div>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: #1e293b;">Especialista em Impressão 3D</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <div>
+                        <p style="font-size: 0.8rem; color: #64748b;">Emitido em: 24 de Julho de 2026</p>
+                        <p style="font-size: 0.8rem; color: #64748b;">Código de Validação: <strong>DIGI-2026-948A</strong></p>
+                    </div>
+                    <!-- QR Code SVG -->
+                    <div style="text-align: center;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="#0f172a"><path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm9-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h4v2h-4v-2zm-4 4h2v4h-2v-4zm2-2h4v2h-4v-2zm2 4h4v4h-4v-4z"/></svg>
+                        <p style="font-size: 0.68rem; color: #64748b;">Verificação QR Code</p>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #f1f5f9; padding: 16px; text-align: right; display: flex; justify-content: flex-end; gap: 12px;">
+                <button class="btn-primary" onclick="window.print()" style="font-weight: 700;">🖨️ Imprimir / Salvar PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=20260723_v4"></script>
 </body>
 </html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Model Canvas — Digitrilha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #004f9f;
+            --primary-dark: #003a75;
+            --accent-teal: #00a599;
+            --accent-amber: #d97706;
+            --accent-green: #059669;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-title: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.5;
+            padding: 24px;
+        }
+
+        .header {
+            max-width: 1400px;
+            margin: 0 auto 24px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: var(--bg-card);
+            padding: 20px 28px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-titles h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background: #e0f2fe;
+            color: var(--primary);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-titles p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: #ffffff;
+            color: var(--text-body);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+
+        /* Canvas Layout Grid */
+        .canvas-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: auto auto auto;
+            gap: 16px;
+        }
+
+        .canvas-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .canvas-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #e0f2fe;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-title);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body {
+            font-size: 0.88rem;
+            color: var(--text-body);
+            flex-grow: 1;
+        }
+
+        .card-body ul {
+            list-style-type: none;
+        }
+
+        .card-body li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card-body li::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .card-body strong {
+            color: var(--text-title);
+        }
+
+        .box-parcerias {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+        }
+
+        .box-atividades {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .box-recursos {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .box-proposta {
+            grid-column: 3 / 4;
+            grid-row: 1 / 3;
+            border-top: 4px solid var(--accent-teal);
+        }
+
+        .box-proposta .card-icon {
+            background: #ccfbf1;
+            color: var(--accent-teal);
+        }
+
+        .box-relacionamento {
+            grid-column: 4 / 5;
+            grid-row: 1 / 2;
+        }
+
+        .box-canais {
+            grid-column: 4 / 5;
+            grid-row: 2 / 3;
+        }
+
+        .box-segmentos {
+            grid-column: 5 / 6;
+            grid-row: 1 / 3;
+        }
+
+        .box-custos {
+            grid-column: 1 / 4;
+            grid-row: 3 / 4;
+            border-top: 4px solid var(--accent-amber);
+        }
+
+        .box-custos .card-icon {
+            background: #fef3c7;
+            color: var(--accent-amber);
+        }
+
+        .box-receitas {
+            grid-column: 4 / 6;
+            grid-row: 3 / 4;
+            border-top: 4px solid var(--accent-green);
+        }
+
+        .box-receitas .card-icon {
+            background: #d1fae5;
+            color: var(--accent-green);
+        }
+
+        @media (max-width: 1024px) {
+            .canvas-container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+            .box-parcerias, .box-atividades, .box-recursos, .box-proposta,
+            .box-relacionamento, .box-canais, .box-segmentos, .box-custos, .box-receitas {
+                grid-column: span 1;
+                grid-row: auto;
+            }
+            .box-custos, .box-receitas {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .canvas-container {
+                grid-template-columns: 1fr;
+            }
+            .box-custos, .box-receitas {
+                grid-column: span 1;
+            }
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+            }
+            .header {
+                box-shadow: none;
+                border: none;
+            }
+            .actions {
+                display: none;
+            }
+            .canvas-container {
+                gap: 8px;
+            }
+            .canvas-card {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-titles">
+            <h1>Digitrilha <span class="badge">Business Model Canvas</span></h1>
+            <p>Hackathon Saúde Digital Unifesp 2026 • Desafio 2: Educação Digital para Profissionais do SUS (Órteses e Próteses)</p>
+        </div>
+        <div class="actions">
+            <a href="business_model_canvas_digitrilha.pptx" class="btn btn-primary" download>
+                📥 Baixar Arquivo PPTX
+            </a>
+            <button onclick="window.print()" class="btn btn-outline">
+                🖨️ Imprimir / PDF
+            </button>
+        </div>
+    </div>
+
+    <div class="canvas-container">
+
+        <!-- 1. PARCERIAS-CHAVE -->
+        <div class="canvas-card box-parcerias">
+            <div class="card-header">
+                <div class="card-icon">1</div>
+                <div class="card-title">Parcerias-Chave</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Ministério da Saúde (SGTES):</strong> Validação pedagógica, fomento e integração ao AVASUS/UNA-SUS.</li>
+                    <li><strong>UNIFESP & Universidades:</strong> Curadoria de evidências científicas em Órteses e Próteses (O&P).</li>
+                    <li><strong>Centros de Reabilitação (CERs):</strong> Validação dos simuladores clínicos e retorno de qualidade.</li>
+                    <li><strong>CONASEMS / COSEMS:</strong> Disseminação e articulação política com Secretarias Municipais.</li>
+                    <li><strong>Conselhos de Classe (CREFITO, CFM, COFEN):</strong> Apoio institucional e horas de EPS.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. ATIVIDADES-CHAVE -->
+        <div class="canvas-card box-atividades">
+            <div class="card-header">
+                <div class="card-icon">2</div>
+                <div class="card-title">Atividades-Chave</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Curadoria Pedagogica:</strong> Criação de microlearning em pílulas (3 a 5 min).</li>
+                    <li><strong>Treinamento da IA Eva:</strong> Ajuste fino (RAG) em normativas e portarias do SUS.</li>
+                    <li><strong>Desenvolvimento RPG/VR:</strong> Criação de cenários clínicos simulados interativos.</li>
+                    <li><strong>Integração de APIs:</strong> Conexão com Gov.br, e-SUS APS e LTI AVASUS.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3. RECURSOS-CHAVE -->
+        <div class="canvas-card box-recursos">
+            <div class="card-header">
+                <div class="card-icon">3</div>
+                <div class="card-title">Recursos-Chave</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Base de Conhecimento O&P:</strong> Protocolos e normativas clínicas atualizadas.</li>
+                    <li><strong>Motor IA Eva:</strong> Arquitetura LLM RAG com guardrails e sigilo de dados sintéticos.</li>
+                    <li><strong>Plataforma Web/PWA:</strong> Engine leve (HTML/JS/Phaser/A-Frame) com suporte offline.</li>
+                    <li><strong>Equipe Multidisciplinar:</strong> Especialistas em fisiatria, IA, edtech e UX.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. PROPOSTA DE VALOR -->
+        <div class="canvas-card box-proposta">
+            <div class="card-header">
+                <div class="card-icon">4</div>
+                <div class="card-title">Proposta de Valor</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Para Profissionais da APS:</strong> Capacitação prática de alta adesão (3-5 min/dia) no local de trabalho + assistente de IA 24/7 para apoio imediato à decisão em O&P.</li>
+                    <li><strong>Para Gestores do SUS:</strong> Aumento da resolutividade na UBS, redução de encaminhamentos incorretos aos CERs e otimização dos recursos públicos.</li>
+                    <li><strong>Para Pacientes (PCD):</strong> Atendimento ágil e qualificado, prescrição assertiva, redução do abandono de equipamentos e prevenção de úlceras por pressão.</li>
+                    <li><strong>Para a Rede SUS:</strong> Plataforma interoperável (e-SUS/Gov.br), conformidade total com a LGPD e escalável nacionalmente.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. RELACIONAMENTO COM CLIENTES -->
+        <div class="canvas-card box-relacionamento">
+            <div class="card-header">
+                <div class="card-icon">5</div>
+                <div class="card-title">Relacionamento</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Tutor IA (Eva):</strong> Suporte 24/7 e feedback imediato nos casos clínicos.</li>
+                    <li><strong>Gamificação:</strong> XP, badges de conquista (*Guardião da Postura*) e micro-certificação.</li>
+                    <li><strong>Suporte & Ouvidoria:</strong> Canal de melhoria contínua pedagógica.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. CANAIS -->
+        <div class="canvas-card box-canais">
+            <div class="card-header">
+                <div class="card-icon">6</div>
+                <div class="card-title">Canais</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Plataformas Oficiais:</strong> AVASUS e UNA-SUS.</li>
+                    <li><strong>e-SUS APS:</strong> Módulo DSS (apoio à decisão no prontuário).</li>
+                    <li><strong>Portal & PWA Digitrilha:</strong> Acesso direto web/mobile com modo offline.</li>
+                    <li><strong>Eventos da Rede:</strong> Congressos CONASEMS/COSEMS.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. SEGMENTOS DE CLIENTES -->
+        <div class="canvas-card box-segmentos">
+            <div class="card-header">
+                <div class="card-icon">7</div>
+                <div class="card-title">Segmentos de Clientes</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Clientes Compradores (B2G):</strong> Ministério da Saúde (SGTES), Secretarias Estaduais e Municipais de Saúde (SES/SMS).</li>
+                    <li><strong>Usuários Finais (Profissionais APS):</strong> Médicos da ESF, Fisioterapeutas, Terapeutas Ocupacionais, Enfermeiros e ACS.</li>
+                    <li><strong>Beneficiários Finais:</strong> Pacientes com deficiência ou mobilidade reduzida atendidos pelo SUS.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8. ESTRUTURA DE CUSTOS -->
+        <div class="canvas-card box-custos">
+            <div class="card-header">
+                <div class="card-icon">8</div>
+                <div class="card-title">Estrutura de Custos</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Infraestrutura Tecnológica & Cloud:</strong> Hospedagem serverless, consumo de APIs de IA (LLM RAG) e distribuição via CDN.</li>
+                    <li><strong>Desenvolvimento de Software:</strong> Manutenção do PWA, simuladores RPG/VR e conectores de API.</li>
+                    <li><strong>Curadoria de Conteúdo Clínico:</strong> Remuneração de especialista de saúde e designers instrucionais.</li>
+                    <li><strong>Governança & Segurança:</strong> Suporte B2G, auditorias de segurança e conformidade LGPD.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9. FONTES DE RECEITA -->
+        <div class="canvas-card box-receitas">
+            <div class="card-header">
+                <div class="card-icon">9</div>
+                <div class="card-title">Fontes de Receita / Financiamento</div>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Licenciamento B2G / EPS:</strong> Contratos anuais com municípios e estados via Fundo Nacional de Saúde (FNS).</li>
+                    <li><strong>Editais de Inovação & Fomento:</strong> Recursos FINEP, CNPq, DECIT/MS e transformação digital em saúde.</li>
+                    <li><strong>Customização Regional:</strong> Serviços de adaptação de fluxos regulatórios específicos dos municípios.</li>
+                    <li><strong>Parcerias ESG de Impacto Social:</strong> Apoio institucional para expansão de módulos educacionais.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

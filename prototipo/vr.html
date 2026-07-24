@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Trilha Digital VR — UBS Virtual 3D</title>
-  <meta name="description" content="Simulação em Realidade Virtual 3D de uma consulta em UBS na Trilha Digital de Tecnologia Assistiva.">
+  <title>Digitrilha VR — UBS Virtual 3D & Simulação Clínica</title>
+  <meta name="description" content="Simulação em Realidade Virtual 3D e Apoio à Decisão Clínica em Tecnologia Assistiva para o SUS.">
   <!-- A-Frame WebXR Framework -->
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #000; overflow: hidden; }
 
-    /* HUD de instruções (não-VR) */
+    /* HUD (não-VR) */
     #vr-ui {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -23,7 +26,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 24px;
+      padding: 14px 24px;
       background: linear-gradient(180deg, rgba(0,10,30,0.95) 0%, transparent 100%);
       pointer-events: auto;
     }
@@ -31,115 +34,177 @@
     .vr-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       color: white;
       font-size: 1.1rem;
       font-weight: 700;
       text-decoration: none;
+      font-family: 'Outfit', sans-serif;
     }
 
     .vr-logo-icon {
-      background: linear-gradient(135deg, #00a599, #1a6fce);
-      width: 36px; height: 36px;
-      border-radius: 8px;
+      background: linear-gradient(135deg, #00a599, #004f9f);
+      width: 40px; height: 40px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,165,153,0.4);
     }
 
     .vr-badge {
-      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      background: linear-gradient(135deg, #00a599, #004f9f);
       color: white;
-      padding: 6px 16px;
+      padding: 8px 18px;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0,79,159,0.3);
     }
 
     #vr-instructions {
       position: fixed;
-      bottom: 80px; left: 50%;
+      bottom: 24px; left: 50%;
       transform: translateX(-50%);
-      background: rgba(0,10,30,0.85);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(0, 165, 153, 0.4);
       border-radius: 50px;
-      padding: 10px 24px;
-      color: rgba(255,255,255,0.9);
-      font-size: 0.85rem;
+      padding: 12px 28px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 500;
       pointer-events: none;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       white-space: nowrap;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
       animation: floatInstr 3s ease-in-out infinite;
     }
 
     @keyframes floatInstr {
       0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-5px); }
+      50% { transform: translateX(-50%) translateY(-6px); }
     }
 
     #vr-back-btn {
       position: fixed;
-      top: 60px; left: 20px;
-      background: rgba(0,10,30,0.85);
+      top: 75px; left: 24px;
+      background: rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: 50px;
       color: white;
-      padding: 10px 20px;
-      font-size: 0.85rem;
+      padding: 10px 22px;
+      font-size: 0.88rem;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
       z-index: 999;
       display: flex;
       align-items: center;
-      gap: 6px;
-      transition: background 0.2s;
+      gap: 8px;
+      transition: all 0.2s;
       pointer-events: auto;
+      backdrop-filter: blur(8px);
     }
-    #vr-back-btn:hover { background: rgba(0,165,153,0.3); }
+    #vr-back-btn:hover { background: rgba(0,165,153,0.4); border-color: #00a599; }
 
-    /* Info panel (não-VR) */
+    /* Painel de Modal Interativo 3D/2D Overlay */
     #info-panel {
       position: fixed;
-      top: 50%; right: 24px;
-      transform: translateY(-50%);
-      background: rgba(0,10,30,0.9);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 16px;
-      padding: 20px;
-      max-width: 280px;
-      z-index: 999;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid #00a599;
+      border-radius: 20px;
+      padding: 28px;
+      width: 90%;
+      max-width: 520px;
+      z-index: 1000;
       pointer-events: auto;
       display: none;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,165,153,0.3);
+      color: white;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translate(-50%, -46%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }
 
     #info-panel h3 {
+      font-family: 'Outfit', sans-serif;
       color: #00a599;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     #info-panel p {
-      color: rgba(255,255,255,0.85);
-      font-size: 0.9rem;
-      line-height: 1.65;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
+
+    .modal-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .modal-opt-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+
+    .modal-opt-btn:hover {
+      background: #004f9f;
+      border-color: #00a599;
+      transform: translateX(4px);
+    }
+
+    .feedback-box-vr {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .feedback-correct-vr { background: rgba(5, 150, 105, 0.25); border: 1px solid #059669; color: #6ee7b7; }
+    .feedback-incorrect-vr { background: rgba(220, 38, 38, 0.25); border: 1px solid #dc2626; color: #fca5a5; }
 
     #info-panel .close-info {
       position: absolute;
-      top: 10px; right: 12px;
-      background: none;
+      top: 16px; right: 18px;
+      background: rgba(255,255,255,0.1);
       border: none;
-      color: rgba(255,255,255,0.5);
-      font-size: 1.2rem;
+      color: #94a3b8;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 1.1rem;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
     }
 
-    #info-panel .close-info:hover { color: white; }
+    #info-panel .close-info:hover { background: #dc2626; color: white; }
   </style>
 </head>
 <body>
@@ -147,412 +212,276 @@
   <!-- HEADER -->
   <div id="vr-ui">
     <div id="vr-header">
-      <a href="rpg.html" class="vr-logo">
+      <a href="index.html" class="vr-logo">
         <div class="vr-logo-icon">✚</div>
-        SUS<strong style="color:#00a599">Assist</strong> VR
+        Digitrilha <strong style="color:#00a599">VR</strong>
       </a>
-      <div class="vr-badge">🥽 MODO VR</div>
+      <div class="vr-badge">🥽 MODO VR 3D INTERATIVO</div>
     </div>
   </div>
 
   <!-- BOTÃO VOLTAR -->
-  <a href="rpg.html" id="vr-back-btn">← Voltar ao RPG</a>
+  <a href="index.html" id="vr-back-btn">← Voltar à Digitrilha</a>
 
-  <!-- INSTRUÇÕES -->
+  <!-- INSTRUÇÕES DE NAVEGAÇÃO E CLIQUE -->
   <div id="vr-instructions">
-    🖱️ Arraste para olhar ao redor &nbsp;|&nbsp; 👆 Clique nos marcadores azuis para interagir &nbsp;|&nbsp; 🥽 Modo VR disponível
+    🖱️ Clique com o mouse nos marcadores azuis pulsantes para interagir | WASD para andar
   </div>
 
-  <!-- PAINEL DE INFORMAÇÃO -->
+  <!-- PAINEL DE MODAL INTERATIVO (3D/2D OVERLAY) -->
   <div id="info-panel">
-    <button class="close-info" onclick="document.getElementById('info-panel').style.display='none'">✕</button>
-    <h3 id="info-title">INFORMAÇÃO CLÍNICA</h3>
+    <button class="close-info" onclick="closeVRModal()">✕</button>
+    <h3 id="info-title"><span>📍</span> INTERAÇÃO CLÍNICA</h3>
     <p id="info-text"></p>
+    <div class="modal-options" id="modal-options"></div>
+    <div class="feedback-box-vr" id="feedback-vr"></div>
   </div>
 
-  <!-- CENA A-FRAME -->
+  <!-- CENA A-FRAME WEBXR -->
   <a-scene
     background="color: #87ceeb"
     fog="type: linear; color: #b0d8f0; near: 15; far: 35"
     renderer="antialias: true; colorManagement: true"
     vr-mode-ui="enabled: true"
-    loading-screen="dotsColor: #00a599; backgroundColor: #001a40"
+    loading-screen="dotsColor: #00a599; backgroundColor: #0f172a"
   >
 
-    <!-- === CÂMERA COM CURSOR === -->
+    <!-- === CÂMERA COM SUPORTE DUAL: MOUSE CLICK + GAZE CURSOR === -->
     <a-entity id="rig" position="0 0 5">
       <a-camera look-controls="reverseMouseDrag: false" wasd-controls="enabled: true" position="0 1.6 0">
-        <!-- Cursor de mira (para VR com gaze) -->
         <a-cursor
+          id="vr-cursor"
           color="#00a599"
-          fuse="true"
-          fuse-timeout="1500"
+          fuse="false"
           raycaster="objects: .clickable"
+          cursor="rayOrigin: mouse"
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
-          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
-          animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
         ></a-cursor>
       </a-camera>
     </a-entity>
 
-    <!-- === ASSETS === -->
+    <!-- === ASSETS & MIXINS === -->
     <a-assets>
-      <a-mixin id="wall-mat" material="color: #f5f0e8; roughness: 0.8; metalness: 0.0"></a-mixin>
-      <a-mixin id="floor-mat" material="color: #d4c9b0; roughness: 0.9; metalness: 0.0"></a-mixin>
-      <a-mixin id="hotspot" geometry="primitive: sphere; radius: 0.15"
-        material="color: #00a599; emissive: #00a599; emissiveIntensity: 0.5; transparent: true; opacity: 0.9"
-        animation="property: scale; dir: alternate; dur: 1200; loop: true; to: 1.3 1.3 1.3; easing: easeInOutSine"
+      <a-mixin id="hotspot"
+        geometry="primitive: sphere; radius: 0.18"
+        material="color: #00a599; emissive: #00a599; emissiveIntensity: 0.6; transparent: true; opacity: 0.9"
+        animation="property: scale; dir: alternate; dur: 1000; loop: true; to: 1.3 1.3 1.3; easing: easeInOutSine"
         class="clickable">
       </a-mixin>
     </a-assets>
 
     <!-- ============================================================
-         SALA DE CONSULTÓRIO DA UBS
+         ESTRUTURA DA SALA DA UBS
          ============================================================ -->
-
     <!-- CHÃO -->
-    <a-plane
-      position="0 0 0"
-      rotation="-90 0 0"
-      width="10" height="10"
-      material="color: #c8bda0; roughness: 1.0"
-      shadow="receive: true">
-    </a-plane>
-
+    <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" material="color: #c8bda0; roughness: 1.0"></a-plane>
     <!-- TETO -->
-    <a-plane
-      position="0 3.2 0"
-      rotation="90 0 0"
-      width="10" height="10"
-      material="color: #f8f6f0; roughness: 0.9">
-    </a-plane>
-
+    <a-plane position="0 3.2 0" rotation="90 0 0" width="10" height="10" material="color: #f8f6f0; roughness: 0.9"></a-plane>
     <!-- PAREDES -->
-    <!-- Parede fundo -->
-    <a-plane position="0 1.6 -5" width="10" height="3.2"
-      material="color: #eee8d8; roughness: 0.8" shadow="receive: true">
-    </a-plane>
-
-    <!-- Parede esquerda -->
-    <a-plane position="-5 1.6 0" rotation="0 90 0" width="10" height="3.2"
-      material="color: #e8e0d0; roughness: 0.8">
-    </a-plane>
-
-    <!-- Parede direita (com janela) -->
-    <a-entity position="5 1.6 0" rotation="0 -90 0">
-      <!-- Parede direita superior -->
-      <a-plane position="0 0.6 0" width="10" height="2.0" material="color: #e8e0d0; roughness: 0.8"></a-plane>
-      <!-- Janela -->
-      <a-plane position="0 -0.5 -0.05" width="2.5" height="1.8"
-        material="color: #87ceeb; transparent: true; opacity: 0.7; side: double">
-      </a-plane>
-      <a-box position="0 -0.5 0" width="2.7" height="0.08" depth="0.15" material="color: #8b7355"></a-box>
-      <a-box position="0 0.4 0" width="2.7" height="0.08" depth="0.15" material="color: #8b7355"></a-box>
-      <!-- Divisor vertical janela -->
-      <a-box position="0 -0.5 0" width="0.06" height="1.8" depth="0.12" material="color: #8b7355"></a-box>
-    </a-entity>
-
-    <!-- Rodapés -->
-    <a-box position="0 0.05 -4.95" width="10" height="0.12" depth="0.1" material="color: #b8b0a0"></a-box>
-    <a-box position="-4.95 0.05 0" rotation="0 90 0" width="10" height="0.12" depth="0.1" material="color: #b8b0a0"></a-box>
+    <a-plane position="0 1.6 -5" width="10" height="3.2" material="color: #eee8d8; roughness: 0.8"></a-plane>
+    <a-plane position="-5 1.6 0" rotation="0 90 0" width="10" height="3.2" material="color: #e8e0d0; roughness: 0.8"></a-plane>
+    <a-plane position="5 1.6 0" rotation="0 -90 0" width="10" height="3.2" material="color: #e8e0d0; roughness: 0.8"></a-plane>
 
     <!-- ============================================================
-         MOBILIÁRIO
+         MOBILIÁRIO & ELEMENTOS CLÍNICOS 3D
          ============================================================ -->
-
-    <!-- MESA DO MÉDICO (fundo da sala) -->
+    <!-- MESA DO MÉDICO -->
     <a-entity position="0 0 -3.5">
-      <!-- Tampo -->
-      <a-box width="2.2" height="0.08" depth="0.9" position="0 0.78 0"
-        material="color: #7a5a3c; roughness: 0.7">
-      </a-box>
-      <!-- Pernas -->
+      <a-box width="2.2" height="0.08" depth="0.9" position="0 0.78 0" material="color: #7a5a3c; roughness: 0.7"></a-box>
       <a-box width="0.06" height="0.78" depth="0.06" position="-1.0 0.39 0.4" material="color: #5a3c20"></a-box>
       <a-box width="0.06" height="0.78" depth="0.06" position="1.0 0.39 0.4" material="color: #5a3c20"></a-box>
       <a-box width="0.06" height="0.78" depth="0.06" position="-1.0 0.39 -0.4" material="color: #5a3c20"></a-box>
       <a-box width="0.06" height="0.78" depth="0.06" position="1.0 0.39 -0.4" material="color: #5a3c20"></a-box>
-      <!-- Monitor -->
-      <a-box width="0.6" height="0.4" depth="0.03" position="-0.5 1.14 -0.3"
-        material="color: #1a1a1a">
-      </a-box>
-      <a-box width="0.58" height="0.38" depth="0.02" position="-0.5 1.14 -0.285"
-        material="color: #2a7af0; emissive: #0a3a90; emissiveIntensity: 0.3">
-      </a-box>
-      <a-box width="0.04" height="0.15" depth="0.04" position="-0.5 0.88 -0.3" material="color: #1a1a1a"></a-box>
-      <!-- Teclado -->
-      <a-box width="0.45" height="0.02" depth="0.18" position="-0.5 0.80 0.0"
-        material="color: #cccccc">
-      </a-box>
-      <!-- Prontuário / papéis -->
-      <a-box width="0.35" height="0.015" depth="0.25" position="0.4 0.80 0.0"
-        material="color: #f5f0e0">
-      </a-box>
+      
+      <!-- Monitor e-SUS APS -->
+      <a-box width="0.6" height="0.4" depth="0.03" position="-0.5 1.14 -0.3" material="color: #1a1a1a"></a-box>
+      <a-box width="0.58" height="0.38" depth="0.02" position="-0.5 1.14 -0.285" material="color: #004f9f; emissive: #004f9f; emissiveIntensity: 0.4"></a-box>
+      
+      <!-- Órteses em 3D sobre a mesa -->
+      <a-torus radius="0.1" radius-tubular="0.02" arc="180" position="0.5 0.88 -0.1" rotation="90 0 0" material="color: #00a599"></a-torus>
     </a-entity>
 
-    <!-- CADEIRA DO MÉDICO -->
-    <a-entity position="0 0 -2.7">
-      <a-cylinder radius="0.22" height="0.07" position="0 0.48 0" material="color: #2a5a9a"></a-cylinder>
-      <a-cylinder radius="0.03" height="0.48" position="0 0.24 0" material="color: #333"></a-cylinder>
-      <a-cylinder radius="0.04" height="0.02" position="0 0.0 0" material="color: #333"></a-cylinder>
-      <a-box width="0.44" height="0.08" depth="0.38" position="0 0.9 0.05" material="color: #2a5a9a"></a-box>
+    <!-- CADEIRA DE RODAS DO PACIENTE -->
+    <a-entity position="-1.5 0 -1.5" rotation="0 45 0">
+      <a-cylinder radius="0.35" height="0.04" position="-0.35 0.35 0" rotation="0 0 90" material="color: #222"></a-cylinder>
+      <a-cylinder radius="0.35" height="0.04" position="0.35 0.35 0" rotation="0 0 90" material="color: #222"></a-cylinder>
+      <a-box width="0.6" height="0.06" depth="0.6" position="0 0.42 0" material="color: #004f9f"></a-box>
+      <a-box width="0.6" height="0.6" depth="0.06" position="0 0.72 -0.28" material="color: #004f9f"></a-box>
     </a-entity>
-
-    <!-- CADEIRA DE RODAS DO PACIENTE (centro da cena) -->
-    <a-entity position="-1 0 1.5" rotation="0 30 0">
-      <!-- Assento -->
-      <a-box width="0.52" height="0.05" depth="0.42" position="0 0.48 0"
-        material="color: #e8e0cc; roughness: 0.8">
-      </a-box>
-      <!-- Encosto -->
-      <a-box width="0.52" height="0.52" depth="0.04" position="0 0.74 -0.2"
-        material="color: #c8c0b0; roughness: 0.8">
-      </a-box>
-      <!-- Estrutura lateral esquerda -->
-      <a-box width="0.04" height="0.5" depth="0.45" position="-0.26 0.24 0"
-        material="color: #777777">
-      </a-box>
-      <!-- Estrutura lateral direita -->
-      <a-box width="0.04" height="0.5" depth="0.45" position="0.26 0.24 0"
-        material="color: #777777">
-      </a-box>
-      <!-- Rodas grandes -->
-      <a-torus radius="0.28" radius-tubular="0.025" position="-0.26 0.28 0.05" rotation="0 90 0"
-        material="color: #333333">
-      </a-torus>
-      <a-torus radius="0.28" radius-tubular="0.025" position="0.26 0.28 0.05" rotation="0 90 0"
-        material="color: #333333">
-      </a-torus>
-      <!-- Rodas dianteiras -->
-      <a-cylinder radius="0.07" height="0.03" position="-0.24 0.1 -0.2" rotation="0 0 90"
-        material="color: #555555">
-      </a-cylinder>
-      <a-cylinder radius="0.07" height="0.03" position="0.24 0.1 -0.2" rotation="0 0 90"
-        material="color: #555555">
-      </a-cylinder>
-      <!-- Apoio pé -->
-      <a-box width="0.48" height="0.03" depth="0.12" position="0 0.18 -0.26"
-        material="color: #888888">
-      </a-box>
-      <!-- Apoio braço -->
-      <a-box width="0.04" height="0.03" depth="0.36" position="-0.26 0.55 0.0" material="color: #888"></a-box>
-      <a-box width="0.04" height="0.03" depth="0.36" position="0.26 0.55 0.0" material="color: #888"></a-box>
-
-      <!-- PACIENTE (boneco simplificado) -->
-      <!-- Corpo -->
-      <a-box width="0.36" height="0.42" depth="0.22" position="0 0.80 0"
-        material="color: #4a7aaa; roughness: 0.9">
-      </a-box>
-      <!-- Cabeça -->
-      <a-sphere radius="0.16" position="0 1.18 0"
-        material="color: #d4a574; roughness: 0.8">
-      </a-sphere>
-      <!-- Cabelo -->
-      <a-sphere radius="0.17" position="0 1.26 0"
-        material="color: #6b3f1a; roughness: 1.0" segments-height="8" segments-width="8">
-      </a-sphere>
-      <!-- Pernas -->
-      <a-box width="0.14" height="0.42" depth="0.18" position="-0.1 0.45 0.12"
-        material="color: #3a5a8a">
-      </a-box>
-      <a-box width="0.14" height="0.42" depth="0.18" position="0.1 0.45 0.12"
-        material="color: #3a5a8a">
-      </a-box>
-    </a-entity>
-
-    <!-- LABEL DO PACIENTE -->
-    <a-text value="👵 Dona Maria, 72 anos" position="-1 2.0 1.5"
-      align="center" color="#ffffff"
-      width="3" wrap-count="25"
-      background="color: #001a40; padding: 0.2"
-    ></a-text>
-
-    <!-- MACA/DIVÃ DE EXAME -->
-    <a-entity position="2.5 0 -1.5">
-      <a-box width="0.65" height="0.08" depth="1.8" position="0 0.58 0"
-        material="color: #d8f0d8; roughness: 0.8">
-      </a-box>
-      <a-box width="0.04" height="0.58" depth="0.06" position="-0.3 0.29 0.8" material="color: #888"></a-box>
-      <a-box width="0.04" height="0.58" depth="0.06" position="0.3 0.29 0.8" material="color: #888"></a-box>
-      <a-box width="0.04" height="0.58" depth="0.06" position="-0.3 0.29 -0.8" material="color: #888"></a-box>
-      <a-box width="0.04" height="0.58" depth="0.06" position="0.3 0.29 -0.8" material="color: #888"></a-box>
-      <!-- Papel da maca -->
-      <a-box width="0.63" height="0.01" depth="1.78" position="0 0.625 0"
-        material="color: #f5f5f5">
-      </a-box>
-    </a-entity>
-
-    <!-- ARMÁRIO / PRATELEIRA -->
-    <a-entity position="-4.5 1.0 -2.0">
-      <a-box width="0.8" height="2.0" depth="0.5" position="0 0 0"
-        material="color: #c8b878; roughness: 0.8">
-      </a-box>
-      <a-box width="0.78" height="0.02" depth="0.48" position="0 0.65 0" material="color: #b8a868"></a-box>
-      <a-box width="0.78" height="0.02" depth="0.48" position="0 -0.32 0" material="color: #b8a868"></a-box>
-    </a-entity>
-
-    <!-- POSTER NA PAREDE -->
-    <a-plane position="2.0 1.8 -4.9" width="1.2" height="0.9"
-      material="color: #d8eef8">
-    </a-plane>
-    <a-text value="🏥 UBS Ipiranga\nTecnologia Assistiva" position="2.0 1.8 -4.85"
-      align="center" color="#004f9f" width="2.5" wrap-count="20">
-    </a-text>
-
-    <!-- LUMINÁRIA DE TETO -->
-    <a-entity position="0 3.15 0">
-      <a-box width="0.8" height="0.08" depth="0.4" material="color: #f0f0f0"></a-box>
-      <a-box width="0.78" height="0.02" depth="0.38" position="0 -0.05 0"
-        material="color: #ffff80; emissive: #ffff40; emissiveIntensity: 0.8">
-      </a-box>
-      <a-light type="point" color="#fff9e8" intensity="0.8" distance="8" position="0 -0.1 0"></a-light>
-    </a-entity>
-
-    <!-- ILUMINAÇÃO AMBIENTE -->
-    <a-light type="ambient" color="#d8e8f8" intensity="0.6"></a-light>
-    <a-light type="directional" position="-1 4 2" color="#fff5e0" intensity="0.8" castShadow="true"></a-light>
-    <a-light type="point" color="#e8f0ff" intensity="0.3" position="4.5 2 3"></a-light>
 
     <!-- ============================================================
-         HOTSPOTS INTERATIVOS (esferas azul-teal clicáveis)
+         HOTSPOTS CLICÁVEIS E INTERATIVOS
          ============================================================ -->
 
-    <!-- HOTSPOT 1: Cadeira de Rodas -->
+    <!-- HOTSPOT 1: Cadeira de Rodas Postural -->
     <a-sphere
       mixin="hotspot"
-      position="-1 1.7 1.5"
+      position="-1.5 1.4 -1.5"
       class="clickable"
-      data-info="AVALIAÇÃO DA CADEIRA"
-      data-text="Esta cadeira de rodas padrão NÃO é adequada para Dona Maria. Ela tem hemiplegia esquerda e precisa de uma cadeira POSTURAL com suporte lateral e almofada anti-escara para prevenir úlceras. ⚠️ Prescrição incorreta causa abandono do equipamento."
-      onclick="showInfo(this)"
-    >
-    </a-sphere>
-    <a-text value="👆 Avaliar\ncadeira" position="-1 2.1 1.5"
-      align="center" color="#00ffd8" width="2.5" wrap-count="12">
-    </a-text>
+      data-id="cadeira"
+      data-info="♿ AVALIAÇÃO DA CADEIRA DE RODAS"
+      data-text="Dona Maria (72 anos, pós-AVC) está usando uma cadeira padrão inadequada. Ela apresenta hemiplegia e tônus espástico. Qual o recurso de Tecnologia Assistiva mais indicado?"
+      data-options='[
+        {"text": "Prescrever Cadeira POSTURAL com apoio lateral e Almofada Anti-escaras (Braden)", "correct": true, "feedback": "Excelente! Previne lesões por pressão e garante alinhamento do tronco."},
+        {"text": "Manter a cadeira padrão simples sem modificações", "correct": false, "feedback": "Incorreto. Causa deformidades e alto risco de úlceras por pressão."}
+      ]'
+    ></a-sphere>
+    <a-text value="👆 Clique:\nAvaliar Cadeira" position="-1.5 1.85 -1.5" align="center" color="#00ffd8" width="2.8" wrap-count="14"></a-text>
 
-    <!-- HOTSPOT 2: Prontuário / Mesa -->
+    <!-- HOTSPOT 2: Prontuário e-SUS APS -->
     <a-sphere
       mixin="hotspot"
-      position="0.4 1.1 -3.0"
+      position="-0.5 1.25 -3.5"
       class="clickable"
-      data-info="PRONTUÁRIO CLÍNICO"
-      data-text="Dona Maria, 72 anos. AVC isquêmico há 6 meses. Hemiplegia à esquerda com espasticidade grau 2 (Escala de Ashworth). Transfere com apoio bilateral. Risco moderado de úlcera por pressão (Braden: 14). Mora com filha. Acesso ao SUS pela UBS Ipiranga."
-      onclick="showInfo(this)"
-    >
-    </a-sphere>
-    <a-text value="👆 Ver\nprontuário" position="0.4 1.5 -3.0"
-      align="center" color="#00ffd8" width="2.5" wrap-count="12">
-    </a-text>
+      data-id="prontuario"
+      data-info="📋 PRONTUÁRIO CLÍNICO (e-SUS APS)"
+      data-text="Dona Maria, 72 anos. AVC isquêmico há 6 meses. Apresenta pé caído à esquerda com espasticidade grau 2 (Escala de Ashworth). Qual órtese deve ser prescrita?"
+      data-options='[
+        {"text": "Órtese Tornozelo-Pé (AFO) articulada para treino de marcha", "correct": true, "feedback": "Perfeito! A AFO estabiliza o tornozelo e melhora a marcha funcional."},
+        {"text": "Colar cervical rígido", "correct": false, "feedback": "Incorreto. Não se aplica ao quadro de pé caído."}
+      ]'
+    ></a-sphere>
+    <a-text value="👆 Clique:\nVer Prontuário" position="-0.5 1.7 -3.5" align="center" color="#00ffd8" width="2.8" wrap-count="14"></a-text>
 
-    <!-- HOTSPOT 3: Legislação (poster/parede) -->
+    <!-- HOTSPOT 3: Mesa de Impressão 3D -->
     <a-sphere
       mixin="hotspot"
-      position="2.8 1.8 -4.6"
+      position="0.5 1.25 -3.5"
       class="clickable"
-      data-info="LEGISLAÇÃO SUS — T.A."
-      data-text="Portaria de Consolidação MS nº 2/2017, Anexo XXII: define critérios de dispensação de Tecnologia Assistiva (órteses, próteses e meios auxiliares de locomoção) pelo SUS. O encaminhamento ao CER é obrigatório para equipamentos de maior complexidade. A UBS faz a triagem e o encaminhamento regulado."
-      onclick="showInfo(this)"
-    >
-    </a-sphere>
-    <a-text value="👆 Legislação\nSUS" position="2.8 2.2 -4.6"
-      align="center" color="#00ffd8" width="2.5" wrap-count="12">
-    </a-text>
+      data-id="3d"
+      data-info="🦿 BANCADA DE IMPRESSÃO 3D vs TRADICIONAL"
+      data-text="Você está na bancada de prototipagem 3D. Qual a principal vantagem do escaneamento 3D em relação ao molde de gesso?"
+      data-options='[
+        {"text": "Armazenar o arquivo CAD na nuvem e permitir reimpressão direta sem nova moldagem", "correct": true, "feedback": "Excelente! O arquivo digital elimina o desconforto de moldar o paciente novamente."},
+        {"text": "Demorar mais tempo e ocupar mais espaço físico", "correct": false, "feedback": "Incorreto. O fluxo digital otimiza tempo e espaço."}
+      ]'
+    ></a-sphere>
+    <a-text value="👆 Clique:\nFluxo 3D vs Gesso" position="0.5 1.7 -3.5" align="center" color="#00ffd8" width="2.8" wrap-count="14"></a-text>
+
+    <!-- HOTSPOT 4: Legislação do SUS -->
+    <a-sphere
+      mixin="hotspot"
+      position="3.5 1.8 -4.8"
+      class="clickable"
+      data-id="legislação"
+      data-info="📜 LEGISLAÇÃO E RECT REGULADA (SUS)"
+      data-text="Portaria de Consolidação MS nº 2/2017: Qual a função da Atenção Primária (UBS) no fluxo de dispensação de OPM?"
+      data-options='[
+        {"text": "Realizar a triagem, avaliação funcional inicial e encaminhamento regulado ao CER", "correct": true, "feedback": "Correto! A UBS é a porta de entrada para a Rede de Cuidados à Pessoa com Deficiência."},
+        {"text": "Encaminhar o paciente sem laudo ou justificativa funcional", "correct": false, "feedback": "Incorreto. A ausência de laudo gera negação no SISREG."}
+      ]'
+    ></a-sphere>
+    <a-text value="👆 Clique:\nLegislação SUS" position="3.5 2.25 -4.8" align="center" color="#00ffd8" width="2.8" wrap-count="14"></a-text>
 
     <!-- ============================================================
-         E.V.A. (Assistente Virtual)
+         E.V.A. (Assistente Virtual 3D)
          ============================================================ -->
-    <a-entity position="-3.5 0 2.0" rotation="0 45 0">
-      <!-- Base robótica da E.V.A. -->
+    <a-entity position="2.2 0 -2.0" rotation="0 -45 0" class="clickable" onclick="clickEVA()">
+      <!-- Corpo Robótico -->
       <a-cylinder radius="0.18" height="0.06" position="0 0.03 0" material="color: #004f9f"></a-cylinder>
-      <a-cylinder radius="0.1" height="0.6" position="0 0.33 0" material="color: #0a6fd8"></a-cylinder>
-      <!-- Corpo -->
-      <a-box width="0.38" height="0.5" depth="0.25" position="0 0.88 0"
-        material="color: #004f9f">
-      </a-box>
-      <!-- Logo Cruz na barriga -->
-      <a-box width="0.06" height="0.22" depth="0.03" position="0 0.88 0.14"
-        material="color: white; emissive: white; emissiveIntensity: 0.5">
-      </a-box>
-      <a-box width="0.22" height="0.06" depth="0.03" position="0 0.88 0.14"
-        material="color: white; emissive: white; emissiveIntensity: 0.5">
-      </a-box>
-      <!-- Cabeça -->
-      <a-sphere radius="0.2" position="0 1.3 0"
-        material="color: #0a6fd8; emissive: #0040a0; emissiveIntensity: 0.2">
-      </a-sphere>
-      <!-- Olhos (telas LED) -->
-      <a-box width="0.14" height="0.06" depth="0.02" position="-0.06 1.33 0.19"
-        material="color: #00a599; emissive: #00a599; emissiveIntensity: 1.0">
-      </a-box>
-      <a-box width="0.14" height="0.06" depth="0.02" position="0.06 1.33 0.19"
-        material="color: #00a599; emissive: #00a599; emissiveIntensity: 1.0">
-      </a-box>
-      <!-- Antena -->
-      <a-cylinder radius="0.015" height="0.25" position="0 1.7 0" material="color: #888"></a-cylinder>
-      <a-sphere radius="0.04" position="0 1.84 0"
-        material="color: #00a599; emissive: #00a599; emissiveIntensity: 0.8"
-        animation="property: scale; dir: alternate; dur: 800; loop: true; to: 1.4 1.4 1.4">
-      </a-sphere>
-      <!-- Braços -->
-      <a-box width="0.08" height="0.35" depth="0.1" position="-0.25 0.88 0"
-        rotation="0 0 20" material="color: #0a6fd8">
-      </a-box>
-      <a-box width="0.08" height="0.35" depth="0.1" position="0.25 0.88 0"
-        rotation="0 0 -20" material="color: #0a6fd8">
-      </a-box>
+      <a-cylinder radius="0.1" height="0.6" position="0 0.33 0" material="color: #00a599"></a-cylinder>
+      <a-box width="0.38" height="0.5" depth="0.25" position="0 0.88 0" material="color: #004f9f"></a-box>
+      <!-- Cruz da Saúde -->
+      <a-box width="0.06" height="0.22" depth="0.03" position="0 0.88 0.14" material="color: white; emissive: white; emissiveIntensity: 0.6"></a-box>
+      <a-box width="0.22" height="0.06" depth="0.03" position="0 0.88 0.14" material="color: white; emissive: white; emissiveIntensity: 0.6"></a-box>
+      <!-- Cabeça & Olhos -->
+      <a-sphere radius="0.2" position="0 1.3 0" material="color: #00a599; emissive: #00a599; emissiveIntensity: 0.3"></a-sphere>
+      <a-box width="0.14" height="0.06" depth="0.02" position="-0.06 1.33 0.19" material="color: #00ffd8; emissive: #00ffd8; emissiveIntensity: 1.0"></a-box>
+      <a-box width="0.14" height="0.06" depth="0.02" position="0.06 1.33 0.19" material="color: #00ffd8; emissive: #00ffd8; emissiveIntensity: 1.0"></a-box>
     </a-entity>
 
-    <!-- Label E.V.A. -->
-    <a-text value="🤖 E.V.A.\nEducação em Vida Assistiva" position="-3.5 2.2 2.0"
-      align="center" color="#00a599" width="3.5" wrap-count="22">
-    </a-text>
+    <a-text value="🤖 E.V.A. (Clique para Tutor IA)" position="2.2 2.1 -2.0" align="center" color="#00ffd8" width="3.2" wrap-count="20"></a-text>
 
-    <!-- Balão de fala da E.V.A. -->
-    <a-plane position="-3.5 2.0 2.4" width="2.2" height="0.7"
-      rotation="0 -45 0"
-      material="color: #001a40; transparent: true; opacity: 0.9">
-    </a-plane>
-    <a-text value="Olá! Avalie os pontos\nazuis para aprender\nsobre este caso clínico."
-      position="-3.5 2.0 2.42" rotation="0 -45 0"
-      align="center" color="#00ffd8" width="3" wrap-count="22">
-    </a-text>
-
-    <!-- SKY (céu / fundo externo pela janela) -->
+    <!-- ILUMINAÇÃO -->
+    <a-light type="ambient" color="#d8e8f8" intensity="0.7"></a-light>
+    <a-light type="directional" position="-1 4 2" color="#fff5e0" intensity="0.8"></a-light>
     <a-sky color="#87ceeb" radius="50"></a-sky>
 
   </a-scene>
 
+  <!-- LÓGICA DE INTERAÇÃO E CLIQUES DUAL (MOUSE + VR) -->
   <script>
-    function showInfo(el) {
-      const panel = document.getElementById('info-panel');
-      const title = document.getElementById('info-title');
-      const text = document.getElementById('info-text');
-      title.textContent = el.getAttribute('data-info');
-      text.textContent = el.getAttribute('data-text');
-      panel.style.display = 'block';
-
-      // Narrar com Web Speech API
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(el.getAttribute('data-text'));
-        utter.lang = 'pt-BR';
-        utter.rate = 0.9;
-        utter.pitch = 1.1;
-        window.speechSynthesis.speak(utter);
-      }
-    }
-
-    // Fechar info ao clicar no canvas
-    document.querySelector('a-scene').addEventListener('click', (e) => {
-      if (!e.target.classList.contains('clickable')) {
-        // não fechar se clicar num hotspot
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      // Adicionar event listeners aos objetos .clickable diretamente via JS
+      const clickables = document.querySelectorAll('.clickable');
+      clickables.forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          handleObjectClick(el);
+        });
+      });
     });
 
-    // Instruções de uso por dispositivo
-    const instructions = document.getElementById('vr-instructions');
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      instructions.textContent = '📱 Mova o celular para olhar ao redor | 👆 Toque nos marcadores azuis';
+    function handleObjectClick(el) {
+      const infoTitle = el.getAttribute('data-info');
+      const infoText = el.getAttribute('data-text');
+      const optsJson = el.getAttribute('data-options');
+
+      if (!infoTitle || !infoText) return;
+
+      openVRModal(infoTitle, infoText, optsJson ? JSON.parse(optsJson) : []);
+    }
+
+    function openVRModal(title, text, options) {
+      const panel = document.getElementById('info-panel');
+      const titleEl = document.getElementById('info-title');
+      const textEl = document.getElementById('info-text');
+      const optsBox = document.getElementById('modal-options');
+      const feedbackEl = document.getElementById('feedback-vr');
+
+      titleEl.innerHTML = `<span>📍</span> ${title}`;
+      textEl.innerText = text;
+      optsBox.innerHTML = '';
+      feedbackEl.style.display = 'none';
+
+      if (options && options.length > 0) {
+        options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'modal-opt-btn';
+          btn.innerText = opt.text;
+          btn.onclick = () => {
+            feedbackEl.style.display = 'block';
+            if (opt.correct) {
+              feedbackEl.className = 'feedback-box-vr feedback-correct-vr';
+              feedbackEl.innerHTML = `<strong>✅ Decisão Correta!</strong><p>${opt.feedback}</p>`;
+              speakAudio(opt.feedback);
+            } else {
+              feedbackEl.className = 'feedback-box-vr feedback-incorrect-vr';
+              feedbackEl.innerHTML = `<strong>❌ Atenção!</strong><p>${opt.feedback}</p>`;
+              speakAudio(opt.feedback);
+            }
+          };
+          optsBox.appendChild(btn);
+        });
+      }
+
+      panel.style.display = 'block';
+      speakAudio(text);
+    }
+
+    function closeVRModal() {
+      document.getElementById('info-panel').style.display = 'none';
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    function clickEVA() {
+      openVRModal(
+        "🤖 E.V.A. — TUTORA DIGITAL EM TECNOLOGIA ASSISTIVA",
+        "Olá! Sou a E.V.A. Explore os pontos azuis da sala para realizar a avaliação clínica de Dona Maria e testar seus conhecimentos em prescrição de OPM no SUS!",
+        [
+          {"text": "Iniciar Avaliação Clínica em VR", "correct": true, "feedback": "Ótimo! Clique nos marcadores 3D para examinar o paciente e a prescrição."}
+        ]
+      );
+    }
+
+    function speakAudio(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'pt-BR';
+        utter.rate = 0.95;
+        window.speechSynthesis.speak(utter);
+      }
     }
   </script>
 </body>
