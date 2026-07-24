@@ -437,6 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initApp() {
+    setupMobileMenu();
     setupViewNavigation();
     setupLessonButtons();
     setupSimulationButtons();
@@ -447,6 +448,33 @@ function initApp() {
     setupSoundToggle();
     setupThemeToggle();
     updateUIProgress();
+}
+
+function setupMobileMenu() {
+    const btnToggle = document.getElementById('btn-mobile-menu-toggle');
+    const sidebar = document.querySelector('.app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const icon = document.getElementById('mobile-hamburger-icon');
+
+    function toggleMenu() {
+        playClickSound();
+        const isOpen = sidebar.classList.toggle('sidebar-open');
+        overlay.classList.toggle('active', isOpen);
+        if (icon) icon.innerText = isOpen ? '✕' : '☰';
+    }
+
+    function closeMenu() {
+        if (sidebar) sidebar.classList.remove('sidebar-open');
+        if (overlay) overlay.classList.remove('active');
+        if (icon) icon.innerText = '☰';
+    }
+
+    btnToggle?.addEventListener('click', toggleMenu);
+    overlay?.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+        item.addEventListener('click', closeMenu);
+    });
 }
 
 function setupViewNavigation() {

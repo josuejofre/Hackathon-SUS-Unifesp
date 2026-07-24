@@ -12,9 +12,22 @@
     <link rel="stylesheet" href="style.css?v=20260723_v3">
 </head>
 <body>
+    <!-- MOBILE TOP BAR (Visível apenas em telas pequenas/smartphones) -->
+    <div class="mobile-top-bar" id="mobile-top-bar">
+        <div class="mobile-logo-box">
+            <img src="assets/v2/logo_digitrilha.png" alt="Digitrilha" class="mobile-logo-img">
+        </div>
+        <button class="mobile-menu-toggle" id="btn-mobile-menu-toggle" aria-label="Abrir Menu Nav">
+            <span id="mobile-hamburger-icon">☰</span>
+        </button>
+    </div>
+
+    <!-- OVERLAY ESCURO AO ABRIR O MENU MOBILE -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
     <div class="app-container">
         <!-- ============================================================ -->
-        <!-- SIDEBAR PRINCIPAL (ESQUERDA - 260px STICKY)                   -->
+        <!-- SIDEBAR PRINCIPAL (ESQUERDA - 260px STICKY / DRAWER MÓVEL)    -->
         <!-- ============================================================ -->
         <aside class="app-sidebar">
             <div>
