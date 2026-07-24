@@ -84,107 +84,213 @@ function playBadgeSound() {
 // MATRIZ CURRICULAR COMPLETA — 5 EIXOS / 14 UNIDADES
 // ============================================================================
 const lessonsContent = {
+    // EIXO 1
     "E1U1T1": {
         title: "1.1 O que é Tecnologia Assistiva",
-        html: `<p><strong>Tecnologia Assistiva (TA)</strong> é uma área interdisciplinar que reúne produtos, recursos, metodologias, estratégias, serviços e práticas para promover a funcionalidade, independência e qualidade de vida de pessoas com deficiência ou mobilidade reduzida.</p><h4>Base Legal (Lei 13.146/2015 — LBI)</h4><p>Garante o acesso a dispositivos e serviços de TA como direito fundamental para a inclusão social no SUS.</p>`
+        html: `<p><strong>Tecnologia Assistiva (TA)</strong> é uma área do conhecimento interprofissional que engloba produtos, recursos, metodologias, estratégias, práticas e serviços para promover a funcionalidade, independência, autonomia e inclusão social de pessoas com deficiência ou mobilidade reduzida.</p><h4>Base Legal (Lei 13.146/2015 — LBI)</h4><p>A Lei Brasileira de Inclusão da Pessoa com Deficiência (LBI) garante o acesso universal e gratuito a recursos de TA no SUS como um direito humano fundamental.</p>`
     },
     "E1U1T2": {
         title: "1.2 O que são OPM",
-        html: `<p><strong>OPM</strong> refere-se ao conjunto de <em>Órteses, Próteses e Meios Auxiliares de Locomoção</em> previstos na Tabela de Procedimentos do SUS (SIGTAP).</p><ul><li><strong>Órteses:</strong> Dispositivos aplicados a um segmento corporal existente.</li><li><strong>Próteses:</strong> Substituem total ou parcialmente um membro ausente.</li><li><strong>Meios Auxiliares:</strong> Equipamentos de deslocamento (cadeiras de rodas, andadores, bengalas).</li></ul>`
+        html: `<p><strong>OPM</strong> é a sigla oficial do SUS para <em>Órteses, Próteses e Meios Auxiliares de Locomoção</em>, previstos na Tabela de Procedimentos do SIGTAP.</p><ul><li><strong>Órteses:</strong> Dispositivos aplicados a um segmento corporal existente para alinhar, imobilizar ou melhorar a função.</li><li><strong>Próteses:</strong> Equipamentos destinados a substituir total ou parcialmente um membro ausente.</li><li><strong>Meios Auxiliares:</strong> Recursos de deslocamento como cadeiras de rodas, andadores e bengalões.</li></ul>`
     },
     "E1U1T3": {
         title: "1.3 Diferença entre Órtese, Prótese e Recurso Auxiliar",
-        html: `<p><strong>Órtese (ex: AFO, Colete):</strong> Suporta, alinha ou previne deformidades em segmento corporal existente.</p><p><strong>Prótese (ex: Prótese Transtibial):</strong> Substitui a estrutura e função de membro amputado ou congênito.</p><p><strong>Recurso Auxiliar (ex: Cadeira de Rodas):</strong> Amplia a mobilidade e independência nas Atividades da Vida Diária (AVDs).</p>`
+        html: `<p><strong>Órtese (ex: AFO, Colete de Boston):</strong> Suporta, alinha, previne deformidades ou compensa a fraqueza em um segmento corporal existente.</p><p><strong>Prótese (ex: Prótese Transtibial):</strong> Substitui a estrutura anatômica e função biomecânica de um membro amputado.</p><p><strong>Recurso Auxiliar (ex: Cadeira de Rodas Postural):</strong> Amplia a mobilidade física e permite participação nas Atividades da Vida Diária (AVDs).</p>`
     },
     "E1U1T4": {
         title: "1.4 Quem participa do processo de cuidado",
-        html: `<p>O cuidado no SUS é interprofissional e centrado na pessoa:</p><ul><li><strong>Atenção Primária (UBS / eMulti):</strong> Identificação precoce, triagem e acompanhamento domiciliar.</li><li><strong>Centro Especializado em Reabilitação (CER):</strong> Avaliação especializada, prescrição e dispensação.</li><li><strong>Usuário e Família:</strong> Protagonistas na definição das metas funcionais.</li></ul>`
+        html: `<p>O cuidado em Tecnologia Assistiva no SUS é centrado na pessoa e demanda atuação multiprofissional:</p><ul><li><strong>Atenção Primária (UBS / eMulti):</strong> Identificação precoce na comunidade, triagem funcional, orientação à família e acompanhamento domiciliar.</li><li><strong>Atenção Especializada (CER):</strong> Avaliação médica/fisioterapêutica/terapêutica ocupacional especializada, moldagem, prescrição e dispensação.</li><li><strong>Usuário e Família:</strong> Protagonistas que definem as prioridades de uso no seu cotidiano.</li></ul>`
     },
     "E1U1T5": {
         title: "1.5 OPM no contexto do SUS",
-        html: `<p>O fornecimento no SUS é gratuito e regulado pela <strong>Rede de Cuidados à Pessoa com Deficiência (RCPD)</strong>, seguindo as diretrizes da Portaria de Consolidação MS nº 2/2017.</p>`
+        html: `<p>A provisão no SUS é regulada pela <strong>Rede de Cuidados à Pessoa com Deficiência (RCPD)</strong> (Portaria MS nº 2/2017). O fluxo integra a Atenção Primária ao SISREG e aos Centros Especializados em Reabilitação (CER).</p>`
     },
     "E1U2T1": {
         title: "2.1 Função vs Estrutura Corporal (CIF)",
-        html: `<p>Na <strong>Classificação Internacional de Funcionalidade (CIF)</strong>, a avaliação vai além do diagnóstico da doença:</p><ul><li><strong>Estrutura Corporal:</strong> Alteração anatômica (ex: fraqueza nos dorsiflexores).</li><li><strong>Função Corporal:</strong> Impacto na marcha ou estabilidade postural.</li></ul>`
+        html: `<p>A <strong>Classificação Internacional de Funcionalidade, Incapacidade e Saúde (CIF)</strong> da OMS ensina que a incapacidade não é apenas uma doença, mas a interação entre limitações no corpo e o ambiente:</p><ul><li><strong>Estrutura Corporal:</strong> Alteração anatômica (ex: hipotrofia muscular ou amputação).</li><li><strong>Função Corporal:</strong> Impacto fisiológico (ex: perda de força dorsiflexora ou instabilidade no pé).</li><li><strong>Atividade e Participação:</strong> Capacidade de caminhar, trabalhar ou ir à feira.</li></ul>`
     },
     "E1U2T2": {
         title: "2.2 Objetivo Terapêutico na Prescrição",
-        html: `<p>Toda OPM deve responder a um objetivo claro: <em>Prevenir contraturas? Permitir marcha independente? Garantir sedestação estável?</em> O objetivo orienta a escolha do modelo.</p>`
+        html: `<p>Toda OPM deve ser prescrita com metas claras e mensuráveis (Metas SMART): <em>Prevenir deformidades? Permitir transferência independente? Reduzir gasto energético durante a marcha?</em></p>`
     },
     "E1U2T3": {
         title: "2.3 Participação e Autonomia",
-        html: `<p>O sucesso da prescrição é medido pelo ganho de <strong>participação social</strong> (trabalho, estudo, lazer) e não apenas pela estética da peça.</p>`
+        html: `<p>O sucesso da prescrição é medido pelo ganho de <strong>autonomia e participação social</strong> do indivíduo em seu território, e não apenas pelo alinhamento mecânico do dispositivo.</p>`
     },
     "E1U2T4": {
         title: "2.4 Barreiras Ambientais",
-        html: `<p>A avaliação precisa considerar o ambiente de vida do paciente: largura de portas, rampas, tipo de piso e transporte público disponível.</p>`
+        html: `<p>Avaliar o ambiente de vida do paciente é indispensável: largura de portas, presença de degraus, inclinação de rampas, tipo de piso e facilidade de acesso ao transporte público local.</p>`
     },
     "E1U2T5": {
-        title: "2.5 Adesão ao Tratamento",
-        html: `<p>Equipamentos desconfortáveis ou prescritos sem escutar o usuário são abandonados. A adesão exige orientação clara e adaptação gradual.</p>`
+        title: "2.5 Adesão ao Tratamento e Prevenção de Abandono",
+        html: `<p>Dispositivos pesados, desconfortáveis ou desalinhados com a realidade da família são frequentemente abandonados. A adesão exige escuta atenta, orientação de uso progressivo e revisões periódicas.</p>`
     },
+
+    // EIXO 2
     "E2U3T1": {
-        title: "3.1 Avaliação Inicial & Escutas na UBS",
-        html: `<p>A triagem na UBS deve identificar o histórico clínico, tempo da lesão, expectativas do paciente e rotina familiar antes do encaminhamento regulado via SISREG.</p>`
+        title: "3.1 Investigação da Demanda & Escuta na UBS",
+        html: `<p>A acolhida na UBS deve mapear o histórico da lesão, queixa funcional principal, expectativas do paciente e disponibilidade de cuidador antes do encaminhamento regulado.</p>`
     },
     "E2U3T2": {
-        title: "3.2 Exame Físico e Funcional",
-        html: `<p>Avaliação da amplitude de movimento (ADM), tônus muscular (Escala de Ashworth), integridade cutânea e força funcional.</p>`
+        title: "3.2 Exame Biomecânico e Funcional",
+        html: `<p>Exame físico voltado para OPM inclui: amplitude de movimento (ADM) articular, teste de força muscular, classificação de tônus espástico (Escala de Ashworth) e integridade da pele.</p>`
     },
     "E2U3T3": {
-        title: "3.3 Critérios para Encaminhamento ao CER",
-        html: `<p>Encaminhar com laudo detalhado incluindo: diagnóstico funcional, código SIGTAP pretendido e objetivo terapêutico específico.</p>`
+        title: "3.3 Análise da Rotina Domiciliar e Comunitária",
+        html: `<p>Entender como o paciente se desloca em casa (cadeira, arrasto, marcha com apoio) orienta a escolha precisa entre um meio auxiliar simples ou uma cadeira postural com reclinamento.</p>`
+    },
+    "E2U3T4": {
+        title: "3.4 Critérios de Encaminhamento Regulado (SISREG)",
+        html: `<p>Para aprovação no SISREG, o laudo emitido pela UBS deve conter: diagnóstico funcional detalhado, objetivo terapêutico específico, código SIGTAP pretendido e laudo médico assinado.</p>`
     },
     "E2U4T1": {
-        title: "4.1 Quando indicar e quando contraindicar",
-        html: `<p><strong>Indicação:</strong> Deformidades flexíveis, dor, instabilidade articular, perda de segmento ou mobilidade reduzida.<br><strong>Contraindicação:</strong> Deformidades rígidas não acomodáveis sem alívio de pressão ou falta de suporte familiar em casos de dependência total.</p>`
+        title: "4.1 Indicações Clínicas e Funcionais Frequentes",
+        html: `<p>Indica-se OPM em quadros de: instabilidade articular por fraqueza muscular, hipertonia espástica flexível, encurtamento miotendíneo, amputações e lesões medulares.</p>`
     },
     "E2U4T2": {
-        title: "4.2 Objetivos de Curto e Longo Prazo",
-        html: `<p><strong>Curto prazo:</strong> Alívio de dor, proteção tecidual e estabilização.<br><strong>Longo prazo:</strong> Marcha autônoma, prevenção de úlceras por pressão e independência nas AVDs.</p>`
+        title: "4.2 Contraindicações Formais e Deformidades Rígidas",
+        html: `<p>Contraindica-se a força de correção em deformidades ósseas fixadas/rígidas (que geram dor e úlceras se forçadas), lesões cutâneas ativas na área de contato ou falta de suporte familiar em dependência grave.</p>`
+    },
+    "E2U4T3": {
+        title: "4.3 Metas de Curto vs Longo Prazo",
+        html: `<p><strong>Curto Prazo:</strong> Cicatrização do coto, alívio de dor e proteção articular.<br><strong>Longo Prazo:</strong> Treino de marcha independente, retorno ao trabalho e participação comunitária.</p>`
+    },
+    "E2U4T4": {
+        title: "4.4 Alinhamento de Expectativas com a Família",
+        html: `<p>Explicar claramente os limites funcionais do equipamento evita frustrações. O alinhamento transparente reforça a parceria entre a equipe de saúde e o usuário.</p>`
     },
     "E2U5T1": {
-        title: "5.1 Principais Erros na Prescrição de OPM",
-        html: `<p>Os erros mais comuns que levam ao <strong>abandono da OPM</strong> no SUS incluem:</p><ol><li>Prescrever sem avaliar o ambiente domiciliar.</li><li>Ignorar a presença de espasticidade severa.</li><li>Falta de acompanhamento e reavaliação pós-entrega.</li></ol>`
+        title: "5.1 Os 5 Erros Frequentes na Provisão de OPM",
+        html: `<p>Estudos indicam que o abandono de OPM no SUS ocorre por: 1) Prescrição sem objetivo claro; 2) Falta de avaliação ambiental; 3) Erro no tamanho da peça; 4) Falta de treino de uso; 5) Ausência de retorno de seguimento.</p>`
     },
+    "E2U5T2": {
+        title: "5.2 Ignorar o Ambiente Domiciliar e Acessibilidade",
+        html: `<p>Prescrever uma cadeira de rodas larga para um paciente cujas portas do banheiro medem 60 cm inviabiliza o uso diário, gerando o imediato encostamento do equipamento.</p>`
+    },
+    "E2U5T3": {
+        title: "5.3 Prescrever sem Avaliar Espasticidade e Pele",
+        html: `<p>Aplicar apoio rígido sobre proeminências ósseas em pacientes espásticos sem alívio de pressão gera hiperemia imediata e rápida evolução para úlceras por pressão (escaras).</p>`
+    },
+    "E2U5T4": {
+        title: "5.4 Falta de Reavaliação e Seguimento Longitudinal",
+        html: `<p>Uma OPM dispensada não é o fim do tratamento. Sem consultas periódicas de reavaliação, perdem-se os ajustes necessários ao longo da evolução clínica do paciente.</p>`
+    },
+
+    // EIXO 3
     "E3U6T1": {
-        title: "6.1 Objetivos das Órteses",
-        html: `<p>As órteses possuem 4 funções principais: <strong>Estabilizar</strong> articulações instáveis, <strong>Posicionar</strong> segmentos, <strong>Corrigir</strong> deformidades flexíveis e <strong>Facilitar</strong> a função motora.</p>`
+        title: "6.1 Objetivos Biomecânicos das Órteses",
+        html: `<p>As órteses atuam sobre o sistema musculoesquelético para: <strong>Estabilizar</strong> segmentos instáveis, <strong>Posicionar</strong> em postura funcional, <strong>Corrigir</strong> deformidades flexíveis e <strong>Aliviar carga</strong> articular.</p>`
+    },
+    "E3U6T2": {
+        title: "6.2 Sistema de 3 Pontos de Pressão Biomecânica",
+        html: `<p>Princípio biomecânico fundamental: aplica-se uma força principal de correção no ápice da curva/deformidade e duas forças de oposição nas extremidades opostas para controle articular estático.</p>`
+    },
+    "E3U6T3": {
+        title: "6.3 Materiais Moldáveis (Termoplásticos)",
+        html: `<p>Termoplásticos de baixa temperatura amolecem entre 60°C e 70°C e são moldados diretamente no paciente. Termoplásticos de alta temperatura (Polipropileno) exigem molde em gesso e aquecimento a 180°C.</p>`
     },
     "E3U7T1": {
-        title: "7.1 Tipos de Órteses (MMII / MMSS / Tronco)",
-        html: `<p><strong>AFO (Tornozelo-Pé):</strong> Indicada para pé caído e espasticidade leve pós-AVC.<br><strong>KAFO (Joelho-Tornozelo-Pé):</strong> Indicada quando há fraqueza associada de quadríceps.<br><strong>Colete TLSO / Boston:</strong> Indicado para escoliose ou apoio postural de tronco.</p>`
+        title: "7.1 Órteses de Membro Inferior (AFO, KAFO, GRAFO)",
+        html: `<p><strong>AFO (Tornozelo-Pé):</strong> Estabiliza o tornozelo e previne o arrasto do pé na marcha.<br><strong>KAFO (Joelho-Tornozelo-Pé):</strong> Indicada quando há fraqueza associada do quadríceps.<br><strong>GRAFO:</strong> Utiliza o apoio anterior de tíbia para controlar a curvatura em flexão do joelho.</p>`
+    },
+    "E3U7T2": {
+        title: "7.2 Órteses de Membro Superior (MMSS)",
+        html: `<p><strong>Cock-up de Punho:</strong> Mantém a extensão funcional do punho nas paralisias nervosas.<br><strong>Órtese de Repouso para Mão:</strong> Mantém a abertura da arcada palmar em pacientes hemiplégicos espásticos.</p>`
+    },
+    "E3U7T3": {
+        title: "7.3 Órteses de Coluna (Colete de Boston, TLSO)",
+        html: `<p>Indicados para o tratamento conservador de escolioses idiopáticas em jovens em crescimento (curvas entre 20° e 40° Cobb) ou para apoio postural em deformidades paralíticas de tronco.</p>`
     },
     "E3U8T1": {
-        title: "8.1 Componentes Essenciais das Próteses",
-        html: `<p>Uma prótese de membro inferior consiste em: <strong>Encaixe (Socket)</strong> (interface de carga), <strong>Sistema de Suspensão</strong>, <strong>Módulo/Pylon</strong> e <strong>Pé Protético</strong> (ex: SACH ou fibra de carbono).</p>`
+        title: "8.1 Exopróteses vs Endopróteses",
+        html: `<p><strong>Exopróteses:</strong> Dispositivos externos aplicados ao coto de amputação.<br><strong>Endopróteses:</strong> Implantes cirúrgicos internos (ex: prótese total de quadril ou joelho).</p>`
     },
+    "E3U8T2": {
+        title: "8.2 Componentes Protéticos (Membro Inferior)",
+        html: `<p>Uma prótese transtibial compreende: 1) <strong>Soquete/Encaixe:</strong> Interface de carga;<br>2) <strong>Liner de Silicone:</strong> Conforto e adesão;<br>3) <strong>Adaptadores/Tubos:</strong> Alinhamento;<br>4) <strong>Pé Protético:</strong> Absorção de impacto (ex: Pé SACH ou de fibra de carbono).</p>`
+    },
+    "E3U8T3": {
+        title: "8.3 Meios Auxiliares de Locomoção",
+        html: `<p>Cadeiras de rodas (padrão, postural ou motorizada), andadores e bengalas expandem a base de apoio do corpo e distribuem as forças de reação do solo durante a locomoção.</p>`
+    },
+
+    // EIXO 4
     "E4U9T1": {
-        title: "9.1 Moldagem Tradicional em Gesso",
-        html: `<p>O método tradicional utiliza atadura gessada para obtenção do molde negativo, vazamento em gesso pedra para o modelo positivo e retificação manual antes da termomoldagem.</p>`
+        title: "9.1 Moldagem Negativa com Atadura Gessada",
+        html: `<p>No método tradicional, o técnico aplica ataduras gessadas sobre o membro do paciente para capturar o formato anatômico exato (obtenção do molde negativo).</p>`
+    },
+    "E4U9T2": {
+        title: "9.2 Preenchimento e Modelo Positivo em Gesso",
+        html: `<p>O molde negativo é preenchido com gesso líquido. Após a secagem, retira-se a casca externa obtendo-se a réplica exata do membro (modelo positivo de gesso).</p>`
+    },
+    "E4U9T3": {
+        title: "9.3 Retificação Manual e Termoformagem sob Vácuo",
+        html: `<p>O modelo positivo é esculpido manualmente para alívio de proeminências ósseas e preenchimento de pontos de pressão. Em seguida, a placa de polipropileno aquecida é termoformada a vácuo sobre ele.</p>`
     },
     "E4U10T1": {
-        title: "10.1 Fluxo Digital e Impressão 3D",
-        html: `<p>O fluxo moderno de Manufatura Aditiva consiste em: <strong>Escaneamento 3D</strong> da anatomia → <strong>Modelagem CAD</strong> personalizada → <strong>Impressão 3D (FDM/SLS)</strong> em materiais flexíveis (TPU) ou rígidos (PLA/PETG).</p>`
+        title: "10.1 Escaneamento Anatômico 3D sem Gesso",
+        html: `<p>No fluxo digital moderno, um scanner 3D óptico ou de luz estruturada captura as coordenadas tridimensionais do membro do paciente em poucos segundos, sem necessidade de sujeira ou gesso.</p>`
+    },
+    "E4U10T2": {
+        title: "10.2 Modelagem CAD Personalizada",
+        html: `<p>O modelo tridimensional do paciente é importado em um software CAD (ex: Blender, Fusion 360). O projetista desenha a órtese sob medida, aplicando espessuras, janelas de alívio e ranhuras de ventilação.</p>`
+    },
+    "E4U10T3": {
+        title: "10.3 Fatiamento CAM e Impressão FDM em TPU",
+        html: `<p>O arquivo CAD é fatiado em código G-code e impresso em 3D. Materiais flexíveis como **TPU (Poliuretano Termoplástico)** oferecem memória elástica incomparável para órteses dinâmicas e sob medida.</p>`
     },
     "E4U11T1": {
-        title: "11.1 Comparação: Tradicional vs Impressão 3D",
-        html: `<table style="width:100%; border-collapse:collapse; margin-top:10px;"><tr style="background:#e0f2fe; color:#004f9f;"><th>Critério</th><th>Tradicional</th><th>Impressão 3D</th></tr><tr><td><strong>Molde</strong></td><td>Gesso (sujo/pesado)</td><td>Scanner 3D digital (sem contato)</td></tr><tr><td><strong>Armazenamento</strong></td><td>Físico (ocupa espaço)</td><td>Arquivo digital em nuvem (CAD)</td></tr><tr><td><strong>Reposição</strong></td><td>Nova moldagem</td><td>Reimpressão direta do arquivo</td></tr></table>`
+        title: "11.1 Matriz Comparativa: Gesso vs Impressão 3D",
+        html: `<table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:0.88rem;"><tr style="background:#e0f2fe; color:#004f9f; text-align:left;"><th>Atributo</th><th>Gesso Tradicional</th><th>Manufatura 3D</th></tr><tr><td><strong>Conforto na Coleta</strong></td><td>Molde gessado frio/sujo</td><td>Scanner óptico sem contato</td></tr><tr><td><strong>Armazenamento</strong></td><td>Ocupa espaço físico</td><td>Arquivo digital CAD na nuvem</td></tr><tr><td><strong>Reimpressão</strong></td><td>Exige nova moldagem</td><td>Reimpressão direta com 1 clique</td></tr></table>`
     },
+    "E4U11T2": {
+        title: "11.2 Repositório Digital CAD e Reimpressão",
+        html: `<p>Com o arquivo digital armazenado no prontuário do e-SUS, caso a órtese seja danificada ou necessite de ajuste de tamanho, o laboratório pode imprimir uma nova peça sem que o paciente precise retornar para ser moldado.</p>`
+    },
+    "E4U11T3": {
+        title: "11.3 Aceitação do Usuário e Personalização Estética",
+        html: `<p>Órteses 3D permitem padronagens vazadas mais leves, respiráveis e personalizadas com cores escolhidas pelas crianças, reduzindo significativamente o estigma visual e o abandono.</p>`
+    },
+
+    // EIXO 5
     "E5U12T1": {
-        title: "12.1 Prova, Adaptação e Sinais de Alerta",
-        html: `<p>Na entrega da OPM, verificar se há pontos de hiperemia (vermelhidão que não desaparece após 15 min de remoção). Ajustar o alívio de pressão imediatamente para evitar escaras.</p>`
+        title: "12.1 Condução da Prova Física e Ajustes",
+        html: `<p>Na sessão de entrega da OPM, realiza-se a prova estática e dinâmica: verificar estabilidade de marcha, fixação dos velcros, facilidade de colocação e alinhamento dos eixos mecânicos com os eixos anatômicos.</p>`
+    },
+    "E5U12T2": {
+        title: "12.2 Inspeção Cutânea e Prevenção de Escaras",
+        html: `<p>Após 15 minutos de uso inicial, remover a OPM e inspecionar a pele. Áreas de hiperemia (vermelhidão) que não somem após 15 minutos indicam **ponto de pressão excessiva** e exigem desgaste/alívio imediato no dispositivo.</p>`
+    },
+    "E5U12T3": {
+        title: "13.3 Orientação de Uso Gradual e Higiene",
+        html: `<p>Instruir o paciente a adotar um esquema gradual de uso: 2 horas no 1º dia, aumentando 1 hora por dia até o uso contínuo, além de orientar a limpeza com sabão neutro e secagem à sombra.</p>`
     },
     "E5U13T1": {
-        title: "13.1 Seguimento Clínico e Prevenção de Abandono",
-        html: `<p>Agendar retornos periódicos (30, 90 e 180 dias). Em crianças, reavaliar o crescimento corporal para substituir órteses curtas antes que causem deformidades secundárias.</p>`
+        title: "13.1 Protocolo de Acompanhamento no SUS",
+        html: `<p>Recomenda-se acompanhamento longitudinal em 30, 90 e 180 dias após a dispensação para verificar se os objetivos terapêuticos iniciais estão sendo atingidos no cotidiano do usuário.</p>`
+    },
+    "E5U13T2": {
+        title: "13.2 Monitoramento de Crescimento Infantil",
+        html: `<p>Em crianças, o crescimento físico rápido exige monitoramento constante para substituição da órtese antes que o comprimento reduzido cause lesões na pele ou deformidades compensatórias.</p>`
+    },
+    "E5U13T3": {
+        title: "13.3 Manutenção Preventiva de Componentes",
+        html: `<p>Substituição periódica de velcros desgastados, substituição de solados de EVA, alinhamento de articulações de joelho/tornozelo e lubrificação de peças móveis.</p>`
     },
     "E5U14T1": {
-        title: "14.1 Caso Integrador Final — Árvore de Decisão",
-        html: `<p>Paciente José, 73 anos, pós-AVC com pé caído e espasticidade leve. A tomada de decisão clínica na UBS envolve: prescrição de AFO articulada + sapato adequado + orientação à família sobre inspeção diária da pele.</p>`
+        title: "14.1 Caso 1: José Carlos (73 anos, AVC, Pé Caído & AFO)",
+        html: `<p>Paciente idoso pós-AVC com espasticidade leve de tríceps sural e marcha em ceifa. Decisão clínica: prescrição de AFO articulada com bloqueio da flexão plantar a 90° e treino de marcha na UBS.</p>`
+    },
+    "E5U14T2": {
+        title: "14.2 Caso 2: Sofia (6 anos, Paralisia Cerebral Espástica)",
+        html: `<p>Criança com equinismo flexível bilateral durante a marcha. Decisão clínica: AFOs rígidas noturnas para ganho de ADM e AFOs dinâmicas em TPU 3D diurnas para estipular apoio de calcanhar.</p>`
+    },
+    "E5U14T3": {
+        title: "14.3 Caso 3: Ana Paula (34 anos, Amputação Transradial & 3D)",
+        html: `<p>Trabalhadora autônoma com amputação de antebraço. Decisão clínica: prótese cosmética e funcional impressa em 3D com encaixe ajustável em TPU e garra mecânica acionada por cabo de tração de ombro.</p>`
     }
 };
+
 
 const simulationsData = {
     1: {
