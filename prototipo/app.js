@@ -476,14 +476,19 @@ function setupSimulationButtons() {
     document.getElementById('btn-close-sim')?.addEventListener('click', () => { playClickSound(); closeSimModal(); });
 }
 
+let selectedSimOption = null;
+
 function openSimulationModal(moduleId) {
     state.currentSimModuleId = moduleId;
+    selectedSimOption = null;
+
     const simData = simulationsData[moduleId];
     const modal = document.getElementById('simulation-modal');
     const titleEl = document.getElementById('sim-title');
     const descEl = document.getElementById('sim-case-text');
     const optionsBox = document.getElementById('sim-options');
     const feedbackBox = document.getElementById('sim-feedback');
+    const btnSubmit = document.getElementById('btn-submit-sim');
 
     if (feedbackBox) feedbackBox.style.display = 'none';
 
@@ -504,21 +509,47 @@ function openSimulationModal(moduleId) {
             const btnOpt = document.createElement('button');
             btnOpt.className = 'sim-option-btn';
             btnOpt.innerText = opt.text;
-            btnOpt.addEventListener('click', () => handleSimAnswer(opt, feedbackBox));
+            btnOpt.addEventListener('click', () => {
+                playClickSound();
+                document.querySelectorAll('.sim-option-btn').forEach(b => {
+                    b.style.borderColor = 'var(--border-color)';
+                    b.style.background = 'var(--bg-secondary)';
+                });
+                btnOpt.style.borderColor = 'var(--primary)';
+                btnOpt.style.background = 'var(--primary-light)';
+                selectedSimOption = opt;
+                handleSimAnswer(opt, feedbackBox);
+            });
             optionsBox.appendChild(btnOpt);
         });
+    }
+
+    if (btnSubmit) {
+        btnSubmit.innerText = 'Confirmar Decisão Clínica';
+        btnSubmit.onclick = () => {
+            playClickSound();
+            if (!selectedSimOption) {
+                alert("Por favor, escolha uma das alternativas antes de confirmar sua decisão clínica.");
+                return;
+            }
+            handleSimAnswer(selectedSimOption, feedbackBox);
+            btnSubmit.innerText = 'Concluído ✓';
+            setTimeout(() => {
+                closeSimModal();
+            }, 1200);
+        };
     }
 
     modal?.classList.add('open');
 }
 
 function handleSimAnswer(option, feedbackBox) {
-    if (!feedbackBox) return;
+    if (!feedbackBox || !option) return;
     feedbackBox.style.display = 'block';
     if (option.correct) {
         playSuccessSound();
         feedbackBox.className = 'sim-feedback-panel feedback-correct';
-        feedbackBox.innerHTML = `<strong>✅ Resposta Correta!</strong><p>${option.feedback}</p>`;
+        feedbackBox.innerHTML = `<strong>✅ Decisão Clínica Correta!</strong><p>${option.feedback}</p>`;
         
         if (state.currentSimModuleId) {
             state.completedSimulations.add(state.currentSimModuleId);
@@ -529,7 +560,7 @@ function handleSimAnswer(option, feedbackBox) {
     } else {
         playErrorSound();
         feedbackBox.className = 'sim-feedback-panel feedback-incorrect';
-        feedbackBox.innerHTML = `<strong>❌ Resposta Incorreta</strong><p>${option.feedback}</p>`;
+        feedbackBox.innerHTML = `<strong>❌ Atenção ao Diagnóstico!</strong><p>${option.feedback}</p>`;
     }
 }
 
