@@ -420,6 +420,29 @@ function finishCurrentLesson() {
         state.completedLessons.add(currentActiveLessonId);
         playSuccessSound();
         addXP(50);
+
+        // Atualizar o item de aula na tela
+        const lessonItem = document.querySelector(`.lesson-item[data-lesson-id="${currentActiveLessonId}"]`);
+        if (lessonItem) {
+            const icon = lessonItem.querySelector('.lesson-status-icon');
+            if (icon) {
+                icon.style.backgroundColor = '#059669';
+                icon.innerHTML = '✓';
+                icon.style.color = 'white';
+                icon.style.fontSize = '9px';
+                icon.style.display = 'flex';
+                icon.style.alignItems = 'center';
+                icon.style.justifyContent = 'center';
+            }
+            const btn = lessonItem.querySelector('.btn-read-lesson');
+            if (btn) {
+                btn.innerText = 'Concluído ✓';
+                btn.style.background = '#d1fae5';
+                btn.style.color = '#059669';
+                btn.style.borderColor = '#10b981';
+            }
+        }
+
         checkBadges();
         updateUIProgress();
         closeLessonModal();
@@ -427,12 +450,26 @@ function finishCurrentLesson() {
 }
 
 function setupSimulationButtons() {
-    document.querySelectorAll('.btn-start-simulation').forEach(btn => {
-        btn.addEventListener('click', () => {
+    document.querySelectorAll('.btn-start-simulation, .btn-simulation').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             playClickSound();
-            const card = btn.closest('.modulo-card');
-            const moduleId = parseInt(card.getAttribute('data-module-id'), 10);
-            openSimulationModal(moduleId);
+
+            let moduleId = btn.getAttribute('data-module-id');
+            if (!moduleId) {
+                const card = btn.closest('.modulo-card');
+                if (card) {
+                    const cardId = card.getAttribute('id');
+                    if (cardId) moduleId = cardId.replace('modulo-', '');
+                }
+            }
+
+            if (moduleId) {
+                openSimulationModal(parseInt(moduleId, 10));
+            } else {
+                console.error('Module ID not found for simulation button');
+            }
         });
     });
 
@@ -443,7 +480,7 @@ function openSimulationModal(moduleId) {
     state.currentSimModuleId = moduleId;
     const simData = simulationsData[moduleId];
     const modal = document.getElementById('simulation-modal');
-    const titleEl = document.getElementById('sim-modal-title');
+    const titleEl = document.getElementById('sim-title');
     const descEl = document.getElementById('sim-case-text');
     const optionsBox = document.getElementById('sim-options');
     const feedbackBox = document.getElementById('sim-feedback');
