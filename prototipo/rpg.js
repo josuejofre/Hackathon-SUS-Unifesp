@@ -289,7 +289,7 @@ function drawMap() {
   ctx.setLineDash([]);
 
   // Sinalização do corredor
-  drawSign(corrX + corrW / 2, TOP + mapH * 0.2, '🏥 UBS Ipiranga');
+  drawSign(corrX + corrW / 2, TOP + mapH * 0.2, '🏥 UBS Resolve Santana (SJC)');
   drawSign(corrX + corrW / 2, TOP + mapH * 0.55, '⬆ Consultórios');
 
   // Planta no corredor
