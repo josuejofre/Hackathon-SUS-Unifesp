@@ -313,20 +313,20 @@
          HOTSPOTS CLICÁVEIS E INTERATIVOS
          ============================================================ -->
 
-    <!-- HOTSPOT 1: Cadeira de Rodas Postural -->
+    <!-- HOTSPOT 1: Avaliação de AFO -->
     <a-sphere
       mixin="hotspot"
       position="-1.5 1.4 -1.5"
       class="clickable"
-      data-id="cadeira"
-      data-info="♿ AVALIAÇÃO DA CADEIRA DE RODAS"
-      data-text="Dona Maria (72 anos, pós-AVC) está usando uma cadeira padrão inadequada. Ela apresenta hemiplegia e tônus espástico. Qual o recurso de Tecnologia Assistiva mais indicado?"
+      data-id="afo"
+      data-info="🦶 AVALIAÇÃO DE ÓRTESE (CASO DONA MARIA)"
+      data-text="Dona Maria (72 anos, pós-AVC há 6 meses) apresenta fraqueza nos dorsiflexores e pé caído à esquerda durante o treino de marcha. Qual a conduta ortótica mais adequada?"
       data-options='[
-        {"text": "Prescrever Cadeira POSTURAL com apoio lateral e Almofada Anti-escaras (Braden)", "correct": true, "feedback": "Excelente! Previne lesões por pressão e garante alinhamento do tronco."},
-        {"text": "Manter a cadeira padrão simples sem modificações", "correct": false, "feedback": "Incorreto. Causa deformidades e alto risco de úlceras por pressão."}
+        {"text": "Prescrever Órtese Tornozelo-Pé (AFO) alinhada a 90° e orientação de uso com calçado fechado", "correct": true, "feedback": "Excelente! A AFO mantém o tornozelo funcional a 90°, previne o arrasto do pé na marcha e reduz quedas."},
+        {"text": "Manter marcha sem apoio ortótico", "correct": false, "feedback": "Incorreto. A ausência de apoio mantém o risco de quedas e o padrão em ceifa."}
       ]'
     ></a-sphere>
-    <a-text value="👆 Clique:\nAvaliar Cadeira" position="-1.5 1.85 -1.5" align="center" color="#00ffd8" width="2.8" wrap-count="14"></a-text>
+    <a-text value="👆 Clique:\nAvaliar Órtese" position="-1.5 1.85 -1.5" align="center" color="#00ffd8" width="2.8" wrap-count="14"></a-text>
 
     <!-- HOTSPOT 2: Prontuário e-SUS APS -->
     <a-sphere
@@ -364,11 +364,11 @@
       position="3.5 1.8 -4.8"
       class="clickable"
       data-id="legislação"
-      data-info="📜 LEGISLAÇÃO E RECT REGULADA (SUS)"
+      data-info="📜 LEGISLAÇÃO E REDE REGULADA (SUS)"
       data-text="Portaria de Consolidação MS nº 2/2017: Qual a função da Atenção Primária (UBS) no fluxo de dispensação de OPM?"
       data-options='[
         {"text": "Realizar a triagem, avaliação funcional inicial e encaminhamento regulado ao CER", "correct": true, "feedback": "Correto! A UBS é a porta de entrada para a Rede de Cuidados à Pessoa com Deficiência."},
-        {"text": "Encaminhar o paciente sem laudo ou justificativa funcional", "correct": false, "feedback": "Incorreto. A ausência de laudo gera negação no SISREG."}
+        {"text": "Encaminhar o paciente sem laudo ou justificativa funcional", "correct": false, "feedback": "Incorreto. A ausência de laudo funcional invalida o processo de dispensação da OPM."}
       ]'
     ></a-sphere>
     <a-text value="👆 Clique:\nLegislação SUS" position="3.5 2.25 -4.8" align="center" color="#00ffd8" width="2.8" wrap-count="14"></a-text>

@@ -15,23 +15,23 @@ const MISSIONS = [
       name: 'Dona Maria',
       age: 72,
       avatar: '👵',
-      condition: 'AVC Isquêmico · Hemiplegia D.',
+      condition: 'Pós-AVC Isquêmico · Pé Caído à Esquerda',
       room: 'Consultório 1',
       missionLabel: 'MISSÃO 1',
       dialogLines: [
-        'Bom dia, doutor. Tive um AVC há 6 meses e minha perna esquerda ficou mais fraca...',
-        'Em casa, tenho muita dificuldade de me locomover. Minha filha me ajuda, mas ela trabalha o dia todo.',
-        'O médico me disse que eu preciso de uma cadeira de rodas, mas não sei qual. O que o senhor me recomenda?'
+        'Bom dia, doutor(a). Tive um AVC há 6 meses e meu pé esquerdo ficou "caído"...',
+        'Estou fazendo fisioterapia na UBS, mas quando tento caminhar, a ponta do meu pé esquerdo raspa no chão e tenho medo de cair.',
+        'O fisioterapeuta disse que uma órtese pode ajudar na estabilização do meu tornozelo durante o treino de marcha. O que o senhor(a) recomenda?'
       ],
-      evaHint: 'Dona Maria tem hemiplegia à esquerda com espasticidade moderada. Ela consegue transferir peso com apoio bilateral. Observe: risco de úlcera por pressão em ísquio e sacro. Uma cadeira postural com suporte lateral e almofada anti-escara é a conduta correta.',
-      question: 'Qual o equipamento mais adequado para Dona Maria neste momento?',
+      evaHint: 'Dona Maria apresenta fraqueza nos dorsiflexores do tornozelo (pé caído) pós-AVC. A prescrição de uma Órtese Tornozelo-Pé (AFO) alinhada a 90° estabiliza o tornozelo na fase de balanço e previne o arrasto do pé.',
+      question: 'Qual a conduta e recurso de Tecnologia Assistiva mais adequado para auxiliar Dona Maria no treino de marcha na UBS?',
       options: [
-        { text: 'Cadeira de rodas dobrável padrão (modelo M3)', correct: false, feedback: 'A cadeira padrão não oferece suporte postural para hemiplegia. Sem apoio lateral adequado, o risco de deformidades posturais e úlceras por pressão é muito alto.' },
-        { text: 'Cadeira de rodas postural com suporte lateral e almofada anti-escara', correct: true, feedback: 'Excelente decisão clínica! A cadeira postural garante alinhamento pélvico, previne úlceras por pressão e suporta a assimetria muscular causada pela hemiplegia.' },
-        { text: 'Andador com 4 pés como equipamento principal', correct: false, feedback: 'O andador com 4 pés exige coordenação bilateral e equilíbrio preservado. Para hemiplegia com fraqueza significativa, não é o equipamento de locomoção principal.' },
-        { text: 'Órtese AFO (tornozelo-pé) apenas', correct: false, feedback: 'A AFO é um ótimo complemento para reabilitação da marcha, mas não resolve a necessidade principal de locomoção domiciliar de Dona Maria neste estágio.' }
+        { text: 'Prescrever Órtese Tornozelo-Pé (AFO) alinhada a 90° e orientar uso com calçado fechado adequado', correct: true, feedback: 'Excelente decisão clínica! A AFO mantém o tornozelo em posição funcional a 90°, evita o arrasto do pé na marcha e reduz significativamente o risco de quedas.' },
+        { text: 'Recomendar apenas uso de bengala simples sem órtese de tornozelo', correct: false, feedback: 'Incorreto. A bengala simples não corrige o déficit de dorsiflexão nem estabiliza a articulação do tornozelo no pé caído.' },
+        { text: 'Recomendar repouso prolongado no leito sem intervenção ortótica', correct: false, feedback: 'Incorreto. O repouso prolongado favorece a atrofia muscular e o encurtamento do tríceps sural.' },
+        { text: 'Imobilizar todo o membro inferior com gesso rígido por 6 meses', correct: false, feedback: 'Incorreto. A imobilização gessada sem indicação cirúrgica gera rigidez articular permanente e perda funcional.' }
       ],
-      badge: { name: 'Guardião da Postura', icon: '🏆', desc: 'Prescreveu corretamente a cadeira postural, prevenindo complicações em paciente com hemiplegia.' },
+      badge: { name: 'Especialista em Marcha', icon: '🏆', desc: 'Prescreveu a Órtese AFO com precisão, estabilizando o tornozelo e garantindo marcha segura pós-AVC.' },
       xp: 150,
       canvasPos: { xFrac: 0.8, yFrac: 0.28 }
     }

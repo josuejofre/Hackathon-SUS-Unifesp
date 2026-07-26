@@ -103,7 +103,7 @@ const lessonsContent = {
     },
     "E1U1T5": {
         title: "1.5 OPM no contexto do SUS",
-        html: `<p>A provisão no SUS é regulada pela <strong>Rede de Cuidados à Pessoa com Deficiência (RCPD)</strong> (Portaria MS nº 2/2017). O fluxo integra a Atenção Primária ao SISREG e aos Centros Especializados em Reabilitação (CER).</p>`
+        html: `<p>A provisão no SUS é regulada pela <strong>Rede de Cuidados à Pessoa com Deficiência (RCPD)</strong> (Portaria MS nº 2/2017). O fluxo integra a Atenção Primária aos Centros Especializados em Reabilitação (CER).</p>`
     },
     "E1U2T1": {
         title: "2.1 Função vs Estrutura Corporal (CIF)",
@@ -140,8 +140,8 @@ const lessonsContent = {
         html: `<p>Entender como o paciente se desloca em casa (cadeira, arrasto, marcha com apoio) orienta a escolha precisa entre um meio auxiliar simples ou uma cadeira postural com reclinamento.</p>`
     },
     "E2U3T4": {
-        title: "3.4 Critérios de Encaminhamento Regulado (SISREG)",
-        html: `<p>Para aprovação no SISREG, o laudo emitido pela UBS deve conter: diagnóstico funcional detalhado, objetivo terapêutico específico, código SIGTAP pretendido e laudo médico assinado.</p>`
+        title: "3.4 Critérios de Encaminhamento Regulado ao CER",
+        html: `<p>Para a solicitação de OPM, o laudo emitido pela UBS deve conter: diagnóstico funcional detalhado, objetivo terapêutico específico, código SIGTAP pretendido e laudo médico assinado.</p>`
     },
     "E2U4T1": {
         title: "4.1 Indicações Clínicas e Funcionais Frequentes",
@@ -314,9 +314,9 @@ const simulationsData = {
     3: {
         moduleId: 3,
         title: "Quiz Unidade 3 — Avaliação Inicial & Triagem UBS",
-        description: "Qual elemento NÃO pode faltar no laudo de solicitação de OPM encaminhado ao SISREG?",
+        description: "Qual elemento NÃO pode faltar no laudo de solicitação de OPM?",
         options: [
-            { text: "Descrição clara da limitação funcional e do objetivo terapêutico pretendido.", correct: true, feedback: "Exato! Sem justificativa funcional a regulação não aprova o pedido." },
+            { text: "Descrição clara da limitação funcional e do objetivo terapêutico pretendido.", correct: true, feedback: "Exato! Sem justificativa funcional a solicitação de OPM não pode ser aprovada." },
             { text: "Apenas a marca comercial do fabricante.", correct: false, feedback: "No SUS prescreve-se por código da Tabela SIGTAP." }
         ]
     },
@@ -954,8 +954,8 @@ function getEvaAIResponse(userText) {
         return "<strong>E.V.A.:</strong> Para pacientes com alterações posturais severas ou espasticidade, prescreva cadeiras posturais com almofada anti-escaras (código SIGTAP 07.01.03) para prevenir úlceras por pressão.";
     } else if (txt.includes('3d') || txt.includes('impressão') || txt.includes('scanner')) {
         return "<strong>E.V.A.:</strong> O fluxo 3D utiliza escaneamento anatômico sem gesso, modelagem CAD e impressão em filamentos como TPU flexível. Permite salvar o arquivo na nuvem para reimpressão direta!";
-    } else if (txt.includes('cer') || txt.includes('sisreg') || txt.includes('encaminhamento')) {
-        return "<strong>E.V.A.:</strong> Na Atenção Primária, a triagem via SISREG exige laudo detalhado com diagnóstico funcional e o objetivo terapêutico antes do encaminhamento ao CER.";
+    } else if (txt.includes('cer') || txt.includes('laudo') || txt.includes('encaminhamento')) {
+        return "<strong>E.V.A.:</strong> Na Atenção Primária, a solicitação de OPM exige laudo detalhado com diagnóstico funcional e o objetivo terapêutico antes do encaminhamento ao CER.";
     } else {
         return "<strong>E.V.A.:</strong> Olá! Posso tirar suas dúvidas sobre prescrição de OPM, legislação do SUS (Portaria 2/2017), critérios de avaliação ou impressão 3D em Tecnologia Assistiva!";
     }
