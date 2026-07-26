@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Digitrilha VR — Campus Virtual 3D (14 Unidades)</title>
-  <meta name="description" content="Simulação em Realidade Virtual 3D e Apoio à Decisão Clínica em Tecnologia Assistiva para o SUS em 5 Salas Temáticas.">
+  <title>Digitrilha VR 3D — Campus de Reabilitação (14 Unidades)</title>
+  <meta name="description" content="Simulação em Realidade Virtual 3D com Corredor Conectado, 5 Salas e Apoio à Decisão Clínica em Tecnologia Assistiva para o SUS.">
   <!-- A-Frame WebXR Framework -->
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #0b0f19; overflow: hidden; }
 
-    /* HUD (Navegação Superior) */
+    /* TOP HUD NAVEGADOR */
     #vr-ui {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -26,9 +26,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
-      background: linear-gradient(180deg, rgba(11,15,25,0.98) 0%, rgba(11,15,25,0.85) 100%);
-      border-bottom: 1px solid rgba(0,165,153,0.3);
+      padding: 10px 18px;
+      background: linear-gradient(180deg, rgba(11,15,25,0.98) 0%, rgba(11,15,25,0.88) 100%);
+      border-bottom: 1px solid rgba(0,165,153,0.4);
       pointer-events: auto;
     }
 
@@ -54,21 +54,20 @@
       box-shadow: 0 4px 12px rgba(0,165,153,0.4);
     }
 
-    /* BARRA DE SALAS PARA NAVEGAÇÃO RÁPIDA */
     .room-nav-bar {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
       padding: 4px 0;
     }
 
     .room-nav-btn {
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(30, 41, 59, 0.85);
       border: 1px solid rgba(255,255,255,0.15);
       color: #cbd5e1;
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
@@ -82,29 +81,6 @@
       box-shadow: 0 2px 10px rgba(0,165,153,0.5);
     }
 
-    #vr-instructions {
-      position: fixed;
-      bottom: 20px; left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(0, 165, 153, 0.5);
-      border-radius: 50px;
-      padding: 10px 24px;
-      color: #ffffff;
-      font-size: 0.85rem;
-      font-weight: 500;
-      pointer-events: none;
-      backdrop-filter: blur(12px);
-      white-space: nowrap;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-      animation: floatInstr 3s ease-in-out infinite;
-    }
-
-    @keyframes floatInstr {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-5px); }
-    }
-
     #vr-back-btn {
       background: rgba(30, 41, 59, 0.9);
       border: 1px solid rgba(255,255,255,0.2);
@@ -115,13 +91,46 @@
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
+      transition: all 0.2s;
+    }
+    #vr-back-btn:hover { background: rgba(0,165,153,0.4); border-color: #00a599; }
+
+    /* BARRA INFERIOR DE INTERAÇÃO RÁPIDA (ACESSIBILIDADE DUAL) */
+    #quick-interact-bar {
+      position: fixed;
+      bottom: 12px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(0, 165, 153, 0.5);
+      border-radius: 40px;
+      padding: 8px 18px;
+      z-index: 999;
       display: flex;
+      gap: 8px;
       align-items: center;
-      gap: 6px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
+      max-width: 95vw;
+      overflow-x: auto;
+    }
+
+    .quick-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #00ffd8;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
       transition: all 0.2s;
     }
 
-    #vr-back-btn:hover { background: rgba(0,165,153,0.4); border-color: #00a599; }
+    .quick-btn:hover {
+      background: #004f9f;
+      color: white;
+    }
 
     /* PAINEL MODAL INTERATIVO 2D OVERLAY */
     #info-panel {
@@ -131,10 +140,10 @@
       background: rgba(15, 23, 42, 0.96);
       border: 2px solid #00a599;
       border-radius: 20px;
-      padding: 26px;
+      padding: 24px;
       width: 90%;
       max-width: 540px;
-      z-index: 1000;
+      z-index: 10000;
       pointer-events: auto;
       display: none;
       backdrop-filter: blur(16px);
@@ -151,8 +160,8 @@
     #info-panel h3 {
       font-family: 'Outfit', sans-serif;
       color: #00ffd8;
-      font-size: 1.2rem;
-      margin-bottom: 12px;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -160,25 +169,25 @@
 
     #info-panel p {
       color: #cbd5e1;
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin-bottom: 16px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 14px;
     }
 
     .modal-options {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 8px;
+      margin-top: 10px;
     }
 
     .modal-opt-btn {
       background: #1e293b;
       border: 1px solid #334155;
       color: white;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
@@ -188,14 +197,13 @@
     .modal-opt-btn:hover {
       background: #004f9f;
       border-color: #00a599;
-      transform: translateX(4px);
     }
 
     .feedback-box-vr {
-      margin-top: 14px;
-      padding: 12px 16px;
+      margin-top: 12px;
+      padding: 10px 14px;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       display: none;
     }
 
@@ -204,18 +212,17 @@
 
     #info-panel .close-info {
       position: absolute;
-      top: 16px; right: 18px;
+      top: 14px; right: 16px;
       background: rgba(255,255,255,0.1);
       border: none;
       color: #94a3b8;
-      width: 32px; height: 32px;
+      width: 30px; height: 30px;
       border-radius: 50%;
-      font-size: 1.1rem;
+      font-size: 1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
     }
 
     #info-panel .close-info:hover { background: #dc2626; color: white; }
@@ -223,7 +230,7 @@
 </head>
 <body>
 
-  <!-- HEADER NAVEGADOR -->
+  <!-- HEADER NAV -->
   <div id="vr-ui">
     <div id="vr-header">
       <a href="index.html" class="vr-logo">
@@ -231,7 +238,6 @@
         Digitrilha <strong style="color:#00a599">VR 3D</strong>
       </a>
 
-      <!-- MENU DE SALAS -->
       <div class="room-nav-bar">
         <button class="room-nav-btn active" onclick="teleportToRoom(1)">🏛️ Sala 1: Fundamentos</button>
         <button class="room-nav-btn" onclick="teleportToRoom(2)">🩺 Sala 2: Avaliação</button>
@@ -244,12 +250,20 @@
     </div>
   </div>
 
-  <!-- INSTRUÇÕES -->
-  <div id="vr-instructions">
-    🖱️ Clique com o mouse nos marcadores azuis pulsantes para interagir | Use os botões no topo para alternar de Sala
+  <!-- BARRA DE ATALHOS DE INTERAÇÃO -->
+  <div id="quick-interact-bar">
+    <span style="color:#94a3b8; font-size:0.75rem; font-weight:700; margin-right:4px;">INTERAGIR:</span>
+    <button class="quick-btn" onclick="triggerStation('u1')">Unidade 1 (LBI)</button>
+    <button class="quick-btn" onclick="triggerStation('u2')">Unidade 2 (CIF)</button>
+    <button class="quick-btn" onclick="triggerStation('u3')">Unidade 3 (Dona Maria)</button>
+    <button class="quick-btn" onclick="triggerStation('u4')">Unidade 4 (Laudo OPM)</button>
+    <button class="quick-btn" onclick="triggerStation('u5')">Unidade 5 (Erros)</button>
+    <button class="quick-btn" onclick="triggerStation('u6')">Unidade 6 (3 Pontos)</button>
+    <button class="quick-btn" onclick="triggerStation('u10')">Unidade 10 (Impressão 3D)</button>
+    <button class="quick-btn" onclick="clickEVA()">🤖 E.V.A. IA</button>
   </div>
 
-  <!-- PAINEL MODAL DE RESPOSTA -->
+  <!-- PAINEL MODAL OVERLAY -->
   <div id="info-panel">
     <button class="close-info" onclick="closeVRModal()">✕</button>
     <h3 id="info-title"><span>📍</span> ESTAÇÃO DE APRENDIZADO VR</h3>
@@ -261,391 +275,460 @@
   <!-- CENA A-FRAME WEBXR -->
   <a-scene
     background="color: #0b0f19"
-    fog="type: linear; color: #0b0f19; near: 20; far: 45"
+    fog="type: linear; color: #0b0f19; near: 15; far: 40"
     renderer="antialias: true; colorManagement: true"
     vr-mode-ui="enabled: true"
-    loading-screen="dotsColor: #00a599; backgroundColor: #0b0f19"
   >
 
-    <!-- === CÂMERA E CONTROLES === -->
-    <a-entity id="rig" position="0 0 5">
+    <!-- CÂMERA COM RETÍCULO VIRTUAL CURSOR -->
+    <a-entity id="rig" position="0 0 0">
       <a-camera id="main-camera" look-controls="reverseMouseDrag: false" wasd-controls="enabled: true" position="0 1.6 0">
-        <a-cursor
-          id="vr-cursor"
-          color="#00ffd8"
-          fuse="false"
-          raycaster="objects: .clickable"
-          cursor="rayOrigin: mouse"
-          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
-        ></a-cursor>
+        <a-entity
+          cursor="fuse: false; rayOrigin: mouse"
+          raycaster="objects: .clickable, a-sphere, a-box, a-cylinder"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.015; radiusOuter: 0.025"
+          material="color: #00ffd8; shader: flat; opacity: 0.8"
+        ></a-entity>
       </a-camera>
     </a-entity>
 
-    <!-- === ASSETS & MIXINS === -->
+    <!-- ASSETS & MIXINS -->
     <a-assets>
       <a-mixin id="hotspot"
-        geometry="primitive: sphere; radius: 0.22"
-        material="color: #00a599; emissive: #00ffd8; emissiveIntensity: 0.8; transparent: true; opacity: 0.9"
-        animation="property: scale; dir: alternate; dur: 1000; loop: true; to: 1.3 1.3 1.3; easing: easeInOutSine"
+        geometry="primitive: sphere; radius: 0.28"
+        material="color: #00a599; emissive: #00ffd8; emissiveIntensity: 0.9; transparent: true; opacity: 0.95"
+        animation="property: scale; dir: alternate; dur: 900; loop: true; to: 1.25 1.25 1.25; easing: easeInOutSine"
         class="clickable">
       </a-mixin>
 
       <a-mixin id="pedestal"
-        geometry="primitive: cylinder; radius: 0.45; height: 0.8"
-        material="color: #1e293b; roughness: 0.4">
+        geometry="primitive: cylinder; radius: 0.5; height: 0.8"
+        material="color: #1e293b; roughness: 0.3">
       </a-mixin>
 
-      <a-mixin id="room-floor"
-        geometry="primitive: plane; width: 12; height: 12"
-        rotation="-90 0 0"
-        material="color: #111827; roughness: 0.8">
+      <a-mixin id="door-portal"
+        geometry="primitive: cylinder; radius: 0.6; height: 0.05"
+        material="color: #00a599; emissive: #00ffd8; emissiveIntensity: 0.6; opacity: 0.8"
+        class="clickable">
       </a-mixin>
     </a-assets>
 
     <!-- ============================================================ -->
-    <!-- SALA 1 (EIXO 1 — UNIDADES 1 & 2: FUNDAMENTOS & LBI)           -->
-    <!-- Posição: Center X: 0, Z: 0                                   -->
+    <!-- CORREDOR CENTRAL DE INTEGRAÇÃO DO CAMPUS                      -->
+    <!-- Largura: 6m (X: -3 a 3), Comprimento: 32m (Z: -16 a 16)        -->
     <!-- ============================================================ -->
-    <a-entity id="sala-1" position="0 0 0">
-      <!-- CHÃO E TETO -->
-      <a-plane position="0 0 0" rotation="-90 0 0" width="12" height="12" material="color: #1e293b; roughness: 0.8"></a-plane>
-      <a-plane position="0 3.6 0" rotation="90 0 0" width="12" height="12" material="color: #0f172a; roughness: 0.9"></a-plane>
-      
-      <!-- PAREDES DA SALA 1 -->
-      <a-plane position="0 1.8 -6" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="-6 1.8 0" rotation="0 90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="6 1.8 0" rotation="0 -90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
+    <a-entity id="corredor-central">
+      <!-- CHÃO DO CORREDOR -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="6" height="32" material="color: #1e293b; roughness: 0.7"></a-plane>
+      <a-plane position="0 3.8 0" rotation="90 0 0" width="6" height="32" material="color: #0f172a"></a-plane>
 
-      <!-- PAINEL DE TÍTULO DA SALA 1 -->
-      <a-plane position="0 2.8 -5.9" width="7" height="0.9" material="color: #004f9f; opacity: 0.9">
-        <a-text value="🏛️ SALA 1 — UNIDADES 1 & 2: FUNDAMENTOS DE TA & LBI" align="center" position="0 0 0.02" color="#ffffff" width="4.5" wrap-count="28"></a-text>
-      </a-plane>
+      <!-- PAREDES LATERAIS DO CORREDOR (COM ARCHWAYS PARA AS SALAS) -->
+      <!-- Parede Esquerda (X: -3) -->
+      <a-plane position="-3 1.9 -14" width="0.1" height="3.8" rotation="0 90 0" material="color: #0f172a"></a-plane>
+      <a-plane position="-3 1.9 -2" width="0.1" height="3.8" rotation="0 90 0" material="color: #0f172a"></a-plane>
+      <a-plane position="-3 1.9 10" width="0.1" height="3.8" rotation="0 90 0" material="color: #0f172a"></a-plane>
 
-      <!-- ESTAÇÃO 1.1: O que é Tecnologia Assistiva & LBI -->
-      <a-cylinder mixin="pedestal" position="-3 0.4 -3"></a-cylinder>
-      <a-box position="-3 1.0 -3" width="0.4" height="0.4" depth="0.4" material="color: #00a599"></a-box>
-      <a-sphere mixin="hotspot" position="-3 1.5 -3"
-        data-info="🏛️ UNIDADE 1 — CONCEITO DE TA & LEI 13.146/2015"
-        data-text="A Tecnologia Assistiva no SUS engloba produtos, recursos e metodologias para independência funcional. Qual a garantia dada pela Lei Brasileira de Inclusão (LBI)?"
-        data-options='[
-          {"text": "Acesso gratuito e universal a recursos de TA na Rede de Cuidados no SUS", "correct": true, "feedback": "Excelente! A LBI estabelece o direito universal à Tecnologia Assistiva."},
-          {"text": "Apenas empréstimo temporário mediante cobrança de taxa", "correct": false, "feedback": "Incorreto. A provisão no SUS é pública e gratuita."}
-        ]'
-      ></a-sphere>
-      <a-plane position="-3 2.1 -3" width="2.4" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
-        <a-text value="Unidade 1: Conceito de TA & LBI
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
-      </a-plane>
+      <!-- Parede Direita (X: 3) -->
+      <a-plane position="3 1.9 -8" width="0.1" height="3.8" rotation="0 90 0" material="color: #0f172a"></a-plane>
+      <a-plane position="3 1.9 4" width="0.1" height="3.8" rotation="0 90 0" material="color: #0f172a"></a-plane>
 
-      <!-- ESTAÇÃO 1.2: Classificação CIF (OMS) -->
-      <a-cylinder mixin="pedestal" position="3 0.4 -3"></a-cylinder>
-      <a-box position="3 1.0 -3" width="0.4" height="0.4" depth="0.4" material="color: #004f9f"></a-box>
-      <a-sphere mixin="hotspot" position="3 1.5 -3"
-        data-info="📊 UNIDADE 2 — AVALIAÇÃO PELA CIF (OMS)"
-        data-text="Na Classificação Internacional de Funcionalidade (CIF), como se diferencia a alteração anatômica (Estrutura) do impacto diário (Participação)?"
-        data-options='[
-          {"text": "Estrutura refere-se à anatomia e Participação refere-se ao engajamento social nas AVDs", "correct": true, "feedback": "Perfeito! A CIF avalia a pessoa de forma holística em seu ambiente."},
-          {"text": "Estrutura e Participação são termos sinônimos", "correct": false, "feedback": "Incorreto. Estrutura é anatômica, Participação é social."}
-        ]'
-      ></a-sphere>
-      <a-plane position="3 2.1 -3" width="2.4" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
-        <a-text value="Unidade 2: Avaliação CIF
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
-      </a-plane>
-
-      <!-- TUTORA E.V.A. ROBÔ DA SALA 1 -->
-      <a-entity position="0 0 -3" class="clickable" onclick="clickEVA()">
-        <a-cylinder radius="0.2" height="0.06" position="0 0.03 0" material="color: #004f9f"></a-cylinder>
-        <a-cylinder radius="0.12" height="0.6" position="0 0.33 0" material="color: #00a599"></a-cylinder>
-        <a-box width="0.4" height="0.5" depth="0.25" position="0 0.88 0" material="color: #004f9f"></a-box>
-        <a-sphere radius="0.2" position="0 1.3 0" material="color: #00a599; emissive: #00a599; emissiveIntensity: 0.4"></a-sphere>
-        <a-box width="0.14" height="0.06" depth="0.02" position="-0.06 1.33 0.19" material="color: #00ffd8; emissive: #00ffd8; emissiveIntensity: 1.0"></a-box>
-        <a-box width="0.14" height="0.06" depth="0.02" position="0.06 1.33 0.19" material="color: #00ffd8; emissive: #00ffd8; emissiveIntensity: 1.0"></a-box>
-      </a-entity>
-      <a-plane position="0 2.0 -3" width="2.6" height="0.5" material="color: #0f172a; opacity: 0.95">
-        <a-text value="🤖 E.V.A. — Tutora Digital
-(Clique para Orientação)" align="center" position="0 0 0.02" color="#00ffd8" width="2.4" wrap-count="22"></a-text>
+      <!-- LETREIRO DO CORREDOR -->
+      <a-plane position="0 3.2 -14" width="5.5" height="0.7" material="color: #004f9f; opacity: 0.9">
+        <a-text value="🏥 CORREDOR CENTRAL DE REABILITAÇÃO SUS" align="center" position="0 0 0.02" color="#ffffff" width="4.2" wrap-count="30"></a-text>
       </a-plane>
     </a-entity>
+
+    <!-- ============================================================ -->
+    <!-- PORTAIS DE ACESSO (PORTAS 3D COM PORTAL TELEPORT)            -->
+    <!-- ============================================================ -->
+    <!-- PORTA 1 ➔ SALA 1 -->
+    <a-entity position="-2.6 0 -10" onclick="teleportToRoom(1)" class="clickable">
+      <a-cylinder mixin="door-portal"></a-cylinder>
+      <a-box position="0 1.2 0" width="0.1" height="2.2" depth="1.2" material="color: #00a599"></a-box>
+      <a-plane position="0.1 2.2 0" rotation="0 90 0" width="1.6" height="0.4" material="color: #004f9f">
+        <a-text value="🚪 Entrada: Sala 1 (Fundamentos)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="24"></a-text>
+      </a-plane>
+    </a-entity>
+
+    <!-- PORTA 2 ➔ SALA 2 -->
+    <a-entity position="2.6 0 -4" onclick="teleportToRoom(2)" class="clickable">
+      <a-cylinder mixin="door-portal"></a-cylinder>
+      <a-box position="0 1.2 0" width="0.1" height="2.2" depth="1.2" material="color: #00a599"></a-box>
+      <a-plane position="-0.1 2.2 0" rotation="0 -90 0" width="1.6" height="0.4" material="color: #004f9f">
+        <a-text value="🚪 Entrada: Sala 2 (Avaliacao)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="24"></a-text>
+      </a-plane>
+    </a-entity>
+
+    <!-- PORTA 3 ➔ SALA 3 -->
+    <a-entity position="-2.6 0 2" onclick="teleportToRoom(3)" class="clickable">
+      <a-cylinder mixin="door-portal"></a-cylinder>
+      <a-box position="0 1.2 0" width="0.1" height="2.2" depth="1.2" material="color: #00a599"></a-box>
+      <a-plane position="0.1 2.2 0" rotation="0 90 0" width="1.6" height="0.4" material="color: #004f9f">
+        <a-text value="🚪 Entrada: Sala 3 (Laboratorio OPM)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="26"></a-text>
+      </a-plane>
+    </a-entity>
+
+    <!-- PORTA 4 ➔ SALA 4 -->
+    <a-entity position="2.6 0 8" onclick="teleportToRoom(4)" class="clickable">
+      <a-cylinder mixin="door-portal"></a-cylinder>
+      <a-box position="0 1.2 0" width="0.1" height="2.2" depth="1.2" material="color: #00a599"></a-box>
+      <a-plane position="-0.1 2.2 0" rotation="0 -90 0" width="1.6" height="0.4" material="color: #004f9f">
+        <a-text value="🚪 Entrada: Sala 4 (Manufatura 3D)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="26"></a-text>
+      </a-plane>
+    </a-entity>
+
+    <!-- PORTA 5 ➔ SALA 5 -->
+    <a-entity position="-2.6 0 14" onclick="teleportToRoom(5)" class="clickable">
+      <a-cylinder mixin="door-portal"></a-cylinder>
+      <a-box position="0 1.2 0" width="0.1" height="2.2" depth="1.2" material="color: #00a599"></a-box>
+      <a-plane position="0.1 2.2 0" rotation="0 90 0" width="1.6" height="0.4" material="color: #004f9f">
+        <a-text value="🚪 Entrada: Sala 5 (Resultados)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="24"></a-text>
+      </a-plane>
+    </a-entity>
+
+
+    <!-- ============================================================ -->
+    <!-- SALA 1 (EIXO 1 — UNIDADES 1 & 2: FUNDAMENTOS & LBI)           -->
+    <!-- Posição: Center X: -9, Z: -10                                -->
+    <!-- ============================================================ -->
+    <a-entity id="sala-1" position="-9 0 -10">
+      <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" material="color: #111827; roughness: 0.8"></a-plane>
+      <a-plane position="0 3.6 0" rotation="90 0 0" width="10" height="10" material="color: #0f172a"></a-plane>
+      <a-plane position="0 1.8 -5" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="-5 1.8 0" rotation="0 90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="5 1.8 0" rotation="0 -90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
+
+      <a-plane position="0 2.8 -4.9" width="6.5" height="0.8" material="color: #004f9f; opacity: 0.95">
+        <a-text value="🏛️ SALA 1 — UNIDADES 1 & 2: FUNDAMENTOS DE TA & LBI" align="center" position="0 0 0.02" color="#ffffff" width="4.2" wrap-count="28"></a-text>
+      </a-plane>
+
+      <!-- ESTAÇÃO 1.1: LBI -->
+      <a-cylinder mixin="pedestal" position="-2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="-2.5 1.4 -2.5" onclick="triggerStation('u1')"></a-sphere>
+      <a-plane position="-2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
+        <a-text value="Unidade 1: Conceito de TA & LBI
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
+      </a-plane>
+
+      <!-- ESTAÇÃO 1.2: CIF -->
+      <a-cylinder mixin="pedestal" position="2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="2.5 1.4 -2.5" onclick="triggerStation('u2')"></a-sphere>
+      <a-plane position="2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
+        <a-text value="Unidade 2: Avaliação CIF OMS
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
+      </a-plane>
+
+      <!-- TUTORA E.V.A. -->
+      <a-entity position="0 0 -2.5" class="clickable" onclick="clickEVA()">
+        <a-cylinder radius="0.18" height="0.06" position="0 0.03 0" material="color: #004f9f"></a-cylinder>
+        <a-cylinder radius="0.1" height="0.6" position="0 0.33 0" material="color: #00a599"></a-cylinder>
+        <a-box width="0.38" height="0.45" depth="0.22" position="0 0.85 0" material="color: #004f9f"></a-box>
+        <a-sphere radius="0.18" position="0 1.25 0" material="color: #00a599; emissive: #00a599; emissiveIntensity: 0.5"></a-sphere>
+        <a-box width="0.12" height="0.05" depth="0.02" position="-0.05 1.28 0.17" material="color: #00ffd8; emissive: #00ffd8; emissiveIntensity: 1.0"></a-box>
+        <a-box width="0.12" height="0.05" depth="0.02" position="0.05 1.28 0.17" material="color: #00ffd8; emissive: #00ffd8; emissiveIntensity: 1.0"></a-box>
+      </a-entity>
+      <a-plane position="0 1.9 -2.5" width="2.5" height="0.5" material="color: #0f172a; opacity: 0.95">
+        <a-text value="🤖 E.V.A. — Tutora Digital
+(Clique para Orientacao)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+      </a-plane>
+    </a-entity>
+
 
     <!-- ============================================================ -->
     <!-- SALA 2 (EIXO 2 — UNIDADES 3, 4 & 5: AVALIAÇÃO CLÍNICA)         -->
-    <!-- Posição: Center X: -16, Z: 0                                 -->
+    <!-- Posição: Center X: 9, Z: -4                                  -->
     <!-- ============================================================ -->
-    <a-entity id="sala-2" position="-16 0 0">
-      <a-plane position="0 0 0" rotation="-90 0 0" width="12" height="12" material="color: #1e293b; roughness: 0.8"></a-plane>
-      <a-plane position="0 3.6 0" rotation="90 0 0" width="12" height="12" material="color: #0f172a"></a-plane>
-      
-      <a-plane position="0 1.8 -6" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="-6 1.8 0" rotation="0 90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="6 1.8 0" rotation="0 -90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
+    <a-entity id="sala-2" position="9 0 -4">
+      <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" material="color: #111827; roughness: 0.8"></a-plane>
+      <a-plane position="0 3.6 0" rotation="90 0 0" width="10" height="10" material="color: #0f172a"></a-plane>
+      <a-plane position="0 1.8 -5" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="-5 1.8 0" rotation="0 90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="5 1.8 0" rotation="0 -90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
 
-      <a-plane position="0 2.8 -5.9" width="7.5" height="0.9" material="color: #004f9f; opacity: 0.9">
-        <a-text value="🩺 SALA 2 — UNIDADES 3, 4 & 5: AVALIAÇÃO CLÍNICA & TRIAGEM" align="center" position="0 0 0.02" color="#ffffff" width="4.5" wrap-count="30"></a-text>
+      <a-plane position="0 2.8 -4.9" width="6.8" height="0.8" material="color: #004f9f; opacity: 0.95">
+        <a-text value="🩺 SALA 2 — UNIDADES 3, 4 & 5: AVALIAÇÃO CLÍNICA & TRIAGEM" align="center" position="0 0 0.02" color="#ffffff" width="4.2" wrap-count="30"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 2.1: Caso Dona Maria (AFO no Pé Caído) -->
-      <a-cylinder mixin="pedestal" position="-3 0.4 -3"></a-cylinder>
-      <a-sphere mixin="hotspot" position="-3 1.5 -3"
-        data-info="🦶 UNIDADE 3 — CASO DONA MARIA (PÓS-AVC & PÉ CAÍDO)"
-        data-text="Dona Maria (72 anos, pós-AVC) apresenta fraqueza nos dorsiflexores e pé caído à esquerda durante o treino de marcha. Qual a conduta ortótica mais adequada?"
-        data-options='[
-          {"text": "Prescrever Órtese Tornozelo-Pé (AFO) alinhada a 90° e orientação de calçado fechado", "correct": true, "feedback": "Excelente! A AFO mantém o tornozelo funcional a 90°, evita o arrasto do pé e previne quedas."},
-          {"text": "Manter marcha sem apoio ortótico", "correct": false, "feedback": "Incorreto. A falta de apoio mantém o risco de queda."}
-        ]'
-      ></a-sphere>
-      <a-plane position="-3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 2.1: Caso Dona Maria -->
+      <a-cylinder mixin="pedestal" position="-2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="-2.5 1.4 -2.5" onclick="triggerStation('u3')"></a-sphere>
+      <a-plane position="-2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 3: Caso Dona Maria
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 2.2: Elementos Obrigatórios no Laudo -->
-      <a-cylinder mixin="pedestal" position="3 0.4 -3"></a-cylinder>
-      <a-sphere mixin="hotspot" position="3 1.5 -3"
-        data-info="📋 UNIDADE 4 — ELEMENTOS DO LAUDO DE SOLICITAÇÃO"
-        data-text="Qual elemento NÃO pode faltar no laudo de solicitação de OPM emitido na Atenção Primária?"
-        data-options='[
-          {"text": "Descrição clara da limitação funcional e do objetivo terapêutico pretendido", "correct": true, "feedback": "Gabarito Oficial! O objetivo funcional é indispensável para aprovação da OPM."},
-          {"text": "Apenas o nome comercial da marca do fabricante", "correct": false, "feedback": "Incorreto. No SUS prescreve-se por código da Tabela SIGTAP."}
-        ]'
-      ></a-sphere>
-      <a-plane position="3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 2.2: Laudo de OPM -->
+      <a-cylinder mixin="pedestal" position="2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="2.5 1.4 -2.5" onclick="triggerStation('u4')"></a-sphere>
+      <a-plane position="2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 4: Laudo de OPM
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 2.3: Os 5 Erros Frequentes na Prescrição -->
-      <a-cylinder mixin="pedestal" position="0 0.4 -4"></a-cylinder>
-      <a-sphere mixin="hotspot" position="0 1.5 -4"
-        data-info="⚠️ UNIDADE 5 — OS 5 ERROS FREQUENTES DE PRESCRIÇÃO"
-        data-text="Estudos no SUS apontam que a desconsideração do ambiente domiciliar e a falta de reavaliação causam alto abandono de OPM. Qual a melhor prática de prevenção?"
-        data-options='[
-          {"text": "Avaliar acessibilidade do domicílio e realizar seguimento longitudinal periódico", "correct": true, "feedback": "Perfeito! O acompanhamento continuo garante a adesão ao tratamento."},
-          {"text": "Entregar a OPM e encerrar o acompanhamento do paciente", "correct": false, "feedback": "Incorreto. Sem reavaliação o risco de abandono ultrapassa 40%."}
-        ]'
-      ></a-sphere>
-      <a-plane position="0 2.1 -4" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 2.3: Prevenção de Erros -->
+      <a-cylinder mixin="pedestal" position="0 0.4 -3.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="0 1.4 -3.5" onclick="triggerStation('u5')"></a-sphere>
+      <a-plane position="0 1.95 -3.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 5: Prevenção de Erros
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
     </a-entity>
+
 
     <!-- ============================================================ -->
     <!-- SALA 3 (EIXO 3 — UNIDADES 6, 7 & 8: LABORATÓRIO DE OPM)        -->
-    <!-- Posição: Center X: 16, Z: 0                                  -->
+    <!-- Posição: Center X: -9, Z: 2                                  -->
     <!-- ============================================================ -->
-    <a-entity id="sala-3" position="16 0 0">
-      <a-plane position="0 0 0" rotation="-90 0 0" width="12" height="12" material="color: #1e293b; roughness: 0.8"></a-plane>
-      <a-plane position="0 3.6 0" rotation="90 0 0" width="12" height="12" material="color: #0f172a"></a-plane>
-      
-      <a-plane position="0 1.8 -6" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="-6 1.8 0" rotation="0 90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="6 1.8 0" rotation="0 -90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
+    <a-entity id="sala-3" position="-9 0 2">
+      <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" material="color: #111827; roughness: 0.8"></a-plane>
+      <a-plane position="0 3.6 0" rotation="90 0 0" width="10" height="10" material="color: #0f172a"></a-plane>
+      <a-plane position="0 1.8 -5" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="-5 1.8 0" rotation="0 90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="5 1.8 0" rotation="0 -90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
 
-      <a-plane position="0 2.8 -5.9" width="7.5" height="0.9" material="color: #004f9f; opacity: 0.9">
-        <a-text value="🦾 SALA 3 — UNIDADES 6, 7 & 8: LABORATÓRIO DE ÓRTESES & PRÓTESES" align="center" position="0 0 0.02" color="#ffffff" width="4.5" wrap-count="32"></a-text>
+      <a-plane position="0 2.8 -4.9" width="6.8" height="0.8" material="color: #004f9f; opacity: 0.95">
+        <a-text value="🦾 SALA 3 — UNIDADES 6, 7 & 8: LABORATÓRIO DE ÓRTESES & PRÓTESES" align="center" position="0 0 0.02" color="#ffffff" width="4.2" wrap-count="32"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 3.1: Sistema de 3 Pontos de Pressão (Unidade 6) -->
-      <a-cylinder mixin="pedestal" position="-3 0.4 -3"></a-cylinder>
-      <a-sphere mixin="hotspot" position="-3 1.5 -3"
-        data-info="🧲 UNIDADE 6 — BIOMECÂNICA DOS 3 PONTOS DE PRESSÃO"
-        data-text="Como funciona a correção biomecânica pelo sistema de 3 pontos de pressão em órteses?"
-        data-options='[
-          {"text": "Aplica-se uma força principal no ápice da deformidade e duas forças opostas nas extremidades", "correct": true, "feedback": "Exato! Este princípio garante controle e alinhamento articular."},
-          {"text": "Compressão circular uniforme ao redor de toda a perna", "correct": false, "feedback": "Incorreto. A compressão uniforme restringe o fluxo sanguíneo sem corrigir a deformidade."}
-        ]'
-      ></a-sphere>
-      <a-plane position="-3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 3.1: 3 Pontos -->
+      <a-cylinder mixin="pedestal" position="-2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="-2.5 1.4 -2.5" onclick="triggerStation('u6')"></a-sphere>
+      <a-plane position="-2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 6: Biomecânica 3D
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 3.2: Órteses de Membro Inferior e Coluna (Unidade 7) -->
-      <a-cylinder mixin="pedestal" position="3 0.4 -3"></a-cylinder>
-      <a-sphere mixin="hotspot" position="3 1.5 -3"
-        data-info="🦾 UNIDADE 7 — ÓRTESES DE MMII, MMSS E COLUNA"
-        data-text="Para uma adolescente com escoliose idiopática em crescimento (curva de 32° Cobb), qual a indicação conservadora?"
-        data-options='[
-          {"text": "Colete de Boston (TLSO) para tratamento conservador tridimensional", "correct": true, "feedback": "Correto! O Colete de Boston é a indicação padrão em fases de crescimento."},
-          {"text": "Colar cervical macio de espuma", "correct": false, "feedback": "Incorreto. O colar cervical não atua na coluna toracolombar."}
-        ]'
-      ></a-sphere>
-      <a-plane position="3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 3.2: Tipos de Órteses -->
+      <a-cylinder mixin="pedestal" position="2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="2.5 1.4 -2.5" onclick="triggerStation('u7')"></a-sphere>
+      <a-plane position="2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 7: Tipos de Órteses
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 3.3: Componentes Protéticos & Meios Auxiliares (Unidade 8) -->
-      <a-cylinder mixin="pedestal" position="0 0.4 -4"></a-cylinder>
-      <a-sphere mixin="hotspot" position="0 1.5 -4"
-        data-info="🦿 UNIDADE 8 — COMPONENTES PROTÉTICOS & MEIOS AUXILIARES"
-        data-text="Qual componente protético é responsável pela interface e transmissão de carga no coto de amputação?"
-        data-options='[
-          {"text": "Soquete / Encaixe (Socket) adaptado anatomicamente", "correct": true, "feedback": "Perfeito! O soquete transmite a carga de sustentação do coto."},
-          {"text": "Bengala simples de apoio", "correct": false, "feedback": "Incorreto. A bengala é um meio auxiliar externo."}
-        ]'
-      ></a-sphere>
-      <a-plane position="0 2.1 -4" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 3.3: Próteses & Meios -->
+      <a-cylinder mixin="pedestal" position="0 0.4 -3.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="0 1.4 -3.5" onclick="triggerStation('u8')"></a-sphere>
+      <a-plane position="0 1.95 -3.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 8: Próteses & Meios
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
     </a-entity>
 
-    <!-- ============================================================ -->
-    <!-- SALA 4 (EIXO 4 — UNIDADES 9, 10 & 11: CENTRO DE MANUFATURA 3D) -->
-    <!-- Posição: Center X: 0, Z: -16                                 -->
-    <!-- ============================================================ -->
-    <a-entity id="sala-4" position="0 0 -16">
-      <a-plane position="0 0 0" rotation="-90 0 0" width="12" height="12" material="color: #1e293b; roughness: 0.8"></a-plane>
-      <a-plane position="0 3.6 0" rotation="90 0 0" width="12" height="12" material="color: #0f172a"></a-plane>
-      
-      <a-plane position="0 1.8 -6" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="-6 1.8 0" rotation="0 90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="6 1.8 0" rotation="0 -90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
 
-      <a-plane position="0 2.8 -5.9" width="7.5" height="0.9" material="color: #004f9f; opacity: 0.9">
-        <a-text value="⚙️ SALA 4 — UNIDADES 9, 10 & 11: MANUFATURA 3D & FLUXO DIGITAL" align="center" position="0 0 0.02" color="#ffffff" width="4.5" wrap-count="32"></a-text>
+    <!-- ============================================================ -->
+    <!-- SALA 4 (EIXO 4 — UNIDADES 9, 10 & 11: CENTRO MANUFATURA 3D)    -->
+    <!-- Posição: Center X: 9, Z: 8                                   -->
+    <!-- ============================================================ -->
+    <a-entity id="sala-4" position="9 0 8">
+      <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" material="color: #111827; roughness: 0.8"></a-plane>
+      <a-plane position="0 3.6 0" rotation="90 0 0" width="10" height="10" material="color: #0f172a"></a-plane>
+      <a-plane position="0 1.8 -5" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="-5 1.8 0" rotation="0 90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="5 1.8 0" rotation="0 -90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
+
+      <a-plane position="0 2.8 -4.9" width="6.8" height="0.8" material="color: #004f9f; opacity: 0.95">
+        <a-text value="⚙️ SALA 4 — UNIDADES 9, 10 & 11: MANUFATURA 3D & FLUXO DIGITAL" align="center" position="0 0 0.02" color="#ffffff" width="4.2" wrap-count="32"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 4.1: Fabricação Tradicional com Gesso (Unidade 9) -->
-      <a-cylinder mixin="pedestal" position="-3 0.4 -3"></a-cylinder>
-      <a-sphere mixin="hotspot" position="-3 1.5 -3"
-        data-info="🏺 UNIDADE 9 — FABRICAÇÃO TRADICIONAL EM GESSO"
-        data-text="Quais as fases clássicas da confecção de órteses pelo método tradicional?"
-        data-options='[
-          {"text": "Moldagem negativa em atadura gessada, preenchimento positivo e termoformagem a vácuo", "correct": true, "feedback": "Exato! Esse é o processo artesanal clássico de órteses."},
-          {"text": "Impressão direta por sinterização a laser sem moldagem", "correct": false, "feedback": "Incorreto. Esse refere-se ao método fabril aditivo."}
-        ]'
-      ></a-sphere>
-      <a-plane position="-3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 4.1: Gesso -->
+      <a-cylinder mixin="pedestal" position="-2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="-2.5 1.4 -2.5" onclick="triggerStation('u9')"></a-sphere>
+      <a-plane position="-2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 9: Método Gesso
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 4.2: Impressão 3D & TPU Flexível (Unidade 10) -->
-      <a-cylinder mixin="pedestal" position="3 0.4 -3"></a-cylinder>
-      <!-- MODELO DE IMPRESSORA 3D COM BICO ANIMADO -->
-      <a-box position="3 0.9 -3" width="0.6" height="0.5" depth="0.5" material="color: #0f172a; wireframe: false"></a-box>
-      <a-box position="3 1.0 -3" width="0.08" height="0.08" depth="0.08" material="color: #00ffd8; emissive: #00ffd8; emissiveIntensity: 0.8"
-        animation="property: position; dir: alternate; dur: 800; loop: true; to: 3.1 1.0 -2.9; easing: easeInOutQuad"></a-box>
-
-      <a-sphere mixin="hotspot" position="3 1.5 -3"
-        data-info="🛈 UNIDADE 10 — FLUXO DIGITAL CAD/CAM & TPU FLEXÍVEL"
-        data-text="Qual a grande vantagem do filamento TPU (Poliuretano Termoplástico) na impressão 3D de órteses?"
-        data-options='[
-          {"text": "Elevada flexibilidade, resistência ao impacto e conforto anatômico customizável", "correct": true, "feedback": "Perfeito! O TPU oferece conforto e flexibilidade ideais para o paciente."},
-          {"text": "Extrema rigidez quebradiça sem flexão", "correct": false, "feedback": "Incorreto. O TPU é um elastômero flexível."}
-        ]'
-      ></a-sphere>
-      <a-plane position="3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 4.2: Impressão 3D TPU -->
+      <a-cylinder mixin="pedestal" position="2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="2.5 1.4 -2.5" onclick="triggerStation('u10')"></a-sphere>
+      <a-plane position="2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 10: Impressão 3D TPU
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 4.3: Matriz Comparativa (Unidade 11) -->
-      <a-cylinder mixin="pedestal" position="0 0.4 -4"></a-cylinder>
-      <a-sphere mixin="hotspot" position="0 1.5 -4"
-        data-info="📊 UNIDADE 11 — COMPARAÇÃO MÉTODOS (GESSO vs 3D)"
-        data-text="Qual o benefício do repositório digital CAD na nuvem do e-SUS para casos de perda ou quebra do dispositivo?"
-        data-options='[
-          {"text": "Reimpressão direta da órtese em 1 clique sem necessidade de remoldar o paciente", "correct": true, "feedback": "Gabarito! O arquivo digital elimina o desconforto de uma nova moldagem."},
-          {"text": "Exigir novo molde de gesso presencial obrigatório", "correct": false, "feedback": "Incorreto. Com o arquivo CAD a reimpressão é direta."}
-        ]'
-      ></a-sphere>
-      <a-plane position="0 2.1 -4" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 4.3: Repositório CAD -->
+      <a-cylinder mixin="pedestal" position="0 0.4 -3.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="0 1.4 -3.5" onclick="triggerStation('u11')"></a-sphere>
+      <a-plane position="0 1.95 -3.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 11: Repositório CAD
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
     </a-entity>
+
 
     <!-- ============================================================ -->
     <!-- SALA 5 (EIXO 5 — UNIDADES 12, 13 & 14: PROVA & RESULTADOS)      -->
-    <!-- Posição: Center X: 0, Z: 16                                  -->
+    <!-- Posição: Center X: -9, Z: 14                                 -->
     <!-- ============================================================ -->
-    <a-entity id="sala-5" position="0 0 16">
-      <a-plane position="0 0 0" rotation="-90 0 0" width="12" height="12" material="color: #1e293b; roughness: 0.8"></a-plane>
-      <a-plane position="0 3.6 0" rotation="90 0 0" width="12" height="12" material="color: #0f172a"></a-plane>
-      
-      <a-plane position="0 1.8 -6" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="-6 1.8 0" rotation="0 90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
-      <a-plane position="6 1.8 0" rotation="0 -90 0" width="12" height="3.6" material="color: #0f172a"></a-plane>
+    <a-entity id="sala-5" position="-9 0 14">
+      <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" material="color: #111827; roughness: 0.8"></a-plane>
+      <a-plane position="0 3.6 0" rotation="90 0 0" width="10" height="10" material="color: #0f172a"></a-plane>
+      <a-plane position="0 1.8 -5" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="-5 1.8 0" rotation="0 90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
+      <a-plane position="5 1.8 0" rotation="0 -90 0" width="10" height="3.6" material="color: #0f172a"></a-plane>
 
-      <a-plane position="0 2.8 -5.9" width="7.5" height="0.9" material="color: #004f9f; opacity: 0.9">
-        <a-text value="🏆 SALA 5 — UNIDADES 12, 13 & 14: PROVA FÍSICA & ÁRVORE DE DECISÃO" align="center" position="0 0 0.02" color="#ffffff" width="4.5" wrap-count="32"></a-text>
+      <a-plane position="0 2.8 -4.9" width="6.8" height="0.8" material="color: #004f9f; opacity: 0.95">
+        <a-text value="🏆 SALA 5 — UNIDADES 12, 13 & 14: PROVA FÍSICA & ÁRVORE DE DECISÃO" align="center" position="0 0 0.02" color="#ffffff" width="4.2" wrap-count="32"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 5.1: Prova Física & Inspeção Cutânea (Unidade 12) -->
-      <a-cylinder mixin="pedestal" position="-3 0.4 -3"></a-cylinder>
-      <a-sphere mixin="hotspot" position="-3 1.5 -3"
-        data-info="🔍 UNIDADE 12 — PROVA FÍSICA & INSPEÇÃO CUTÂNEA"
-        data-text="Após 15 minutos de uso inicial da OPM, observa-se vermelhidão (hiperemia) mantida na proeminência óssea. Qual a conduta imediata?"
-        data-options='[
-          {"text": "Realizar alívio e desgaste imediato no ponto de hiperpressão da OPM", "correct": true, "feedback": "Excelente! Previne a evolução para lesão por pressão (escara)."},
-          {"text": "Forçar o uso contínuo por 8 horas seguidas", "correct": false, "feedback": "Incorreto. Isso causará úlcera na pele do paciente."}
-        ]'
-      ></a-sphere>
-      <a-plane position="-3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 5.1: Inspeção Cutânea -->
+      <a-cylinder mixin="pedestal" position="-2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="-2.5 1.4 -2.5" onclick="triggerStation('u12')"></a-sphere>
+      <a-plane position="-2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 12: Inspeção Cutânea
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 5.2: Acompanhamento Longitudinal (Unidade 13) -->
-      <a-cylinder mixin="pedestal" position="3 0.4 -3"></a-cylinder>
-      <a-sphere mixin="hotspot" position="3 1.5 -3"
-        data-info="📅 UNIDADE 13 — SEGUIMENTO LONGITUDINAL NO SUS"
-        data-text="Qual o calendário recomendado de consultas de retorno para reavaliação de OPM no SUS?"
-        data-options='[
-          {"text": "Retornos programados em 30, 90 e 180 dias após a dispensação", "correct": true, "feedback": "Perfeito! O acompanhamento em 30/90/180 dias garante ajustes e adesão."},
-          {"text": "Consulta única de entrega sem retornos previstos", "correct": false, "feedback": "Incorreto. O seguimento contínuo é diretriz do SUS."}
-        ]'
-      ></a-sphere>
-      <a-plane position="3 2.1 -3" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 5.2: Seguimento SUS -->
+      <a-cylinder mixin="pedestal" position="2.5 0.4 -2.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="2.5 1.4 -2.5" onclick="triggerStation('u13')"></a-sphere>
+      <a-plane position="2.5 1.95 -2.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 13: Calendário SUS
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
 
-      <!-- ESTAÇÃO 5.3: Caso Integrador Árvore de Decisão (Unidade 14) -->
-      <a-cylinder mixin="pedestal" position="0 0.4 -4"></a-cylinder>
-      <a-sphere mixin="hotspot" position="0 1.5 -4"
-        data-info="🎯 UNIDADE 14 — ÁRVORE DE DECISÃO CLÍNICA FINAL"
-        data-text="Paciente com amputação transradial necessita de dispositivo de preensão para AVDs. Qual o fluxo indicado na rede?"
-        data-options='[
-          {"text": "Prescrição de exoprótese funcional com treino ocupacional e opção de garra 3D customizada", "correct": true, "feedback": "Parabéns por concluir todas as estações do Campus VR Digitrilha!"},
-          {"text": "Encaminhar sem avaliação ocupacional prévia", "correct": false, "feedback": "Incorreto."}
-        ]'
-      ></a-sphere>
-      <a-plane position="0 2.1 -4" width="2.5" height="0.6" material="color: #0f172a; opacity: 0.95; stroke: #00a599; strokeWidth: 2">
+      <!-- ESTAÇÃO 5.3: Árvore de Decisão -->
+      <a-cylinder mixin="pedestal" position="0 0.4 -3.5"></a-cylinder>
+      <a-sphere mixin="hotspot" position="0 1.4 -3.5" onclick="triggerStation('u14')"></a-sphere>
+      <a-plane position="0 1.95 -3.5" width="2.4" height="0.55" material="color: #0f172a; opacity: 0.95">
         <a-text value="Unidade 14: Árvore Decisão
-(Clique na esfera)" align="center" position="0 0 0.02" color="#00ffd8" width="2.2" wrap-count="22"></a-text>
+(Clique para examinar)" align="center" position="0 0 0.02" color="#00ffd8" width="2.1" wrap-count="22"></a-text>
       </a-plane>
     </a-entity>
 
-    <!-- ILUMINAÇÃO GERAL DO CAMPUS VR -->
+
+    <!-- ILUMINAÇÃO GERAL DO CAMPUS -->
     <a-light type="ambient" color="#d8e8f8" intensity="0.85"></a-light>
     <a-light type="directional" position="-2 5 3" color="#ffffff" intensity="0.9"></a-light>
 
   </a-scene>
 
-  <!-- LÓGICA DE INTERAÇÃO, NAVEGAÇÃO ENTRE SALAS & AUDIO -->
+  <!-- BANCO DE DADOS DAS ESTAÇÕES DE APRENDIZADO VR -->
   <script>
-    const roomPositions = {
-      1: { x: 0, y: 0, z: 5 },
-      2: { x: -16, y: 0, z: 5 },
-      3: { x: 16, y: 0, z: 5 },
-      4: { x: 0, y: 0, z: -11 },
-      5: { x: 0, y: 0, z: 21 }
+    const stationData = {
+      u1: {
+        title: "🏛️ UNIDADE 1 — CONCEITO DE TA & LEI 13.146/2015 (LBI)",
+        text: "A Tecnologia Assistiva no SUS engloba produtos, recursos e metodologias para independência funcional. Qual a garantia dada pela Lei Brasileira de Inclusão (LBI)?",
+        options: [
+          { text: "Acesso gratuito e universal a recursos de TA na Rede de Cuidados no SUS", correct: true, feedback: "Excelente! A LBI estabelece o direito universal à Tecnologia Assistiva." },
+          { text: "Apenas empréstimo temporário mediante cobrança de taxa", correct: false, feedback: "Incorreto. A provisão no SUS é pública e gratuita." }
+        ]
+      },
+      u2: {
+        title: "📊 UNIDADE 2 — AVALIAÇÃO PELA CIF (OMS)",
+        text: "Na Classificação Internacional de Funcionalidade (CIF), como se diferencia a alteração anatômica (Estrutura) do impacto diário (Participação)?",
+        options: [
+          { text: "Estrutura refere-se à anatomia e Participação refere-se ao engajamento social nas AVDs", correct: true, feedback: "Perfeito! A CIF avalia a pessoa de forma holística em seu ambiente." },
+          { text: "Estrutura e Participação são termos sinônimos", correct: false, feedback: "Incorreto. Estrutura é anatômica, Participação é social." }
+        ]
+      },
+      u3: {
+        title: "🦶 UNIDADE 3 — CASO DONA MARIA (PÓS-AVC & PÉ CAÍDO)",
+        text: "Dona Maria (72 anos, pós-AVC) apresenta fraqueza nos dorsiflexores e pé caído à esquerda durante o treino de marcha. Qual a conduta ortótica mais adequada?",
+        options: [
+          { text: "Prescrever Órtese Tornozelo-Pé (AFO) alinhada a 90° e orientação de calçado fechado", correct: true, feedback: "Excelente! A AFO mantém o tornozelo funcional a 90°, evita o arrasto do pé e previne quedas." },
+          { text: "Manter marcha sem apoio ortótico", correct: false, feedback: "Incorreto. A falta de apoio mantém o risco de queda." }
+        ]
+      },
+      u4: {
+        title: "📋 UNIDADE 4 — ELEMENTOS DO LAUDO DE SOLICITAÇÃO",
+        text: "Qual elemento NÃO pode faltar no laudo de solicitação de OPM emitido na Atenção Primária?",
+        options: [
+          { text: "Descrição clara da limitação funcional e do objetivo terapêutico pretendido", correct: true, feedback: "Gabarito Oficial! O objetivo funcional é indispensável para aprovação da OPM." },
+          { text: "Apenas o nome comercial da marca do fabricante", correct: false, feedback: "Incorreto. No SUS prescreve-se por código da Tabela SIGTAP." }
+        ]
+      },
+      u5: {
+        title: "⚠️ UNIDADE 5 — OS 5 ERROS FREQUENTES DE PRESCRIÇÃO",
+        text: "Estudos no SUS apontam que a desconsideração do ambiente domiciliar e a falta de reavaliação causam alto abandono de OPM. Qual a melhor prática de prevenção?",
+        options: [
+          { text: "Avaliar acessibilidade do domicílio e realizar seguimento longitudinal periódico", correct: true, feedback: "Perfeito! O acompanhamento contínuo garante a adesão ao tratamento." },
+          { text: "Entregar a OPM e encerrar o acompanhamento do paciente", correct: false, feedback: "Incorreto. Sem reavaliação o risco de abandono ultrapassa 40%." }
+        ]
+      },
+      u6: {
+        title: "🧲 UNIDADE 6 — BIOMECÂNICA DOS 3 PONTOS DE PRESSÃO",
+        text: "Como funciona a correção biomecânica pelo sistema de 3 pontos de pressão em órteses?",
+        options: [
+          { text: "Aplica-se uma força principal no ápice da deformidade e duas forças opostas nas extremidades", correct: true, feedback: "Exato! Este princípio garante controle e alinhamento articular." },
+          { text: "Compressão circular uniforme ao redor de toda a perna", correct: false, feedback: "Incorreto. A compressão uniforme restringe o fluxo sanguíneo sem corrigir a deformidade." }
+        ]
+      },
+      u7: {
+        title: "🦾 UNIDADE 7 — ÓRTESES DE MMII, MMSS E COLUNA",
+        text: "Para uma adolescente com escoliose idiopática em crescimento (curva de 32° Cobb), qual a indicação conservadora?",
+        options: [
+          { text: "Colete de Boston (TLSO) para tratamento conservador tridimensional", correct: true, feedback: "Correto! O Colete de Boston é a indicação padrão em fases de crescimento." },
+          { text: "Colar cervical macio de espuma", correct: false, feedback: "Incorreto. O colar cervical não atua na coluna toracolombar." }
+        ]
+      },
+      u8: {
+        title: "🦿 UNIDADE 8 — COMPONENTES PROTÉTICOS & MEIOS AUXILIARES",
+        text: "Qual componente protético é responsável pela interface e transmissão de carga no coto de amputação?",
+        options: [
+          { text: "Soquete / Encaixe (Socket) adaptado anatomicamente", correct: true, feedback: "Perfeito! O soquete transmite a carga de sustentação do coto." },
+          { text: "Bengala simples de apoio", correct: false, feedback: "Incorreto. A bengala é um meio auxiliar externo." }
+        ]
+      },
+      u9: {
+        title: "🏺 UNIDADE 9 — FABRICAÇÃO TRADICIONAL EM GESSO",
+        text: "Quais as fases clássicas da confecção de órteses pelo método tradicional?",
+        options: [
+          { text: "Moldagem negativa em atadura gessada, preenchimento positivo e termoformagem a vácuo", correct: true, feedback: "Exato! Esse é o processo artesanal clássico de órteses." },
+          { text: "Impressão direta por sinterização a laser sem moldagem", correct: false, feedback: "Incorreto." }
+        ]
+      },
+      u10: {
+        title: "🛈 UNIDADE 10 — FLUXO DIGITAL CAD/CAM & TPU FLEXÍVEL",
+        text: "Qual a grande vantagem do filamento TPU (Poliuretano Termoplástico) na impressão 3D de órteses?",
+        options: [
+          { text: "Elevada flexibilidade, resistência ao impacto e conforto anatômico customizável", correct: true, feedback: "Perfeito! O TPU oferece conforto e flexibilidade ideais para o paciente." },
+          { text: "Extrema rigidez quebradiça sem flexão", correct: false, feedback: "Incorreto. O TPU é um elastômero flexível." }
+        ]
+      },
+      u11: {
+        title: "📊 UNIDADE 11 — COMPARAÇÃO MÉTODOS (GESSO vs 3D)",
+        text: "Qual o benefício do repositório digital CAD na nuvem do e-SUS para casos de perda ou quebra do dispositivo?",
+        options: [
+          { text: "Reimpressão direta da órtese em 1 clique sem necessidade de remoldar o paciente", correct: true, feedback: "Gabarito! O arquivo digital elimina o desconforto de uma nova moldagem." },
+          { text: "Exigir novo molde de gesso presencial obrigatório", correct: false, feedback: "Incorreto." }
+        ]
+      },
+      u12: {
+        title: "🔍 UNIDADE 12 — PROVA FÍSICA & INSPEÇÃO CUTÂNEA",
+        text: "Após 15 minutos de uso inicial da OPM, observa-se vermelhidão (hiperemia) mantida na proeminência óssea. Qual a conduta imediata?",
+        options: [
+          { text: "Realizar alívio e desgaste imediato no ponto de hiperpressão da OPM", correct: true, feedback: "Excelente! Previne a evolução para lesão por pressão (escara)." },
+          { text: "Forçar o uso contínuo por 8 horas seguidas", correct: false, feedback: "Incorreto. Isso causará úlcera na pele." }
+        ]
+      },
+      u13: {
+        title: "📅 UNIDADE 13 — SEGUIMENTO LONGITUDINAL NO SUS",
+        text: "Qual o calendário recomendado de consultas de retorno para reavaliação de OPM no SUS?",
+        options: [
+          { text: "Retornos programados em 30, 90 e 180 dias após a dispensação", correct: true, feedback: "Perfeito! O acompanhamento em 30/90/180 dias garante ajustes e adesão." },
+          { text: "Consulta única de entrega sem retornos previstos", "correct": false, feedback: "Incorreto." }
+        ]
+      },
+      u14: {
+        title: "🎯 UNIDADE 14 — ÁRVORE DE DECISÃO CLÍNICA FINAL",
+        text: "Paciente com amputação transradial necessita de dispositivo de preensão para AVDs. Qual o fluxo indicado na rede?",
+        options: [
+          { text: "Prescrição de exoprótese funcional com treino ocupacional e opção de garra 3D customizada", correct: true, feedback: "Parabéns por concluir todas as estações do Campus VR Digitrilha!" },
+          { text: "Encaminhar sem avaliação ocupacional prévia", correct: false, feedback: "Incorreto." }
+        ]
+      }
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const clickables = document.querySelectorAll('.clickable');
-      clickables.forEach(el => {
-        el.addEventListener('click', (e) => {
-          e.stopPropagation();
-          handleObjectClick(el);
-        });
-      });
-    });
+    const roomPositions = {
+      1: { x: -9, y: 0, z: -5 },
+      2: { x: 9, y: 0, z: 1 },
+      3: { x: -9, y: 0, z: 7 },
+      4: { x: 9, y: 0, z: 13 },
+      5: { x: -9, y: 0, z: 19 }
+    };
 
     function teleportToRoom(roomNum) {
       const pos = roomPositions[roomNum];
@@ -656,20 +739,16 @@
         rig.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
       }
 
-      // Atualizar botões de navegação no topo
       document.querySelectorAll('.room-nav-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', idx === (roomNum - 1));
       });
     }
 
-    function handleObjectClick(el) {
-      const infoTitle = el.getAttribute('data-info');
-      const infoText = el.getAttribute('data-text');
-      const optsJson = el.getAttribute('data-options');
-
-      if (!infoTitle || !infoText) return;
-
-      openVRModal(infoTitle, infoText, optsJson ? JSON.parse(optsJson) : []);
+    function triggerStation(stationKey) {
+      const data = stationData[stationKey];
+      if (data) {
+        openVRModal(data.title, data.text, data.options);
+      }
     }
 
     function openVRModal(title, text, options) {
@@ -717,9 +796,9 @@
     function clickEVA() {
       openVRModal(
         "🤖 E.V.A. — TUTORA DIGITAL EM TECNOLOGIA ASSISTIVA",
-        "Bem-vindo(a) ao Campus Virtual 3D Digitrilha! Explore as 5 Salas Temáticas com as 14 Unidades didáticas. Clique nos marcadores esféricos pulsantes para realizar as avaliações clínicas em VR!",
+        "Bem-vindo(a) ao Campus de Reabilitação Virtual 3D! Você está no Corredor Central conectado a 5 Salas de Aula. Clique nas esferas azuis pulsantes nas salas ou use a barra de atalhos inferior para interagir com cada Unidade!",
         [
-          {"text": "Explorar o Campus VR", "correct": true, "feedback": "Use a barra superior para navegar entre a Sala 1, Sala 2, Sala 3, Sala 4 e Sala 5!"}
+          {"text": "Explorar o Campus VR", "correct": true, "feedback": "Excelente! Use a barra superior para teleportar entre as Salas 1 a 5."}
         ]
       );
     }
